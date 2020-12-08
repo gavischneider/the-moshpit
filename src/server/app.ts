@@ -61,10 +61,14 @@ app.use("/post/", postRoutes);
             image: "",
           };
           // We have the data, now we need to check where the image is
-          if (newPost.enclosures !== []) {
-            newPost.image = newPost.enclosures.url;
+          if (newPost.enclosures[0] !== undefined) {
+            newPost.image = newPost.enclosures[0].url;
+            console.log("AAAAAAAAAAA We didnt have to look: " + newPost.image);
           } else {
             newPost.image = postModel.getImgFromHTML(newPost.description);
+            console.log(
+              "PPPPPPPPPPPP The imaage we found is: " + newPost.image
+            );
           }
           // Data is ready to be stored
           postModel.addPost(newPost, (err: Error, data: any) => {

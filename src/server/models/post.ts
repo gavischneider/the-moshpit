@@ -45,12 +45,13 @@ module.exports.getPostsFromUrl = async (url: string, callback: Function) => {
 };
 
 // Extracts the image source from 'description', which is HTML
-module.exports.getImgfromHTML = (description: string): string | null => {
+module.exports.getImgFromHTML = (description: string): string | null => {
   const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
   const div: HTMLElement = dom.window.document.createElement("div");
   div.innerHTML = description;
   const image: HTMLElement = div.getElementsByTagName("img")[0];
   const imageSrc: string | null = image ? image.getAttribute("src") : "";
+  console.log("OOOOOOOOOO Image source is: " + imageSrc);
   return imageSrc;
 };
 
