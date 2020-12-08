@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
 
-module.exports.getUser = (callback) => {
-  userModel.find((err: Error, data) => {
+module.exports.getUser = (callback: Function) => {
+  userModel.find((err: Error, data: any) => {
     if (err) {
       console.log(err);
     } else {
@@ -20,7 +20,7 @@ module.exports.getUser = (callback) => {
   });
 };
 
-module.exports.addUser = (newUser, callback) => {
+module.exports.addUser = (newUser: any, callback: Function) => {
   const user = new userModel({
     firstname: newUser.firstname,
     lastname: newUser.lastname,

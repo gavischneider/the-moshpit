@@ -23,6 +23,7 @@ const connectionString = process.env.MONGO_CONNECTION_STRING;
 mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to database"))
   .catch((err: Error) => console.log(err));

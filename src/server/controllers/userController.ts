@@ -3,8 +3,8 @@ export {};
 var userModel = require("../models/user");
 
 var usersController = {
-  userHome(req, res) {
-    userModel.getUser((err, data) => {
+  userHome(req: any, res: any) {
+    userModel.getUser((err: Error, data: any) => {
       try {
         if (err) {
           console.log(err);
@@ -18,7 +18,7 @@ var usersController = {
       }
     });
   },
-  addUsers(req, res) {
+  addUsers(req: any, res: any) {
     try {
       console.log("adduser", req.body);
       const user = {
@@ -28,7 +28,7 @@ var usersController = {
         state: req.body.state,
         country: req.body.country,
       };
-      userModel.addUser(user, (err, data) => {
+      userModel.addUser(user, (err: Error, data: any) => {
         if (err) {
           console.log("error occured", err);
         } else {
