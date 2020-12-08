@@ -15,6 +15,7 @@ const postSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  image: String,
 });
 
 const postModel = (module.exports = mongoose.model("post", postSchema));
@@ -27,6 +28,8 @@ export interface Post {
   created: string;
   author: string;
   category: string[];
+  enclosures: object[];
+  image: string;
 }
 
 // Recieves a URL and gets the RSS feed
@@ -71,6 +74,7 @@ module.exports.addPost = (newPost: Post, callback: Function) => {
     created: newPost.created,
     author: newPost.author,
     category: newPost.category,
+    image: newPost.image,
   });
   post.save(callback);
 };

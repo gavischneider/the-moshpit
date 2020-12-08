@@ -30,7 +30,7 @@ const userController = {
       };
       userModel.addUser(user, (err: Error, data: any) => {
         if (err) {
-          console.log("error occured", err);
+          console.log("An error occured", err);
         } else {
           console.log(data);
           res.redirect("/user/home");

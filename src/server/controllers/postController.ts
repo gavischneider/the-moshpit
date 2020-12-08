@@ -12,6 +12,7 @@ const postController = {
         created: req.body.url,
         author: req.body.author,
         category: req.body.category,
+        image: req.body.image,
       };
       postModel.addPost(post, (err: Error, data: any) => {
         if (err) {
