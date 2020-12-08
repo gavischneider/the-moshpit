@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  firstname: String,
-  lastname: String,
+  firstName: String,
+  lastName: String,
   email: String,
-  state: String,
   country: String,
 });
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+}
 
 module.exports.getUser = (callback: Function) => {
   userModel.find((err: Error, data: any) => {
@@ -22,10 +28,9 @@ module.exports.getUser = (callback: Function) => {
 
 module.exports.addUser = (newUser: any, callback: Function) => {
   const user = new userModel({
-    firstname: newUser.firstname,
-    lastname: newUser.lastname,
+    firstname: newUser.firstName,
+    lastname: newUser.lastName,
     email: newUser.city,
-    state: newUser.state,
     country: newUser.country,
   });
   user.save(callback);

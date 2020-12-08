@@ -1,8 +1,8 @@
 export {};
 
-var userModel = require("../models/user");
+const userModel = require("../models/user");
 
-var usersController = {
+const userController = {
   userHome(req: any, res: any) {
     userModel.getUser((err: Error, data: any) => {
       try {
@@ -18,7 +18,7 @@ var usersController = {
       }
     });
   },
-  addUsers(req: any, res: any) {
+  addUser(req: any, res: any) {
     try {
       console.log("adduser", req.body);
       const user = {
@@ -42,4 +42,4 @@ var usersController = {
   },
 };
 
-module.exports = usersController;
+module.exports = userController;

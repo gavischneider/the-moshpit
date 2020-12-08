@@ -3,7 +3,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
 
-const feedSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   title: String,
   id: String,
   description: String,
@@ -17,9 +17,9 @@ const feedSchema = new mongoose.Schema({
   ],
 });
 
-const feedModel = (module.exports = mongoose.model("feed", feedSchema));
+const postModel = (module.exports = mongoose.model("post", postSchema));
 
-export interface Feed {
+export interface Post {
   title: string;
   id: string;
   description: string;
@@ -30,8 +30,8 @@ export interface Feed {
 }
 
 // Recieves a URL and gets the RSS feed
-module.exports.getFeeds = async (feed: any, callback: Function) => {
-  var rss = await feed.load(" http://feeds.feedburner.com/Metalsucks");
+module.exports.getPostsFromUrl = async (posts: any, callback: Function) => {
+  var rss = await posts.load(" http://feeds.feedburner.com/Metalsucks");
   if (rss) {
     console.log(rss.items[0]);
     console.log(new Date(rss.items[0].created));
@@ -51,16 +51,26 @@ module.exports.getImgfromHTML = (description: string): string | null => {
   return imageSrc;
 };
 
-// Adds feed to the database
-module.exports.addFeed = (newFeed: Feed, callback: Function) => {
-  const feed = new feedModel({
-    title: newFeed.title,
-    id: newFeed.id,
-    description: newFeed.description,
-    url: newFeed.url,
-    created: newFeed.created,
-    author: newFeed.author,
-    category: newFeed.category,
+module.exports.getPost = (callback: Function) => {
+  postModel.find((err: Error, data: any) => {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(null, data);
+    }
   });
-  feed.save(callback);
+};
+
+// Adds feed to the database
+module.exports.addPost = (newPost: Post, callback: Function) => {
+  const post = new postModel({
+    title: newPost.title,
+    id: newPost.id,
+    description: newPost.description,
+    url: newPost.url,
+    created: newPost.created,
+    author: newPost.author,
+    category: newPost.category,
+  });
+  post.save(callback);
 };
