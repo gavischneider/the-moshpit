@@ -1,12 +1,14 @@
+export {};
+
 const express = require("express");
-const postControler = require("../controllers/postController");
+const postController = require("../controllers/postController");
 
 const router = express.Router();
 
-router.get("/getposts", postControler.getPosts);
+//router.get("/getposts", postController.getPosts);
 
-router.get("/post", postControler.searchPost);
+//router.get("/post", postController.searchPost);
 
-router.post("/add", postControler.addPost);
+router.post("/add", postController.addPost);
 
 module.exports = router;

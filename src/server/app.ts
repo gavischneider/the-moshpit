@@ -38,46 +38,48 @@ app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
 
 // -----Temporary code to test out initial post storage functionality-----
-feeds.map((feed: string) => {
-  postModel.getPostsFromUrl(feed, (err: Error, data: any) => {
-    if (err) {
-      console.log("An error occured", err);
-    } else {
-      console.log(data);
-      const rssFeed = data.items;
+(function () {
+  feeds.map((feed: string) => {
+    postModel.getPostsFromUrl(feed, (err: Error, data: any) => {
+      if (err) {
+        console.log("An error occured", err);
+      } else {
+        console.log(data);
+        const rssFeed = data.items;
 
-      rssFeed.map((post: any) => {
-        // Start building the post object
-        const newPost = {
-          title: post.title,
-          id: post.id,
-          description: post.description,
-          url: post.url,
-          created: post.created,
-          author: post.author,
-          category: post.category,
-          enclosures: post.enclosures,
-          image: "",
-        };
-        // We have the data, now we need to check where the image is
-        if (newPost.enclosures[0].url) {
-          newPost.image = newPost.enclosures[0].url;
-        } else {
-          newPost.image = postModel.getImgFromHTML(newPost.description);
-        }
-        // Data is ready to be stored
-        postModel.addPost(newPost, (err: Error, data: any) => {
-          if (err) {
-            console.log("An error occured", err);
+        rssFeed.map((post: any) => {
+          // Start building the post object
+          const newPost = {
+            title: post.title,
+            id: post.id,
+            description: post.description,
+            url: post.url,
+            created: post.created,
+            author: post.author,
+            category: post.category,
+            enclosures: post.enclosures,
+            image: "",
+          };
+          // We have the data, now we need to check where the image is
+          if (newPost.enclosures !== []) {
+            newPost.image = newPost.enclosures.url;
           } else {
-            console.log("Data stored in DB: ");
-            console.log(data);
+            newPost.image = postModel.getImgFromHTML(newPost.description);
           }
+          // Data is ready to be stored
+          postModel.addPost(newPost, (err: Error, data: any) => {
+            if (err) {
+              console.log("An error occured", err);
+            } else {
+              console.log("Data stored in DB: ");
+              console.log(data);
+            }
+          });
         });
-      });
-    }
+      }
+    });
   });
-});
+})();
 // ------------------------------------------------------------------------
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

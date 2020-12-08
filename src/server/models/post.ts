@@ -33,8 +33,8 @@ export interface Post {
 }
 
 // Recieves a URL and gets the RSS feed
-module.exports.getPostsFromUrl = async (posts: any, callback: Function) => {
-  var rss = await posts.load(" http://feeds.feedburner.com/Metalsucks");
+module.exports.getPostsFromUrl = async (url: string, callback: Function) => {
+  var rss = await feed.load(url);
   if (rss) {
     console.log(rss.items[0]);
     console.log(new Date(rss.items[0].created));
