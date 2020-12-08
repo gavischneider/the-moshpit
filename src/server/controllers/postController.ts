@@ -26,6 +26,16 @@ const postController = {
       console.log("error", error);
     }
   },
+  getPosts(req: any, res: any) {
+    postModel.find({}, function (err: Error, posts: any) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(posts);
+        res.send(posts);
+      }
+    });
+  },
 };
 
 module.exports = postController;

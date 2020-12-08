@@ -5,7 +5,7 @@ const postController = require("../controllers/postController");
 
 const router = express.Router();
 
-//router.get("/getposts", postController.getPosts);
+router.get("/getposts", postController.getPosts);
 
 //router.get("/post", postController.searchPost);
 
