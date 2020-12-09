@@ -1,1 +1,1 @@
-GET http://localhost:5000/post/getposts
+GET http://localhost:5000/post/getposts?page=1

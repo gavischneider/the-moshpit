@@ -33,7 +33,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to database"))
-  .catch((err: Error) => console.log(err));
+  .catch((err: Error) => console.log(`There was an error: ${err}`));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user/", userRoutes);

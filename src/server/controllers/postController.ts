@@ -1,3 +1,6 @@
+import e from "express";
+import { Post } from "../models/post";
+
 const postModel = require("../models/post");
 
 const postController = {
@@ -26,13 +29,28 @@ const postController = {
       console.log("error", error);
     }
   },
-  // Need to add query and page params
+  // Need to update with the query
   getPosts(req: any, res: any) {
-    postModel.find({}, function (err: Error, posts: any) {
+    //const query = req.query.query;
+    const page = parseInt(req.query.page);
+    const limit = 2;
+    const startIndex = (page - 1) * limit;
+    //const endIndex = page * limit;
+
+    // postModel.find({}, function (err: Error, posts: any) {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     console.log(posts);
+    //     res.send(posts);
+    //   }
+    // });
+
+    const query = postModel.find().limit(limit).skip(startIndex);
+    query.exec((err: Error, posts: Post[]) => {
       if (err) {
-        console.log(err);
+        res.status(500).json({ message: err.message });
       } else {
-        console.log(posts);
         res.send(posts);
       }
     });
