@@ -2,10 +2,13 @@
   "name": "the-moshpit",
   "version": "1.0.0",
   "description": "Metal News Aggregator",
-  "main": "app.js",
+  "main": "main.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server/app.ts"
+    "dev": "nodemon src/server/main.ts"
   },
   "repository": {
     "type": "git",

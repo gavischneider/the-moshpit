@@ -26,6 +26,7 @@ const postController = {
       console.log("error", error);
     }
   },
+  // Need to add query and page params
   getPosts(req: any, res: any) {
     postModel.find({}, function (err: Error, posts: any) {
       if (err) {

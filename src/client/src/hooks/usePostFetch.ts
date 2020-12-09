@@ -30,7 +30,7 @@ export default function usePostFetch(query: any, pageNumber: number) {
 
     axios({
       method: "GET",
-      url: "getposts",
+      url: "post/getposts",
       params: { query: query, page: pageNumber },
     })
       .then((res) => {
