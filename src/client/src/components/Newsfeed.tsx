@@ -31,7 +31,7 @@ export const Newsfeed = () => {
         if (posts.length === index + 1) {
           return (
             <div ref={lastPostElementRef} key={post.id}>
-              post.title
+              {post.title}
             </div>
           );
         }

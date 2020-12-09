@@ -33,7 +33,7 @@ const postController = {
   getPosts(req: any, res: any) {
     //const query = req.query.query;
     const page = parseInt(req.query.page);
-    const limit = 2;
+    const limit = 45;
     const startIndex = (page - 1) * limit;
     //const endIndex = page * limit;
 
@@ -51,6 +51,7 @@ const postController = {
       if (err) {
         res.status(500).json({ message: err.message });
       } else {
+        console.log(posts);
         res.send(posts);
       }
     });

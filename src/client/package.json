@@ -26,9 +26,10 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "postbuild": "mv build ../server/",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",

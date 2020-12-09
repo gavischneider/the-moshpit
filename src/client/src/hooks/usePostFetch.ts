@@ -21,7 +21,7 @@ export default function usePostFetch(query: any, pageNumber: number) {
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
-    setPosts(Array());
+    setPosts([]);
   }, [query]);
 
   useEffect(() => {
@@ -36,7 +36,8 @@ export default function usePostFetch(query: any, pageNumber: number) {
       .then((res) => {
         console.log(res.data);
         setPosts((prevPosts: any) => {
-          const arr: Post[] = [...prevPosts, ...res.data.posts];
+          console.log(res.data);
+          const arr: Post[] = [...prevPosts, ...res.data];
           const map: any = {};
           for (const post of arr) {
             map[post.id] = post;
@@ -46,7 +47,7 @@ export default function usePostFetch(query: any, pageNumber: number) {
 
           //return [...new Set([...prevPosts, ...res.data.posts])];
         });
-        setHasMore(res.data.posts.length > 0);
+        setHasMore(res.data.length > 0);
         setLoading(false);
       })
       .catch((error) => {
