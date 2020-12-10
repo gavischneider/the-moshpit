@@ -6,7 +6,7 @@ import { Newsfeed } from "./components/Newsfeed";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-black">
       <Navbar />
       <Sidebar />
       <Newsfeed />
