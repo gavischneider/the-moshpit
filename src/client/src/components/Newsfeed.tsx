@@ -26,12 +26,13 @@ export const Newsfeed = () => {
   );
 
   return (
-    <div className="container mx-auto bg-gray-900">
+    <div className="container mx-auto bg-gray-900" id="newsfeed">
       <div className="object-center grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto">
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
             return (
               <div
+                key={post.id}
                 ref={lastPostElementRef}
                 className="rounded shadow-lg transform transition duration-300 hover:scale-110 bg-gray-800 mx-auto"
               >
