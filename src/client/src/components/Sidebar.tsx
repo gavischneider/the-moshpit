@@ -1,6 +1,7 @@
 import React from "react";
+import { Source } from "./Source";
 import "../sidebar.css";
-import { feeds } from "../../../server/constants/feeds";
+import { feeds } from "../constants/feeds";
 
 export const Sidebar = () => {
   return (
@@ -151,6 +152,10 @@ export const Sidebar = () => {
               <span className="link-text">Shuttle</span>
             </a>
           </li>
+
+          {feeds.map((feed) => {
+            return <Source key={feed.url} feed={feed} />;
+          })}
         </ul>
       </nav>
     </div>
