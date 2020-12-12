@@ -14,6 +14,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const passportSetup = require("./config/passport-setup");
 
 const userRoutes = require("./routes/users");
 const postRoutes = require("./routes/posts");
