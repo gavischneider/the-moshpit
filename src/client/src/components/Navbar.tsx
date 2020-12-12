@@ -6,12 +6,19 @@ export const Navbar = () => {
     <nav className="z-20 flex items-center justify-between flex-wrap bg-gray-900 border-solid border-b-2 border-red-600 pl-6 pr-6 pt-3 pb-3 shadow-lg inset-x-0 top-0 object-top sticky mb-5">
       <div className="flex">
         <div className="my-auto pr-1">
-          <ul className="flex">
+          <ul className="flex text-white">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className="mr-2">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login" className="mr-2">
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link to="/logout">Logout</Link>
             </li>
           </ul>
         </div>

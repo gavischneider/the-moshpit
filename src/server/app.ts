@@ -17,6 +17,7 @@ const bodyParser = require("body-parser");
 
 const userRoutes = require("./routes/users");
 const postRoutes = require("./routes/posts");
+const authRoutes = require("./routes/auth");
 
 const postModel = require("./models/post");
 
@@ -38,6 +39,7 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
+app.use("/auth/", authRoutes);
 
 // -----Temporary code to test out initial post storage functionality-----
 // (function () {
