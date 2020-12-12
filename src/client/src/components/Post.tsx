@@ -1,4 +1,5 @@
 import React from "react";
+import { Tag } from "./Tag";
 
 export const Post = (props: any) => {
   return (
@@ -8,6 +9,9 @@ export const Post = (props: any) => {
           <img alt={"Post header"} src={props.image} />
         </a>
         <h1 className="text-white my-2">{props.title}</h1>
+        {props.category.map((tag: string) => {
+          return <Tag key={tag} name={tag} />;
+        })}
       </div>
     </div>
   );
