@@ -17,7 +17,11 @@ router.get(
   })
 );
 
-router.get("/google/redirect", authController.googleRedirect);
+router.get(
+  "/google/redirect",
+  passport.authenticate("google"),
+  authController.googleRedirect
+);
 
 router.get("/logout", authController.logout);
 

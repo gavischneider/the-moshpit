@@ -11,7 +11,7 @@ const authController = {
     passport.authenticate("google", {
       scope: ["profile"],
     });
-    res.send("Google");
+    //res.send("Google");
   },
   googleRedirect(req: any, res: any) {
     res.send("You reached the callback URI");
