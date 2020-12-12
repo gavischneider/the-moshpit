@@ -1,17 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-interface Post {
-  title: string;
-  id: string;
-  description: string;
-  url: string;
-  created: string;
-  author: string;
-  category: string[];
-  enclosures: object[];
-  image: string;
-}
+import { Post } from "../../../shared/Post";
 
 // Change the string to type post
 export default function usePostFetch(query: any, pageNumber: number) {

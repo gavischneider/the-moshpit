@@ -1,5 +1,5 @@
-import e from "express";
-import { Post } from "../models/post";
+import express from "express";
+import { Post } from "../../shared/Post";
 
 const postModel = require("../models/post");
 

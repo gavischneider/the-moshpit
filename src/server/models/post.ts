@@ -2,6 +2,7 @@ var feed = require("rss-to-json");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
+import { Post } from "../../shared/Post";
 
 const postSchema = new mongoose.Schema({
   title: String,
@@ -19,18 +20,6 @@ const postSchema = new mongoose.Schema({
 });
 
 const postModel = (module.exports = mongoose.model("post", postSchema));
-
-export interface Post {
-  title: string;
-  id: string;
-  description: string;
-  url: string;
-  created: string;
-  author: string;
-  category: string[];
-  enclosures: object[];
-  image: string;
-}
 
 // Recieves a URL and gets the RSS feed
 module.exports.getPostsFromUrl = async (url: string, callback: Function) => {
