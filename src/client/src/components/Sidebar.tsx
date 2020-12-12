@@ -5,7 +5,7 @@ import { feeds } from "../constants/feeds";
 
 export const Sidebar = () => {
   return (
-    <div className="">
+    <div className="shadow-lg">
       <nav className="navbar z-10 mt-5">
         <ul className="navbar-nav">
           <li className="logo">

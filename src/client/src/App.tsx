@@ -1,16 +1,16 @@
 import React from "react";
-import "./App.css";
-import { Navbar } from "./components/Navbar";
-import { Sidebar } from "./components/Sidebar";
-import { Newsfeed } from "./components/Newsfeed";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App bg-black">
-      <Navbar />
-      <Sidebar />
-      <Newsfeed />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" component={Login} />
+      </Switch>
+    </Router>
   );
 }
 

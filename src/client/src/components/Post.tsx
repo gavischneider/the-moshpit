@@ -4,9 +4,9 @@ import { Tag } from "./Tag";
 export const Post = (props: any) => {
   return (
     <div className="rounded shadow-lg transform transition duration-300 hover:scale-110 bg-gray-700 mx-auto">
-      <div className="">
+      <div className="p-2">
         <a href={props.url} target="_blank" rel="noreferrer">
-          <img alt={"Post header"} src={props.image} />
+          <img alt={"Post header"} src={props.image} className="rounded" />
         </a>
         <h1 className="text-white my-2">{props.title}</h1>
         <div className="px-6 py-4">
