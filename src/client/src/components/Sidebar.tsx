@@ -1,5 +1,6 @@
 import React from "react";
 import "../sidebar.css";
+import { feeds } from "../../../server/constants/feeds";
 
 export const Sidebar = () => {
   return (

@@ -33,7 +33,7 @@ const postController = {
   getPosts(req: any, res: any) {
     //const query = req.query.query;
     const page = parseInt(req.query.page);
-    const limit = 50;
+    const limit = 10;
     const startIndex = (page - 1) * limit;
     //const endIndex = page * limit;
 
