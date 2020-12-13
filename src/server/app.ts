@@ -14,6 +14,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 const passportSetup = require("./config/passport-setup");
 
 const authRoutes = require("./routes/auth");
@@ -43,6 +45,16 @@ mongoose
   .catch((err: Error) => console.log(`There was an error: ${err}`));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // 1 Day
+    keys: [process.env.COOKIE_KEY],
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);

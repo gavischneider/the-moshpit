@@ -14,7 +14,8 @@ const authController = {
   //   //res.send("Google");
   // },
   googleRedirect(req: any, res: any) {
-    res.send("You reached the callback URI");
+    //res.send(req.user);
+    res.redirect("http://localhost:3000/profile");
   },
   logout(req: any, res: any) {
     res.send("Logging out");

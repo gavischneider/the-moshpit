@@ -6,6 +6,16 @@ const userController = require("../controllers/userController");
 import { User } from "../../shared/User";
 require("dotenv").config();
 
+passport.serializeUser((user: User, done: any) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id: string, done: any) => {
+  userModel.findById(id).then((user: User) => {
+    done(null, user.id);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -22,6 +32,7 @@ passport.use(
       userModel.findOne({ googleId: profile.id }).then((currentUser: User) => {
         if (currentUser) {
           console.log(`User is: ${currentUser}`);
+          done(null, currentUser);
         } else {
           // Create new user
           const newUser = {
@@ -34,12 +45,12 @@ passport.use(
             photo: profile.photos[0].value,
           };
 
-          userModel.addUser(newUser, (err: Error, data: any) => {
+          userModel.addUser(newUser, (err: Error) => {
             if (err) {
               console.log(`An error occured: ${err}`);
             } else {
               console.log(`New user created: ${newUser}`);
-              console.log(data);
+              done(null, newUser);
             }
           });
         }
