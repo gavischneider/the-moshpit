@@ -2,32 +2,36 @@ const mongoose = require("mongoose");
 import { User } from "../../shared/User";
 
 const userSchema = new mongoose.Schema({
-  id: String,
-  firstName: String,
-  lastName: String,
-  userName: String,
+  provider: String,
+  googleId: String,
+  firstname: String,
+  lastname: String,
+  username: String,
   email: String,
-  country: String,
+  photo: String,
 });
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
 
-module.exports.getUser = (callback: Function) => {
-  userModel.find((err: Error, data: any) => {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(null, data);
-    }
-  });
-};
+// module.exports.getUser = (callback: Function) => {
+//   userModel.find((err: Error, data: any) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       callback(null, data);
+//     }
+//   });
+// };
 
 module.exports.addUser = (newUser: any, callback: Function) => {
   const user = new userModel({
-    firstname: newUser.firstName,
-    lastname: newUser.lastName,
-    email: newUser.city,
-    country: newUser.country,
+    provider: newUser.provider,
+    googleId: newUser.googleId,
+    firstname: newUser.firstname,
+    lastname: newUser.lastname,
+    username: newUser.username,
+    email: newUser.email,
+    photo: newUser.photo,
   });
   user.save(callback);
 };

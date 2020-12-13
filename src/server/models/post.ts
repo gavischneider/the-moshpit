@@ -44,7 +44,7 @@ module.exports.getImgFromHTML = (description: string): string | null => {
   return imageSrc;
 };
 
-module.exports.getPost = (callback: Function) => {
+module.exports.getPosts = (callback: Function) => {
   postModel.find((err: Error, data: any) => {
     if (err) {
       console.log(err);

@@ -5,7 +5,7 @@ const userControler = require("../controllers/userController");
 
 const router = express.Router();
 
-router.get("/home", userControler.userHome);
+// router.get("/home", userControler.userHome);
 
 router.post("/add", userControler.addUser);
 

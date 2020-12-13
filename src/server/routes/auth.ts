@@ -13,7 +13,7 @@ router.get("/login", authController.login);
 router.get(
   "/google",
   passport.authenticate("google", {
-    scope: ["profile"],
+    scope: ["profile", "email"],
   })
 );
 

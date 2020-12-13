@@ -1,8 +1,9 @@
 export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
+  provider: string;
+  googleId: string;
+  username: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  country: string;
+  photo: string;
 }

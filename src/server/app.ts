@@ -16,11 +16,16 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const passportSetup = require("./config/passport-setup");
 
-const userRoutes = require("./routes/users");
-const postRoutes = require("./routes/posts");
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/posts");
+const userRoutes = require("./routes/users");
 
 const postModel = require("./models/post");
+const userModel = require("./models/user");
+
+const authController = require("./controllers/authController");
+const postController = require("./controllers/postController");
+const userController = require("./controllers/userController");
 
 const app: Application = express();
 app.use(express.json());
