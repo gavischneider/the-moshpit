@@ -7,12 +7,12 @@ import { User } from "../../shared/User";
 require("dotenv").config();
 
 passport.serializeUser((user: User, done: any) => {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser((id: string, done: any) => {
   userModel.findById(id).then((user: User) => {
-    done(null, user.id);
+    done(null, user);
   });
 });
 

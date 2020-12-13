@@ -23,6 +23,11 @@ router.get(
   authController.googleRedirect
 );
 
-router.get("/logout", authController.logout);
+router.get("/user", authController.getUser);
+
+router.get("/logout", (req: any, res: any) => {
+  req.logout();
+  res.redirect("http://localhost:3000/");
+});
 
 module.exports = router;
