@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  id: any;
   provider: string;
   googleId: string;
   username: string;

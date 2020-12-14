@@ -18,7 +18,14 @@ export const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a href="http://localhost:5000/auth/logout">Logout</a>
+              <a href="http://localhost:5000/auth/logout" className="mr-2">
+                Logout
+              </a>
+            </li>
+            <li>
+              <Link to="/profile" className="mr-2">
+                Profile
+              </Link>
             </li>
           </ul>
         </div>

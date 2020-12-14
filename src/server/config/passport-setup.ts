@@ -1,4 +1,5 @@
 const passport = require("passport");
+const mongoose = require("mongoose");
 const GoogleStrategy = require("passport-google-oauth20");
 const userModel = require("../models/user");
 const userController = require("../controllers/userController");
@@ -6,12 +7,12 @@ const userController = require("../controllers/userController");
 import { User } from "../../shared/User";
 require("dotenv").config();
 
-passport.serializeUser((user: User, done: any) => {
-  done(null, user);
+passport.serializeUser((user: any, done: any) => {
+  done(null, user._id);
 });
 
-passport.deserializeUser((id: string, done: any) => {
-  userModel.findById(id).then((user: User) => {
+passport.deserializeUser((id: any, done: any) => {
+  userModel.findById(id).then((user: any) => {
     done(null, user);
   });
 });
@@ -43,7 +44,7 @@ passport.use(
             username: profile.displayName,
             email: profile.emails[0].value,
             photo: profile.photos[0].value,
-          };
+          }; //profile._json.image.url
 
           userModel.addUser(newUser, (err: Error) => {
             if (err) {

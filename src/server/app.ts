@@ -22,15 +22,32 @@ const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/users");
 
-const postModel = require("./models/post");
-const userModel = require("./models/user");
+//const postModel = require("./models/post");
+//const userModel = require("./models/user");
 
-const authController = require("./controllers/authController");
-const postController = require("./controllers/postController");
-const userController = require("./controllers/userController");
+//const authController = require("./controllers/authController");
+//const postController = require("./controllers/postController");
+//const userController = require("./controllers/userController");
 
 const app: Application = express();
 app.use(express.json());
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // 1 Day
+    keys: [process.env.COOKIE_KEY],
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Allows frontend to call backend API
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = process.env.PORT || 5000;
 
@@ -43,17 +60,6 @@ mongoose
   })
   .then(() => console.log("Connected to database"))
   .catch((err: Error) => console.log(`There was an error: ${err}`));
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000, // 1 Day
-    keys: [process.env.COOKIE_KEY],
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
