@@ -10,6 +10,8 @@ const passport = require("passport");
 
 router.get("/login", authController.login);
 
+router.get("/login/success", authController.loginSuccess);
+
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -17,10 +19,14 @@ router.get(
   })
 );
 
+router.get("/login/failed", authController.loginFailed);
+
 router.get(
   "/google/redirect",
-  passport.authenticate("google"),
-  authController.googleRedirect
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:3000/profile",
+    failureRedirect: "/auth/login/failed",
+  })
 );
 
 router.get("/user", authController.getUser);

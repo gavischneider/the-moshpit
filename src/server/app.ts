@@ -17,6 +17,9 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const passportSetup = require("./config/passport-setup");
+const cors = require("cors");
+//const session = require("express-session");
+//const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
@@ -37,15 +40,24 @@ app.use(
     keys: [process.env.COOKIE_KEY],
   })
 );
+//app.use(cookieParser);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Allows frontend to call backend API
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allow seesion cookie from browser to come through
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -113,9 +125,23 @@ app.use("/auth/", authRoutes);
 //   });
 // })();
 // ------------------------------------------------------------------------
+const authCheck = (req: any, res: Response, next: NextFunction) => {
+  if (!req.user) {
+    res.status(401).json({
+      authenticated: false,
+      message: "User has not been authenticated",
+    });
+  }
+};
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Houme route");
+app.get("/", authCheck, (req: any, res: Response) => {
+  //res.send("Houme route");
+  res.status(200).json({
+    authenticated: true,
+    message: "User successfully authenticated",
+    user: req.user,
+    cookies: req.cookies,
+  });
 });
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
