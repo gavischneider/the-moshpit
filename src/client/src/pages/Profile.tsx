@@ -47,6 +47,12 @@ export const Profile = () => {
       <h2>{profile[0].username}</h2>
       <h2>{profile[0].email}</h2>
       <img src={profile[0].photo} alt={"profile"} />
+      <h2>Your News Sources</h2>
+      <ul>
+        {profile[0].sources.map((source: any) => {
+          return <li>{source.name}</li>;
+        })}
+      </ul>
     </div>
   );
 };

@@ -7,4 +7,5 @@ export interface User {
   lastname: string;
   email: string;
   photo: string;
+  sources: Array;
 }

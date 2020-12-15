@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const GoogleStrategy = require("passport-google-oauth20");
 const userModel = require("../models/user");
 const userController = require("../controllers/userController");
+import { feeds } from "../constants/feeds";
 
 import { User } from "../../shared/User";
 require("dotenv").config();
@@ -41,6 +42,7 @@ passport.use(
           done(null, currentUser);
         } else {
           // Create new user
+          // Initially give the user the deafault feeds
           new userModel({
             provider: "google",
             googleId: profile.id,
@@ -49,20 +51,13 @@ passport.use(
             username: profile.displayName,
             email: profile.emails[0].value,
             photo: profile.photos[0].value,
+            sources: feeds,
           })
             .save()
             .then((newUser: any) => {
               console.log("created new user: ", newUser);
               done(null, newUser);
             });
-          // userModel.addUser(newUser, (err: Error) => {
-          //   if (err) {
-          //     console.log(`An error occured: ${err}`);
-          //   } else {
-          //     console.log(`New user created: ${newUser}`);
-          //     done(null, newUser);
-          //   }
-          // });
         }
       });
     }

@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   email: String,
   photo: String,
+  sources: Array,
 });
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
@@ -33,6 +34,7 @@ module.exports.addUser = (newUser: any, callback: Function) => {
     username: newUser.username,
     email: newUser.email,
     photo: newUser.photo,
+    sources: newUser.sources,
   });
   user.save(callback);
 };

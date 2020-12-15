@@ -2,8 +2,10 @@ import React, { useState, useRef, useCallback } from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
 
-export const Newsfeed = () => {
-  const [query, setQuery] = useState("");
+export const Newsfeed = (props: any) => {
+  // Need to get the users query to know which feeds to get (ONLY if user is logged in)
+
+  const [query, setQuery] = useState([...props.user.sources]);
   const [pageNumber, setPageNumber] = useState(1);
 
   const { loading, error, posts, hasMore } = usePostFetch(query, pageNumber);

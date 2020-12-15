@@ -3,21 +3,6 @@ export {};
 const userModel = require("../models/user");
 
 const userController = {
-  // userHome(req: any, res: any) {
-  //   userModel.getUser((err: Error, data: any) => {
-  //     try {
-  //       if (err) {
-  //         console.log(err);
-  //       } else if (data) {
-  //         res.render("home", { data: data });
-  //       } else {
-  //         res.render("home", { data: {} });
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   });
-  // },
   addUser(req: any, res: any) {
     try {
       console.log("adduser", req.body);

@@ -45,13 +45,21 @@ const postController = {
 
   // Need to update with the query
   getPosts(req: any, res: any) {
-    //const query = req.query.query;
+    const sources = req.query.query.map((q: any) => {
+      return q.name;
+    });
     const page = parseInt(req.query.page);
     const limit = 10;
     const startIndex = (page - 1) * limit;
     //const endIndex = page * limit;
 
+    // --TODO--
+    // Change to query2 after 'publisher' is add to each post
     const query = postModel.find().limit(limit).skip(startIndex);
+    const query2 = postModel
+      .find({ publisher: { $all: sources } })
+      .limit(limit)
+      .skip(startIndex);
     query.exec((err: Error, posts: Post[]) => {
       if (err) {
         res.status(500).json({ message: err.message });
