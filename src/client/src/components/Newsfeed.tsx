@@ -1,14 +1,18 @@
 import React, { useState, useRef, useCallback } from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
+import { feeds } from "../constants/feeds";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
 
-  const [query, setQuery] = useState([...props.user.sources]);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { loading, error, posts, hasMore } = usePostFetch(query, pageNumber);
+  // if (props.user) {
+  //   setQuery([...props.user.sources]);
+  // }
+
+  const { loading, error, posts, hasMore } = usePostFetch(pageNumber);
 
   const observer: any = useRef();
   const lastPostElementRef = useCallback(

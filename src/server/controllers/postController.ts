@@ -4,6 +4,7 @@ var feed = require("rss-to-json");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
+import { feeds } from "../constants/feeds";
 
 import { Publisher } from "../../shared/Publisher";
 
@@ -48,18 +49,21 @@ const postController = {
 
   // Need to update with the query
   getPosts(req: any, res: any) {
-    const sources = req.query.query;
-    let sourceNames = [];
-    for (let i = 0; i < sources.length; i++) {
-      console.log(`<Sources[i]: ${sources[i]}>`);
-      sourceNames[i] = JSON.parse(sources[i]).name;
+    // console.log("-----------------------------------------------");
+    // console.log("@@ Sources: @@");
+    // console.log("-----------------------------------------------");
+    // console.log(req.query.query);
+    let sources;
+    if (req.user) {
+      sources = req.user.sources;
+    } else {
+      sources = feeds;
     }
 
-    console.log("+++ req.query.query +++");
-    console.log(req.query.query);
-
-    console.log("+++ SOURCES NAMES ARRAY +++");
-    console.log(sourceNames);
+    let sourceNames = [];
+    for (let i = 0; i < sources.length; i++) {
+      sourceNames[i] = sources[i].name;
+    } // JSON.parse
 
     const page = parseInt(req.query.page);
     const limit = 10;
@@ -70,7 +74,7 @@ const postController = {
     // Change to query2 after 'publisher' is add to each post
     const query = postModel.find().limit(limit).skip(startIndex);
     const query2 = postModel
-      .find({ publisher: { $all: sourceNames } })
+      .find({ publisher: { $in: sourceNames } })
       .limit(limit)
       .skip(startIndex);
     query2.exec((err: Error, posts: Post[]) => {

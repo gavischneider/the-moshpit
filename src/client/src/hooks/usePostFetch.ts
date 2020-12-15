@@ -3,7 +3,7 @@ import axios from "axios";
 import { Post } from "../../../shared/Post";
 
 // Change the string to type post
-export default function usePostFetch(query: any, pageNumber: number) {
+export default function usePostFetch(pageNumber: number) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState(Array<Post>());
@@ -11,7 +11,7 @@ export default function usePostFetch(query: any, pageNumber: number) {
 
   useEffect(() => {
     setPosts([]);
-  }, [query]);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -20,7 +20,7 @@ export default function usePostFetch(query: any, pageNumber: number) {
     axios({
       method: "GET",
       url: "post/getposts",
-      params: { query: query, page: pageNumber },
+      params: { page: pageNumber },
     })
       .then((res) => {
         console.log(res.data);
@@ -42,6 +42,6 @@ export default function usePostFetch(query: any, pageNumber: number) {
       .catch((error) => {
         setError(true);
       });
-  }, [query, pageNumber]);
+  }, [pageNumber]);
   return { loading, error, posts, hasMore };
 }
