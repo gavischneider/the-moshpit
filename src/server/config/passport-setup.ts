@@ -8,7 +8,7 @@ import { User } from "../../shared/User";
 require("dotenv").config();
 
 passport.serializeUser((user: any, done: any) => {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 passport.deserializeUser((id: any, done: any) => {
@@ -41,7 +41,7 @@ passport.use(
           done(null, currentUser);
         } else {
           // Create new user
-          const newUser = {
+          new userModel({
             provider: "google",
             googleId: profile.id,
             firstname: profile.name.givenName,
@@ -49,16 +49,20 @@ passport.use(
             username: profile.displayName,
             email: profile.emails[0].value,
             photo: profile.photos[0].value,
-          }; //profile._json.image.url
-
-          userModel.addUser(newUser, (err: Error) => {
-            if (err) {
-              console.log(`An error occured: ${err}`);
-            } else {
-              console.log(`New user created: ${newUser}`);
+          })
+            .save()
+            .then((newUser: any) => {
+              console.log("created new user: ", newUser);
               done(null, newUser);
-            }
-          });
+            });
+          // userModel.addUser(newUser, (err: Error) => {
+          //   if (err) {
+          //     console.log(`An error occured: ${err}`);
+          //   } else {
+          //     console.log(`New user created: ${newUser}`);
+          //     done(null, newUser);
+          //   }
+          // });
         }
       });
     }
