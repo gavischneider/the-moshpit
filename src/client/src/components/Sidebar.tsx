@@ -153,6 +153,8 @@ export const Sidebar = () => {
             </a>
           </li>
 
+          {/* --TODO--
+Change feeds to the users feeds (if logged in) */}
           {feeds.map((feed) => {
             return <Source key={feed.url} feed={feed} />;
           })}

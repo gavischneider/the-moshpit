@@ -8,7 +8,9 @@ import express, {
   Router,
 } from "express";
 
-const feeds = require("./constants/feeds");
+import { Publisher } from "../shared/Publisher";
+
+const feeds: Array<Publisher> = require("./constants/feeds").feeds;
 
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -25,7 +27,7 @@ const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/users");
 
-//const postModel = require("./models/post");
+const postModel = require("./models/post");
 //const userModel = require("./models/user");
 
 //const authController = require("./controllers/authController");
@@ -79,8 +81,10 @@ app.use("/auth/", authRoutes);
 
 // -----Temporary code to test out initial post storage functionality-----
 // (function () {
-//   feeds.map((feed: string) => {
-//     postModel.getPostsFromUrl(feed, (err: Error, data: any) => {
+//   console.log("--- FEEDS: ---");
+//   console.log(feeds);
+//   feeds.map((feed: Publisher) => {
+//     postModel.getPostsFromUrl(feed.url, (err: Error, data: any) => {
 //       if (err) {
 //         console.log("An error occured", err);
 //       } else {
@@ -99,6 +103,7 @@ app.use("/auth/", authRoutes);
 //             category: post.category,
 //             enclosures: post.enclosures,
 //             image: "",
+//             publisher: feed.name,
 //           };
 //           // We have the data, now we need to check where the image is
 //           if (newPost.enclosures[0] !== undefined) {

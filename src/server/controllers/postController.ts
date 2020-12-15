@@ -20,6 +20,7 @@ const postController = {
         author: req.body.author,
         category: req.body.category,
         image: req.body.image,
+        publisher: req.body.publisher,
       });
       postModel.addPost(newPost, (err: Error, data: any) => {
         if (err) {

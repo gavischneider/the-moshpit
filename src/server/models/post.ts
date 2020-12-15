@@ -17,6 +17,7 @@ const postSchema = new mongoose.Schema({
     },
   ],
   image: String,
+  publisher: String,
 });
 
 const postModel = (module.exports = mongoose.model("post", postSchema));
@@ -65,6 +66,7 @@ module.exports.addPost = (newPost: Post, callback: Function) => {
     author: newPost.author,
     category: newPost.category,
     image: newPost.image,
+    publisher: newPost.publisher,
   });
   post.save(callback);
 };
