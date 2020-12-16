@@ -16,7 +16,7 @@ const postController = {
       console.log("addpost", req.body);
       const newPost = new postModel({
         title: req.body.title,
-        id: req.bosy.id,
+        id: req.body.id,
         description: req.body.description,
         url: req.body.url,
         created: req.body.url,
