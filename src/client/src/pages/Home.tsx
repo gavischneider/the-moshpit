@@ -47,7 +47,7 @@ const Home = (props: any) => {
   console.log(profile);
   //if (!profile[0]) return <span>loading...</span>;
 
-  console.log("############ WE FOUND USER ###############");
+  //console.log("############ WE FOUND USER ###############");
   return (
     <div className="App bg-black">
       <Navbar
@@ -63,6 +63,7 @@ const Home = (props: any) => {
 const mapStateToProps = (state: any) => {
   return {
     user: state.auth.user,
+    status: state.auth.status,
   };
 };
 

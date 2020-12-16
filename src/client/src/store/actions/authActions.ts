@@ -8,17 +8,15 @@ export const getUser = (user: any) => {
       url: "auth/login/success",
     })
       .then((res: any) => {
-        if (res.status === 200) {
-          // setProfile([res.data.user]);
-          // setAuthenticated(true);
-          dispatch({
-            type: "GET_USER",
-            user: res.data.user,
-            status: res.status,
-          });
-        } else {
-          dispatch({ type: "GET_USER", user: {}, status: res.status });
-        }
+        console.log("I JUST DISPATCHED THIS USER: ");
+        console.log(res.data.user);
+        dispatch({
+          type: "GET_USER",
+          user: res.data.user,
+          status: res.status,
+        });
+
+        //dispatch({ type: "GET_USER", user: {}, status: res.status });
       })
       .catch((error) => {
         //   setAuthenticated(false);
