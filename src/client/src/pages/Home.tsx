@@ -7,27 +7,36 @@ import { Newsfeed } from "../components/Newsfeed";
 import { feeds } from "../constants/feeds";
 import { User } from "../../../shared/User";
 import { connect } from "react-redux";
+import { getUser } from "../store/actions/authActions";
 
-const Home = () => {
+const Home = (props: any) => {
   const [profile, setProfile] = useState(Array<User>());
   const [authenticated, setAuthenticated] = useState(false);
 
-  // const { user } = props;
-
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: "auth/login/success",
-    })
-      .then((res: any) => {
-        if (res.status === 200) {
-          setProfile([res.data.user]);
-          setAuthenticated(true);
-        }
-      })
-      .catch((error) => {
-        setAuthenticated(false);
-      });
+    const { user, getUser, status } = props;
+    const u = getUser(profile);
+
+    if (u && status === 200) {
+      setProfile([user]);
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+
+    // axios({
+    //   method: "GET",
+    //   url: "auth/login/success",
+    // })
+    //   .then((res: any) => {
+    //     if (res.status === 200) {
+    //       setProfile([res.data.user]);
+    //       setAuthenticated(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setAuthenticated(false);
+    //   });
   }, []);
 
   const handleNotAuthenticated = () => {
@@ -57,4 +66,10 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getUser: (user: any) => dispatch(getUser(user)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

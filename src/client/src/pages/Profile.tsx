@@ -50,7 +50,7 @@ export const Profile = () => {
       <h2>Your News Sources</h2>
       <ul>
         {profile[0].sources.map((source: any) => {
-          return <li>{source.name}</li>;
+          return <li key={source.url}>{source.name}</li>;
         })}
       </ul>
     </div>
