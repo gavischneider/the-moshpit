@@ -6,10 +6,13 @@ import { Sidebar } from "../components/Sidebar";
 import { Newsfeed } from "../components/Newsfeed";
 import { feeds } from "../constants/feeds";
 import { User } from "../../../shared/User";
+import { connect } from "react-redux";
 
-export const Home = () => {
+const Home = () => {
   const [profile, setProfile] = useState(Array<User>());
   const [authenticated, setAuthenticated] = useState(false);
+
+  // const { user } = props;
 
   useEffect(() => {
     axios({
@@ -47,3 +50,11 @@ export const Home = () => {
     </div>
   );
 };
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
