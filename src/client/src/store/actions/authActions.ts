@@ -33,7 +33,10 @@ import {
 //   };
 // };
 
-export const setUser = () => async (dispatch: Dispatch<AuthDispatchTypes>) => {
+export const setUser = () => async (
+  dispatch: Dispatch<AuthDispatchTypes>,
+  getState: any
+) => {
   console.log("IN THE SETUSER FUNCTION");
   try {
     dispatch({

@@ -1,105 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { User } from "../../../shared/User";
-import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { setUser } from "../store/actions/authActions";
-import { useSelector, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { AuthState } from "../store/reducers/authReducer";
+import { InitialState } from "../store/reducers/rootReducer";
+import store from "../index";
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const userState = useSelector<AuthState, AuthState["user"]>((state) => {
-    console.log(`STATE: `);
-    console.log(state.user);
-    return state.user;
+
+  const userState = useSelector((state: InitialState) => {
+    console.log("STATEEEEEE");
+    console.log(state.auth);
+    return state.auth;
   });
 
-  //const { userState} = useSelector(state => state.user);
-
-  console.log("USER: ");
-  console.log(userState);
-  const authenticated = useSelector<AuthState, AuthState["authenticated"]>(
-    (state) => state.authenticated
-  );
-
+  store.dispatch({ type: setUser });
   useEffect(() => {
     // Check if there's a user authenticated but we dont yet have it
-    if (userState === undefined) {
-      //&& authenticated
+    if (typeof userState.user === "undefined") {
+      // && userState.authenticated
+      console.log("IM IN THE IF");
       dispatch(setUser());
     }
   });
-
-  //useEffect(() => {});
-  //const { user, status, getUser } = props;
-  //const u = getUser({});
-
-  // const [profile, setProfile] = useState(Array<User>());
-  // const [authenticated, setAuthenticated] = useState(false);
-  // const [error, setError] = useState<String | null>(null);
-
-  //if (!user.username) return <Redirect to="/login" />;
-
-  //const proxyUrl = "http://localhost:5000";
-
-  // useEffect(() => {
-  //   axios({
-  //     method: "GET",
-  //     url: "auth/login/success",
-  //   })
-  //     .then((res: any) => {
-  //       if (res.status === 200) return res;
-  //       throw new Error("Failed to authenticate user");
-  //     })
-  //     .then((res: any) => {
-  //       console.log(res.data);
-  //       setProfile([res.data.user]);
-  //       setAuthenticated(true);
-  //     })
-  //     .catch((error) => {
-  //       setAuthenticated(false);
-  //       setError("Failed to authenticate user");
-  //     });
-  // }, []);
-
-  // console.log(`PROFILE: ${profile}`);
-  // if (!profile[0]) return <span>loading...</span>;
-
-  // const handleNotAuthenticated = () => {
-  //   setAuthenticated(false);
-  // };
+  //if (!userState.authenticated) return <Redirect to="/login" />;
 
   return (
     <div>
-      <Navbar
-      //authenticated={authenticated}
-      //handleNotAuthenticated={handleNotAuthenticated}
-      />
+      <Navbar user={userState} />
       <h1>Profile!!!</h1>
-      <h2>{userState && userState.user.username}</h2>
-      <h2>{userState && userState.user.email}</h2>
-      <img src={userState && userState.user.photo} alt={"profile"} />
+      <h2>{userState.user && userState.user.user.username}</h2>
+      <h2>{userState.user && userState.user.user.email}</h2>
+      <img src={userState.user && userState.user.user.photo} alt={"profile"} />
       <h2>Your News Sources</h2>
-      {/* <ul>
-        {userState &&
-          userState.user.sources.map((source: any) => {
+      <ul>
+        {userState.user &&
+          userState.user.user.sources.map((source: any) => {
             return <li key={source.url}>{source.name}</li>;
           })}
-      </ul> */}
+      </ul>
     </div>
   );
 };
-
-// const mapStateToProps = (state: any) => {
-//   return {
-//     user: state.auth.user,
-//     status: state.auth.status,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     getUser: (user: any) => dispatch(getUser(user)),
-//   };
-// };

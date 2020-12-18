@@ -8,20 +8,23 @@ import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/rootReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { AuthState } from "./store/reducers/authReducer";
 
 const store: Store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+export default store;
+
 export type RootStore = ReturnType<typeof rootReducer>;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  //</React.StrictMode>,
   document.getElementById("root")
 );
 
