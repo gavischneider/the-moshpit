@@ -22,18 +22,21 @@ export const Home: React.FC = () => {
     return state.auth;
   });
 
+  const { user, authenticated } = userState;
+
   useEffect(() => {
     // Check if there's a user authenticated but we dont yet have it
-    if (userState && userState.user === undefined && userState.authenticated) {
+    if (userState && userState.user === undefined) {
+      //&& userState.authenticated
       dispatch(setUser());
     }
-  });
+  }, []);
 
   return (
     <div className="App bg-black">
-      <Navbar user={userState} />
+      <Navbar />
       <Sidebar />
-      <Newsfeed user={userState && userState.user} />
+      <Newsfeed user={user} />
     </div>
   );
 };

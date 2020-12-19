@@ -24,7 +24,7 @@ router.get("/login/failed", authController.loginFailed);
 router.get(
   "/google/redirect",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/profile",
+    successRedirect: "http://localhost:3000",
     failureRedirect: "/auth/login/failed",
   })
 );
