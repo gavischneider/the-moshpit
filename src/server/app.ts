@@ -26,6 +26,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/users");
+const tagRoutes = require("./routes/tags");
 
 const postModel = require("./models/post");
 //const userModel = require("./models/user");

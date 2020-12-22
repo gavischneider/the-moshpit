@@ -1,6 +1,17 @@
 const tagModel = require("../models/tag");
 
 const tagController = {
+  // Get all tags
+  getTags(callback: Function) {
+    tagModel.find((err: Error, data: any) => {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(null, data);
+      }
+    });
+  },
+
   addTag(req: any, res: any) {
     // Check if tag exists
     const tagTitle: string = req.body.title;
