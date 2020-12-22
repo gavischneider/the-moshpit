@@ -8,4 +8,5 @@ export interface User {
   email: string;
   photo: string;
   sources: Array;
+  joined: Date;
 }

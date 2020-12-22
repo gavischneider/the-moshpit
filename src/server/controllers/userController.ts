@@ -14,6 +14,7 @@ const userController = {
         lastname: req.body.lastname,
         email: req.body.email,
         photo: req.body.photo,
+        joined: req.body.joined,
       });
       userModel.addUser(newUser, (err: Error, data: any) => {
         if (err) {

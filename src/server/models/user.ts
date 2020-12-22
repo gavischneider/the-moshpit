@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   photo: String,
   sources: Array,
+  joined: Date,
 });
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
@@ -26,6 +27,8 @@ const userModel = (module.exports = mongoose.model("user", userSchema));
 // };
 
 module.exports.addUser = (newUser: any, callback: Function) => {
+  let [tMonth, tDay, tYear] = new Date().toLocaleDateString("en-US").split("/");
+  const todaysDate = `${tMonth}/${tDay}/${tYear}`;
   const user = new userModel({
     provider: newUser.provider,
     googleId: newUser.googleId,
@@ -35,6 +38,7 @@ module.exports.addUser = (newUser: any, callback: Function) => {
     email: newUser.email,
     photo: newUser.photo,
     sources: newUser.sources,
+    joined: todaysDate,
   });
   user.save(callback);
 };

@@ -24,21 +24,31 @@ export const Profile = () => {
   //   }
   // });
 
-  if (!userState.authenticated) return <Redirect to="/login" />;
+  if (!authenticated) return <Redirect to="/login" />;
 
   return (
-    <div>
+    <div className="bg-gray-300">
       <Navbar user={userState} />
       <h1>Profile!!!</h1>
-      {userState.user && (
+      {user && (
         <div>
-          <h2>{userState.user.user.username}</h2>
-          <h2>{userState.user.user.email}</h2>
-          <img src={userState.user.user.photo} alt={"profile"} />
+          <h2>{user.user.username}</h2>
+          <h2>{user.user.email}</h2>
+          <img src={user.user.photo} alt={"profile"} />
+          <h2>{user.user.joined}</h2>
           <h2>Your News Sources</h2>
           <ul>
-            {userState.user.user.sources.map((source: any) => {
-              return <li key={source.url}>{source.name}</li>;
+            {user.user.sources.map((source: any) => {
+              return (
+                <div>
+                  <li key={source.url}>{source.name}</li>
+                  <img
+                    src={source.image}
+                    alt={"source"}
+                    className="svg-inline--fa fa-w-20 fa-5x"
+                  />
+                </div>
+              );
             })}
           </ul>
         </div>

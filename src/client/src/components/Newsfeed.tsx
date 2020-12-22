@@ -3,6 +3,7 @@ import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
 import { Tag } from "./Tag";
 import { Upvote } from "./Upvote";
+import { getDate } from "../services/getDate";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
@@ -37,18 +38,19 @@ export const Newsfeed = (props: any) => {
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto">
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
+            const date = getDate(post.created);
             return (
               <div
                 key={post.id}
                 ref={lastPostElementRef}
-                className="rounded shadow-lg transform transition duration-300 hover:scale-110 bg-gray-800 mx-auto"
+                className="rounded shadow-lg transform transition border border-transparent hover:border-white hover:border-opacity-50 bg-gray-700 mx-auto"
               >
                 <div className="">
                   <a href={post.url} target="_blank" rel="noreferrer">
                     <img alt={"Post header"} src={post.image} />
                   </a>
                   <h1>{post.title}</h1>
-                  <h3 className="text-white mb-2">{post.created}</h3>
+                  <h3 className="text-white mb-2">{date}</h3>
                   <div className="px-6 py-4 mb-1">
                     {post.category.map((tag: string) => {
                       return <Tag key={tag} name={tag} />;
