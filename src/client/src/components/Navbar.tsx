@@ -17,31 +17,39 @@ export const Navbar = (props: any) => {
           <ul className="flex text-white">
             <li>
               <Link to="/" className="mr-2">
-                Home
+                The Moshpit 🤘🏻
               </Link>
             </li>
 
-            {userState.authenticated ? (
-              <li>
-                <a href="http://localhost:5000/auth/logout" className="mr-2">
-                  Logout
-                </a>
-              </li>
-            ) : (
-              <li>
-                <Link to="/login" className="mr-2">
-                  Login
-                </Link>
-              </li>
-            )}
-            {/* Need to implement redux store so that the authenticated state will be available via ALL components */}
-            {userState.authenticated ? (
-              <li>
-                <Link to="/profile" className="mr-2">
-                  Profile
-                </Link>
-              </li>
-            ) : null}
+            <div className="absolute right-0 flex pr-6">
+              {userState.authenticated ? (
+                <>
+                  <div>
+                    <li>
+                      <Link to="/profile" className="mr-4">
+                        Profile
+                      </Link>
+                    </li>
+                  </div>
+                  <div>
+                    <li>
+                      <a
+                        href="http://localhost:5000/auth/logout"
+                        className="mr-2"
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </div>
+                </>
+              ) : (
+                <li>
+                  <Link to="/login" className="mr-2">
+                    Login
+                  </Link>
+                </li>
+              )}
+            </div>
           </ul>
         </div>
       </div>

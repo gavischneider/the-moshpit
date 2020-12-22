@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
+import { Tag } from "./Tag";
+import { Upvote } from "./Upvote";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
@@ -46,6 +48,16 @@ export const Newsfeed = (props: any) => {
                     <img alt={"Post header"} src={post.image} />
                   </a>
                   <h1>{post.title}</h1>
+                  <h3 className="text-white mb-2">{post.created}</h3>
+                  <div className="px-6 py-4 mb-1">
+                    {post.category.map((tag: string) => {
+                      return <Tag key={tag} name={tag} />;
+                    })}
+                  </div>
+                  <br />
+                  <div className="absolute absolute inset-x-0 bottom-0 bottom-2 m-2">
+                    <Upvote postId={post.id} upvotes={post.upvotes} />
+                  </div>
                 </div>
               </div>
             );
@@ -58,6 +70,7 @@ export const Newsfeed = (props: any) => {
               image={post.image}
               category={post.category}
               postId={post._id}
+              created={post.created}
             />
           );
         })}
