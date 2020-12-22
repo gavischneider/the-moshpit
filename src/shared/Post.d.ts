@@ -9,4 +9,5 @@ export interface Post {
   enclosures: object[];
   image: string;
   publisher: string;
+  _id: string;
 }

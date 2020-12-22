@@ -1,5 +1,6 @@
 import React from "react";
 import { Tag } from "./Tag";
+import { Upvote } from "./Upvote";
 
 export const Post = (props: any) => {
   return (
@@ -14,6 +15,7 @@ export const Post = (props: any) => {
             return <Tag key={tag} name={tag} />;
           })}
         </div>
+        <Upvote postId={props.postId} />
       </div>
     </div>
   );

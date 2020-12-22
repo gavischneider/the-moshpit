@@ -57,6 +57,7 @@ export const Newsfeed = (props: any) => {
               url={post.url}
               image={post.image}
               category={post.category}
+              postId={post._id}
             />
           );
         })}
