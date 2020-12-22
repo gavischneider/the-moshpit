@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { GrSign } from "react-icons/gr";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { downvotePost, upvotePost } from "../store/actions/postActions";
 import { InitialState } from "../store/reducers/rootReducer";
-import "../upvote.css";
 
 export const Upvote = (props: any) => {
-  //console.log("this");
-  //console.log(this);
+  const dispatch = useDispatch();
   const userState = useSelector((state: InitialState) => {
     return state.auth;
   });
+  const { user, authenticated } = userState;
 
   const [upvoted, setUpvoted] = useState(false);
   const iconRef = useRef<any>(null);
@@ -32,25 +32,23 @@ export const Upvote = (props: any) => {
   }, [upvoted]);
 
   const handleClick = (e: any) => {
-    if (upvoted) {
-      e.target.querySelector("path").setAttribute("fill", "red");
-      setUpvoted(true);
-      // Dispatch upvotePost
+    if (user !== undefined) {
+      const userId = user.user._id;
+      if (!upvoted) {
+        e.target.querySelector("path").setAttribute("fill", "red");
+        setUpvoted(true);
+        // Dispatch upvotePost with postId and userId
+
+        dispatch(upvotePost(props.postId, userId));
+      } else {
+        e.target.querySelector("path").setAttribute("fill", "none");
+        setUpvoted(false);
+        // Dispatch downvotePost
+        dispatch(downvotePost(props.postId, userId));
+      }
     } else {
-      e.target.querySelector("path").setAttribute("fill", "none");
-      setUpvoted(false);
-      // Dispatch downvotePost
+      // User is not logged in, cannot perform up/down vote
     }
-
-    //this.querySelector("path").setAttribute("fill", "red");
-
-    // Todo:
-    // Check if user already liked post
-    // --- If yes, toggle un-upvote
-    // --- lower count
-    // else
-    // --- Toggle upvote
-    // --- raise count
   };
 
   return (

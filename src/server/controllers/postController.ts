@@ -88,8 +88,8 @@ const postController = {
   },
 
   upvotePost(req: any, res: any) {
-    const postId = req.body.postId;
-    const userId = req.body.userId;
+    const postId: string = req.body.postId;
+    const userId: string = req.body.userId;
 
     postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
       if (result) {
@@ -114,7 +114,7 @@ const postController = {
         result.upvotes.filter((upvoterId: string) => userId !== upvoterId);
         result.save((err: Error) => {
           if (err) {
-            console.log(`Error saving upvoted post: ${err}`);
+            console.log(`Error saving downvoted post: ${err}`);
           }
         });
       } else {

@@ -1,6 +1,8 @@
 import { Reducer } from "react";
 import { Post } from "../../../../shared/Post";
 import {
+  DOWNVOTE_FAILURE,
+  DOWNVOTE_SUCCESS,
   PostDispatchTypes,
   UPVOTE_FAILURE,
   UPVOTE_SUCCESS,
@@ -21,6 +23,8 @@ const postReducer: Reducer<PostState, PostDispatchTypes> = (
   switch (action.type) {
     case UPVOTE_SUCCESS:
     case UPVOTE_FAILURE:
+    case DOWNVOTE_SUCCESS:
+    case DOWNVOTE_FAILURE:
     default:
       return state;
   }

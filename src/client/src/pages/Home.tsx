@@ -20,8 +20,8 @@ export const Home: React.FC = () => {
   const { user, authenticated } = userState;
 
   useEffect(() => {
-    // Check if there's a user authenticated but we dont yet have it
-    if (userState && userState.user === undefined) {
+    // Check if there's a user but we dont yet have it
+    if (userState && user === undefined) {
       //&& userState.authenticated
       dispatch(setUser());
     }
