@@ -1,6 +1,10 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { PostDispatchTypes } from "./postActionsTypes";
+import {
+  UPVOTE_SUCCESS,
+  UPVOTE_FAILURE,
+  PostDispatchTypes,
+} from "./postActionsTypes";
 import { Post } from "../../../../shared/Post";
 
 export const upvotePost = (post: Post, userId: string) => async (
@@ -17,12 +21,12 @@ export const upvotePost = (post: Post, userId: string) => async (
 
     // axios code ....
 
-    // dispatch({
-    //   type: UPVOTE_SUCCESS,
-    // });
+    dispatch({
+      type: UPVOTE_SUCCESS,
+    });
   } catch (error) {
-    // dispatch({
-    //   type: UPVOTE_FAIL,
-    // });
+    dispatch({
+      type: UPVOTE_FAILURE,
+    });
   }
 };
