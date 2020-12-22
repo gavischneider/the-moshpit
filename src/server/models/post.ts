@@ -22,39 +22,39 @@ const postSchema = new mongoose.Schema({
 
 const postModel = (module.exports = mongoose.model("post", postSchema));
 
-// Recieves a URL and gets the RSS feed
-module.exports.getPostsFromUrl = async (url: string, callback: Function) => {
-  var rss = await feed.load(url);
-  if (rss) {
-    console.log(rss.items[0]);
-    console.log(new Date(rss.items[0].created));
-    callback(null, rss);
-  } else {
-    console.log("There was an error retrieving the rss feed");
-  }
-};
+// // Recieves a URL and gets the RSS feed
+// module.exports.getPostsFromUrl = async (url: string, callback: Function) => {
+//   var rss = await feed.load(url);
+//   if (rss) {
+//     console.log(rss.items[0]);
+//     console.log(new Date(rss.items[0].created));
+//     callback(null, rss);
+//   } else {
+//     console.log("There was an error retrieving the rss feed");
+//   }
+// };
 
-// Extracts the image source from 'description', which is HTML
-module.exports.getImgFromHTML = (description: string): string | null => {
-  const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-  const div: HTMLElement = dom.window.document.createElement("div");
-  div.innerHTML = description;
-  const image: HTMLElement = div.getElementsByTagName("img")[0];
-  const imageSrc: string | null = image ? image.getAttribute("src") : "";
-  console.log("OOOOOOOOOO Image source is: " + imageSrc);
-  return imageSrc;
-};
+// // Extracts the image source from 'description', which is HTML
+// module.exports.getImgFromHTML = (description: string): string | null => {
+//   const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+//   const div: HTMLElement = dom.window.document.createElement("div");
+//   div.innerHTML = description;
+//   const image: HTMLElement = div.getElementsByTagName("img")[0];
+//   const imageSrc: string | null = image ? image.getAttribute("src") : "";
+//   console.log("OOOOOOOOOO Image source is: " + imageSrc);
+//   return imageSrc;
+// };
 
-// Get all posts
-module.exports.getPosts = (callback: Function) => {
-  postModel.find((err: Error, data: any) => {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(null, data);
-    }
-  });
-};
+// // Get all posts
+// module.exports.getPosts = (callback: Function) => {
+//   postModel.find((err: Error, data: any) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       callback(null, data);
+//     }
+//   });
+// };
 
 // Adds feed to the database
 module.exports.addPost = (newPost: Post, callback: Function) => {

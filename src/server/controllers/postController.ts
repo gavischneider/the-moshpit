@@ -7,8 +7,10 @@ const mongoose = require("mongoose");
 import { feeds } from "../constants/feeds";
 
 import { Publisher } from "../../shared/Publisher";
+import { Tag } from "../../shared/Tag";
 
 const postModel = require("../models/post");
+const tagController = require("./tagController");
 
 const postController = {
   addPost(req: any, res: any) {
@@ -33,17 +35,8 @@ const postController = {
           //res.redirect("/user/home");
         }
       });
-
-      // newPost.save((err: Error, data: any) => {
-      //   if (err) {
-      //     console.log("error occured", err);
-      //   } else {
-      //     console.log(data);
-      //     res.redirect("/user/home");
-      //   }
-      // });
     } catch (error) {
-      console.log("error", error);
+      console.log("Error adding new post (and its tags)", error);
     }
   },
 
@@ -85,6 +78,29 @@ const postController = {
         res.send(posts);
       }
     });
+  },
+
+  // Recieves a URL and gets the RSS feed
+  async getPostsFromUrl(url: string, callback: Function) {
+    var rss = await feed.load(url);
+    if (rss) {
+      console.log(rss.items[0]);
+      console.log(new Date(rss.items[0].created));
+      callback(null, rss);
+    } else {
+      console.log("There was an error retrieving the rss feed");
+    }
+  },
+
+  // Extracts the image source from 'description', which is HTML
+  getImgFromHTML(description: string): string | null {
+    const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+    const div: HTMLElement = dom.window.document.createElement("div");
+    div.innerHTML = description;
+    const image: HTMLElement = div.getElementsByTagName("img")[0];
+    const imageSrc: string | null = image ? image.getAttribute("src") : "";
+    console.log("OOOOOOOOOO Image source is: " + imageSrc);
+    return imageSrc;
   },
 
   upvotePost(req: any, res: any) {

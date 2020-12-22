@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 const tagModel = require("../models/tag");
 
 const tagController = {
@@ -15,7 +17,7 @@ const tagController = {
   addTag(req: any, res: any) {
     // Check if tag exists
     const tagTitle: string = req.body.title;
-    const newPostId = req.body.newPostId;
+    const newPostId: ObjectId = req.body.newPostId;
 
     tagModel.findOne({ title: tagTitle }).exec((err: Error, result: any) => {
       if (result) {
@@ -39,3 +41,5 @@ const tagController = {
     });
   },
 };
+
+module.exports = tagController;
