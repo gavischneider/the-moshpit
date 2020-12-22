@@ -7,11 +7,11 @@ import {
 } from "../actions/postActionsTypes";
 
 export interface PostState {
-  post: Post | undefined;
+  postId: string | undefined;
 }
 
 const defaultState: PostState = {
-  post: undefined,
+  postId: undefined,
 };
 
 const postReducer: Reducer<PostState, PostDispatchTypes> = (

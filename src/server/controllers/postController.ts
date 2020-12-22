@@ -86,6 +86,42 @@ const postController = {
       }
     });
   },
+
+  upvotePost(req: any, res: any) {
+    const postId = req.body.postId;
+    const userId = req.body.userId;
+
+    postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
+      if (result) {
+        result.upvotes.push(userId);
+        result.save((err: Error) => {
+          if (err) {
+            console.log(`Error saving upvoted post: ${err}`);
+          }
+        });
+      } else {
+        console.log("Could not find the correct post to upvote");
+      }
+    });
+  },
+
+  downvotePost(req: any, res: any) {
+    const postId = req.body.postId;
+    const userId = req.body.userId;
+
+    postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
+      if (result) {
+        result.upvotes.filter((upvoterId: string) => userId !== upvoterId);
+        result.save((err: Error) => {
+          if (err) {
+            console.log(`Error saving upvoted post: ${err}`);
+          }
+        });
+      } else {
+        console.log("Could not find the correct post to upvote");
+      }
+    });
+  },
 };
 
 module.exports = postController;

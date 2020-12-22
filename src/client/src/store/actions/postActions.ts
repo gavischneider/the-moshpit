@@ -7,16 +7,13 @@ import {
 } from "./postActionsTypes";
 import { Post } from "../../../../shared/Post";
 
-export const upvotePost = (post: Post, userId: string) => async (
+export const upvotePost = (postId: string, userId: string) => async (
   dispatch: Dispatch<PostDispatchTypes>
 ) => {
   console.log("IN THE UPVOTE_POST FUNCTION");
   try {
     // Add users id to upvotes array
-    const newPost = {
-      ...post,
-      upvotes: [...post.upvotes, userId],
-    };
+
     // Send new post to backend to save in db
 
     // axios code ....
