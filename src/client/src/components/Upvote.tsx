@@ -2,9 +2,8 @@ import React from "react";
 import { GrSign } from "react-icons/gr";
 
 export const Upvote = (props: any) => {
-  const handleClick = (e: React.MouseEvent) => {
-    console.log("POST ID");
-    console.log(props);
+  const handleClick = (e: any) => {
+    e.target.querySelector("path").setAttribute("fill", "red");
   };
 
   return (
