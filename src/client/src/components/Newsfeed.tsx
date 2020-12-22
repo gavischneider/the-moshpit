@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
-import { feeds } from "../constants/feeds";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)

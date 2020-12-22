@@ -56,25 +56,4 @@ const authReducer: Reducer<AuthState, AuthDispatchTypes> = (
   }
 };
 
-// const authReducer = (state: AuthState = authState, action: any): AuthState => {
-//   switch (action.type) {
-//     case "SET_USER":
-//       console.log("authReducer, action: GET_USER");
-//       return {
-//         ...state,
-//         user: {
-//           ...action.user,
-//         },
-//         status: action.status,
-//         authenticated: action.authenticated,
-//       };
-//     case "GET_USER_ERROR":
-//       console.log("GET_USER_ERROR: " + action.error);
-//       return state;
-//     default:
-//       console.log("Default");
-//       return state;
-//   }
-// };
-
 export default authReducer;

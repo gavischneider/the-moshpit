@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/rootReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { AuthState } from "./store/reducers/authReducer";
 
 const store: Store = createStore(
   rootReducer,

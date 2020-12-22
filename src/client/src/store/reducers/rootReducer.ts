@@ -2,7 +2,6 @@ import authReducer from "./authReducer";
 import { AuthState } from "./authReducer";
 
 import { combineReducers } from "redux";
-import { createSelectorHook } from "react-redux";
 
 export type InitialState = {
   auth: AuthState;

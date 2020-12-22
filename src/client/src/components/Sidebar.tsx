@@ -3,7 +3,7 @@ import { Source } from "./Source";
 import "../sidebar.css";
 import { feeds } from "../constants/feeds";
 
-export const Sidebar = () => {
+export const Sidebar = (props: any) => {
   return (
     <div className="shadow-lg">
       <nav className="navbar z-10 mt-11">

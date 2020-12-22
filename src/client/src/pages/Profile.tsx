@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Navbar } from "../components/Navbar";
-import { User } from "../../../shared/User";
 import { Redirect } from "react-router-dom";
-import { setUser } from "../store/actions/authActions";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { AuthState } from "../store/reducers/authReducer";
+import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
-import store from "../index";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -28,7 +24,7 @@ export const Profile = () => {
   //   }
   // });
 
-  //if (!userState.authenticated) return <Redirect to="/login" />;
+  if (!userState.authenticated) return <Redirect to="/login" />;
 
   return (
     <div>
