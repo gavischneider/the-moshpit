@@ -14,37 +14,38 @@ export const Upvote = (props: any) => {
   const [upvoted, setUpvoted] = useState(false);
   const iconRef = useRef<any>(null);
 
-  useEffect(() => {
-    // If user already upvoted post, make color red
-    if (userState && userState.user !== undefined) {
-      const userId = userState.user.user._id;
-      if (props.upvotes.indexOf(userId) > -1) {
-        // The user already upvoted this post
-        setUpvoted(true);
-      }
-    }
-  }, []);
+  //   useEffect(() => {
+  //     // If user already upvoted post, make color red
+  //     if (userState && userState.user !== undefined) {
+  //       const userId = userState.user.user._id;
+  //       if (props.upvotes.indexOf(userId) > -1) {
+  //         // The user already upvoted this post
+  //         setUpvoted(true);
+  //       }
+  //     }
+  //   }, []);
 
-  useEffect(() => {
-    if (upvoted) {
-      iconRef.current.querySelector("svg path").setAttribute("fill", "red");
-    }
-  }, [upvoted]);
+  //   useEffect(() => {
+  //     if (upvoted) {
+  //       iconRef.current.querySelector("svg path").setAttribute("fill", "red");
+  //     }
+  //   }, [upvoted]);
 
   const handleClick = (e: any) => {
     if (user !== undefined) {
       const userId = user.user._id;
       if (!upvoted) {
-        e.target.querySelector("path").setAttribute("fill", "red");
+        console.log("UPVOTE");
+        console.log(e.currentTarget);
+        e.currentTarget.querySelector("path").setAttribute("fill", "red");
         setUpvoted(true);
-        // Dispatch upvotePost with postId and userId
-
-        dispatch(upvotePost(props.postId, userId));
+        //dispatch(upvotePost(props.postId, userId));
       } else {
-        e.target.querySelector("path").setAttribute("fill", "none");
+        console.log("DOWNVOTE");
+        console.log(e.currentTarget);
+        e.currentTarget.querySelector("path").setAttribute("fill", "none");
         setUpvoted(false);
-        // Dispatch downvotePost
-        dispatch(downvotePost(props.postId, userId));
+        //dispatch(downvotePost(props.postId, userId));
       }
     } else {
       // User is not logged in, cannot perform up/down vote
