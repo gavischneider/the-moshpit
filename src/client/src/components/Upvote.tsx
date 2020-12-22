@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GrSign } from "react-icons/gr";
+import { useSelector } from "react-redux";
+import { InitialState } from "../store/reducers/rootReducer";
+import "../upvote.css";
 
 export const Upvote = (props: any) => {
+  //console.log("this");
+  //console.log(this);
+  const userState = useSelector((state: InitialState) => {
+    return state.auth;
+  });
+
+  const [upvoted, setUpvoted] = useState(false);
+
+  useEffect(() => {
+    // If user already upvoted post, make color red
+    if (userState && userState.user !== undefined) {
+      const userId = userState.user.user._id;
+      if (props.upvotes.indexOf(userId) > -1) {
+        // The user already upvoted this post
+        setUpvoted(true);
+      }
+    }
+
+    if (upvoted) {
+    }
+  }, []);
+
   const handleClick = (e: any) => {
+    console.log(e.target);
     e.target.querySelector("path").setAttribute("fill", "red");
+    //this.querySelector("path").setAttribute("fill", "red");
+
+    // Todo:
+    // Check if user already liked post
+    // --- If yes, toggle un-upvote
+    // --- lower count
+    // else
+    // --- Toggle upvote
+    // --- raise count
   };
 
   return (
@@ -13,6 +48,7 @@ export const Upvote = (props: any) => {
         className="transform transition duration-300 hover:scale-125"
         onClick={handleClick}
       />
+      {/* change inner text to props.upvotes.length */}
       <div className="pl-2 text-lg">0</div>
     </div>
   );

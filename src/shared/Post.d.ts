@@ -10,4 +10,5 @@ export interface Post {
   image: string;
   publisher: string;
   _id: string;
+  upvotes: string[];
 }

@@ -15,7 +15,7 @@ export const Post = (props: any) => {
             return <Tag key={tag} name={tag} />;
           })}
         </div>
-        <Upvote postId={props.postId} />
+        <Upvote postId={props.postId} upvotes={props.upvotes} />
       </div>
     </div>
   );
