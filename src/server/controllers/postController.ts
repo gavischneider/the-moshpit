@@ -30,7 +30,7 @@ const postController = {
           console.log("error occured", err);
         } else {
           console.log(data);
-          res.redirect("/user/home");
+          //res.redirect("/user/home");
         }
       });
 
