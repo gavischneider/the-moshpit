@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { GrSign } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
@@ -12,6 +12,7 @@ export const Upvote = (props: any) => {
   });
 
   const [upvoted, setUpvoted] = useState(false);
+  const iconRef = useRef<any>(null);
 
   useEffect(() => {
     // If user already upvoted post, make color red
@@ -22,14 +23,25 @@ export const Upvote = (props: any) => {
         setUpvoted(true);
       }
     }
-
-    if (upvoted) {
-    }
   }, []);
 
+  useEffect(() => {
+    if (upvoted) {
+      iconRef.current.querySelector("svg path").setAttribute("fill", "red");
+    }
+  }, [upvoted]);
+
   const handleClick = (e: any) => {
-    console.log(e.target);
-    e.target.querySelector("path").setAttribute("fill", "red");
+    if (upvoted) {
+      e.target.querySelector("path").setAttribute("fill", "red");
+      setUpvoted(true);
+      // Dispatch upvotePost
+    } else {
+      e.target.querySelector("path").setAttribute("fill", "none");
+      setUpvoted(false);
+      // Dispatch downvotePost
+    }
+
     //this.querySelector("path").setAttribute("fill", "red");
 
     // Todo:
@@ -42,7 +54,7 @@ export const Upvote = (props: any) => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center" ref={iconRef}>
       <GrSign
         size="2em"
         className="transform transition duration-300 hover:scale-125"
