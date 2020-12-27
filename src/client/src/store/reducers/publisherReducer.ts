@@ -3,6 +3,8 @@ import {
   GET_PUBLISHERS_SUCCESS,
   GET_PUBLISHERS_FAILURE,
   PublisherDispatchTypes,
+  GET_USERS_PUBLISHERS_FAILURE,
+  GET_USERS_PUBLISHERS_SUCCESS,
 } from "../actions/publisherActionsTypes";
 import { Publisher } from "../../../../shared/Publisher";
 
@@ -12,10 +14,12 @@ interface PublisherResponse {
 
 export interface PublisherState {
   publishers: Publisher[] | undefined;
+  loadedUsersFeeds: boolean;
 }
 
 const defaultState: PublisherState = {
   publishers: undefined,
+  loadedUsersFeeds: false,
 };
 
 const publisherReducer = (
@@ -29,6 +33,14 @@ const publisherReducer = (
         publishers: action.payload,
       };
     case GET_PUBLISHERS_FAILURE:
+      return state;
+    case GET_USERS_PUBLISHERS_SUCCESS:
+      return {
+        ...state,
+        publishers: action.payload,
+        loadedUsersFeeds: true,
+      };
+    case GET_USERS_PUBLISHERS_FAILURE:
       return state;
     default:
       return state;

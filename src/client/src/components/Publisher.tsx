@@ -19,7 +19,7 @@ export const Publisher = (props: any) => {
         setImage(publisher.image);
       }
     });
-  }, []);
+  }, [image, publishers]);
 
   //user.user.sources
 

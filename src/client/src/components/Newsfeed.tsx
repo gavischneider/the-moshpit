@@ -34,7 +34,7 @@ export const Newsfeed = (props: any) => {
   );
 
   return (
-    <div className="container mx-auto bg-gray-900" id="newsfeed">
+    <div className="container mx-auto bg-black" id="newsfeed">
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto">
         {posts.map((post, index) => {
           if (posts.length === index + 1) {

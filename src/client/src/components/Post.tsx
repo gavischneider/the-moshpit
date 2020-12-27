@@ -7,10 +7,14 @@ import { Publisher } from "./Publisher";
 export const Post = (props: any) => {
   const date = getDate(props.created);
   return (
-    <div className="rounded shadow-lg transform transition border border-transparent hover:border-white hover:border-opacity-50 bg-gray-700 mx-auto">
+    <div className="rounded shadow-lg transform transition border border-transparent hover:border-white hover:border-opacity-50 bg-gray-800 mx-auto">
       <div className="p-2">
         <a href={props.url} target="_blank" rel="noreferrer">
-          <img alt={"Post header"} src={props.image} className="rounded" />
+          <img
+            alt={"Post header"}
+            src={props.image}
+            className="rounded border border-black"
+          />
         </a>
         <h1 className="text-white my-2">{props.title}</h1>
         <h3 className="text-white mb-2 opacity-75">{date}</h3>
