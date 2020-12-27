@@ -25,12 +25,8 @@ export const Publisher = (props: any) => {
 
   console.log(`ImagePath: ${image}`);
   return (
-    <div>
-      <img
-        src={image}
-        alt="publisher"
-        className="svg-inline--fa fa-w-20 fa-5x"
-      />
+    <div className="flex items-center">
+      <img src={image} alt="publisher" className="w-14" />
     </div>
   );
 };

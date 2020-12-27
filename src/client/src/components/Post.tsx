@@ -20,7 +20,7 @@ export const Post = (props: any) => {
           })}
         </div>
         <br />
-        <div className="absolute absolute inset-x-0 bottom-0 bottom-2 m-2">
+        <div className="flex justify-between absolute inset-x-0 bottom-0 bottom-2 m-2">
           <Upvote postId={props.postId} upvotes={props.upvotes} />
           <Publisher publisher={props.publisher} />
         </div>
