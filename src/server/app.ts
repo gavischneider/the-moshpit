@@ -80,63 +80,14 @@ app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);
 
-// -----Temporary code to test out initial post storage functionality-----
-// (function () {
-//   console.log("--- FEEDS: ---");
-//   console.log(feeds);
-//   feeds.map((feed: Publisher) => {
-//     postModel.getPostsFromUrl(feed.url, (err: Error, data: any) => {
-//       if (err) {
-//         console.log("An error occured", err);
-//       } else {
-//         console.log(data);
-//         const rssFeed = data.items;
-
-//         rssFeed.map((post: any) => {
-//           // Start building the post object
-//           const newPost = {
-//             title: post.title,
-//             id: post.id,
-//             description: post.description,
-//             url: post.url,
-//             created: post.created,
-//             author: post.author,
-//             category: post.category,
-//             enclosures: post.enclosures,
-//             image: "",
-//             publisher: feed.name,
-//           };
-//           // We have the data, now we need to check where the image is
-//           if (newPost.enclosures[0] !== undefined) {
-//             newPost.image = newPost.enclosures[0].url;
-//             console.log("AAAAAAAAAAA We didnt have to look: " + newPost.image);
-//           } else {
-//             newPost.image = postModel.getImgFromHTML(newPost.description);
-//             console.log(
-//               "PPPPPPPPPPPP The imaage we found is: " + newPost.image
-//             );
-//           }
-//           // Data is ready to be stored
-//           postModel.addPost(newPost, (err: Error, data: any) => {
-//             if (err) {
-//               console.log("An error occured", err);
-//             } else {
-//               console.log("Data stored in DB: ");
-//               console.log(data);
-//             }
-//           });
-//         });
-//       }
-//     });
-//   });
-// })();
-// ------------------------------------------------------------------------
 const authCheck = (req: any, res: Response, next: NextFunction) => {
   if (!req.user) {
     res.status(401).json({
       authenticated: false,
       message: "User has not been authenticated",
     });
+  } else {
+    next();
   }
 };
 

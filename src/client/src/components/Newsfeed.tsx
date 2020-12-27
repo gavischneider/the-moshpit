@@ -73,6 +73,7 @@ export const Newsfeed = (props: any) => {
               category={post.category}
               postId={post._id}
               created={post.created}
+              publisher={post.publisher}
             />
           );
         })}
