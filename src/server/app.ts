@@ -27,6 +27,7 @@ const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
 const userRoutes = require("./routes/users");
 const tagRoutes = require("./routes/tags");
+const publisherRoutes = require("./routes/publishers");
 
 const postModel = require("./models/post");
 //const userModel = require("./models/user");
@@ -79,6 +80,7 @@ mongoose
 app.use("/user/", userRoutes);
 app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);
+app.use("/publisher/", publisherRoutes);
 
 const authCheck = (req: any, res: Response, next: NextFunction) => {
   if (!req.user) {

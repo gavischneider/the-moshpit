@@ -11,14 +11,14 @@ interface PublisherResponse {
 }
 
 export interface PublisherState {
-  publishers: PublisherResponse | undefined;
+  publishers: Publisher[] | undefined;
 }
 
 const defaultState: PublisherState = {
   publishers: undefined,
 };
 
-const publisherReducer: Reducer<PublisherState, PublisherDispatchTypes> = (
+const publisherReducer = (
   state: PublisherState = defaultState,
   action: PublisherDispatchTypes
 ) => {
@@ -36,3 +36,5 @@ const publisherReducer: Reducer<PublisherState, PublisherDispatchTypes> = (
 };
 
 export default publisherReducer;
+
+// Reducer<PublisherState, PublisherDispatchTypes>
