@@ -1,28 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { feeds } from "../constants/feeds";
 import { InitialState } from "../store/reducers/rootReducer";
 
 // Change feeds to the feeds loaded into state
 export const Publisher = (props: any) => {
-  const userState = useSelector((state: InitialState) => {
-    console.log("STATEEEEEE");
-    console.log(state.auth);
-    return state.auth;
+  const [image, setImage] = useState("");
+  const publisherState = useSelector((state: InitialState) => {
+    return state.publishers;
   });
 
-  const { user, authenticated } = userState;
-  let imagePath = "";
+  const { publishers } = publisherState;
   useEffect(() => {
-    user && user.user.sources.map((source: any) => {});
-  }, [imagePath, user]);
+    publishers?.map((publisher) => {
+      if (publisher.name.localeCompare(props.publisher) === 0) {
+        console.log(`We found a match: ${publisher.name} = ${props.publisher}`);
+        console.log(`Publisher Image: ${publisher.image}`);
+        setImage(publisher.image);
+      }
+    });
+  }, []);
 
   //user.user.sources
 
-  console.log(`ImagePath: ${imagePath}`);
+  console.log(`ImagePath: ${image}`);
   return (
     <div>
-      <img src={imagePath} alt="publisher" />
+      <img
+        src={image}
+        alt="publisher"
+        className="svg-inline--fa fa-w-20 fa-5x"
+      />
     </div>
   );
 };
