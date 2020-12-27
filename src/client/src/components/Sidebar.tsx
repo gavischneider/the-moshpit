@@ -17,9 +17,9 @@ export const Sidebar = (props: any) => {
   console.log(publishers);
 
   return (
-    <div className="shadow-lg">
+    <div>
       <nav className="navbar z-10 mt-11">
-        <ul className="navbar-nav">
+        <ul className="navbar-nav shadow-xl border-r border-black">
           <li className="logo">
             <a href="#" className="nav-link">
               <span className="link-text logo-text">Sources</span>

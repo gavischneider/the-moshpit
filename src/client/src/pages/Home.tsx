@@ -48,7 +48,7 @@ export const Home: React.FC = () => {
   }, [loadedUsersFeeds, publishers]);
 
   return (
-    <div className="App bg-black">
+    <div className="App bg-gray-900">
       <Navbar />
       <Sidebar user={user} />
       <Newsfeed user={user} />
