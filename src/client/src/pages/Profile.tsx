@@ -27,43 +27,45 @@ export const Profile = () => {
   if (!authenticated) return <Redirect to="/login" />;
 
   return (
-    <div className="bg-gray-300">
+    <div>
       <Navbar user={userState} />
-      <div className="p-5">
-        {user && (
-          <div className="flex justify-evenly">
-            <div className="border border-black">
-              <img
-                src={user.user.photo}
-                alt={"profile"}
-                className="rounded-full h-36 w-36"
-              />
-            </div>
-            <div className="border border-black">
-              <h2>{user.user.username}</h2>
-              <h2>{user.user.email}</h2>
+      <div className="flex justify-center">
+        <div className="bg-gray-300 p-5 border border-black w-3/5">
+          {user && (
+            <div className="flex justify-evenly">
+              <div className="border border-black">
+                <img
+                  src={user.user.photo}
+                  alt={"profile"}
+                  className="rounded-full h-36 w-36"
+                />
+              </div>
+              <div className="border border-black">
+                <h2>{user.user.username}</h2>
+                <h2>{user.user.email}</h2>
 
-              <h2>{user.user.joined}</h2>
+                <h2>{user.user.joined}</h2>
+              </div>
             </div>
+          )}
+          <div className="flex justify-center">
+            <h2>Your News Sources</h2>
+            <ul>
+              {user &&
+                user.user.sources.map((source: any) => {
+                  return (
+                    <div>
+                      <li key={source.url}>{source.name}</li>
+                      <img
+                        src={source.image}
+                        alt={"source"}
+                        className="svg-inline--fa fa-w-20 fa-5x"
+                      />
+                    </div>
+                  );
+                })}
+            </ul>
           </div>
-        )}
-        <div className="flex justify-center">
-          <h2>Your News Sources</h2>
-          <ul>
-            {user &&
-              user.user.sources.map((source: any) => {
-                return (
-                  <div>
-                    <li key={source.url}>{source.name}</li>
-                    <img
-                      src={source.image}
-                      alt={"source"}
-                      className="svg-inline--fa fa-w-20 fa-5x"
-                    />
-                  </div>
-                );
-              })}
-          </ul>
         </div>
       </div>
     </div>
