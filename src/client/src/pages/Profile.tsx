@@ -29,30 +29,43 @@ export const Profile = () => {
   return (
     <div className="bg-gray-300">
       <Navbar user={userState} />
-      <h1>Profile!!!</h1>
-      {user && (
-        <div>
-          <h2>{user.user.username}</h2>
-          <h2>{user.user.email}</h2>
-          <img src={user.user.photo} alt={"profile"} />
-          <h2>{user.user.joined}</h2>
+      <div className="p-5">
+        {user && (
+          <div className="flex justify-evenly">
+            <div className="border border-black">
+              <img
+                src={user.user.photo}
+                alt={"profile"}
+                className="rounded-full h-36 w-36"
+              />
+            </div>
+            <div className="border border-black">
+              <h2>{user.user.username}</h2>
+              <h2>{user.user.email}</h2>
+
+              <h2>{user.user.joined}</h2>
+            </div>
+          </div>
+        )}
+        <div className="flex justify-center">
           <h2>Your News Sources</h2>
           <ul>
-            {user.user.sources.map((source: any) => {
-              return (
-                <div>
-                  <li key={source.url}>{source.name}</li>
-                  <img
-                    src={source.image}
-                    alt={"source"}
-                    className="svg-inline--fa fa-w-20 fa-5x"
-                  />
-                </div>
-              );
-            })}
+            {user &&
+              user.user.sources.map((source: any) => {
+                return (
+                  <div>
+                    <li key={source.url}>{source.name}</li>
+                    <img
+                      src={source.image}
+                      alt={"source"}
+                      className="svg-inline--fa fa-w-20 fa-5x"
+                    />
+                  </div>
+                );
+              })}
           </ul>
         </div>
-      )}
+      </div>
     </div>
   );
 };
