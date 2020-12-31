@@ -56,27 +56,35 @@ export const getUsersPublishers = (usersFeeds: any) => async (
   }
 };
 
-export const removeFeed = (feed: any) => async (
+export const removeFeed = (allFeeds: any, feed: any, userId: any) => async (
   dispatch: Dispatch<PublisherDispatchTypes>
 ) => {
   console.log("IN THE REMOVE_FEED FUNCTION");
   try {
     axios({
-      method: "GET",
-      url: "publisher/getpublishers",
+      method: "PUT",
+      url: "publisher/removepublisher",
+      params: { publisher: feed, userId },
     })
       .then((res) => {
-        console.log("Feed was removed");
+        allFeeds.filter((feed: any) => {
+          feed.name !== feed;
+        });
+
+        console.log(`Feed was removed, ${res}`);
         dispatch({
           type: REMOVE_FEED_SUCCESS,
+          payload: allFeeds,
         });
       })
       .catch((err) => {
+        console.log(`Error removing feed, ${err}`);
         dispatch({
           type: REMOVE_FEED_FAILURE,
         });
       });
   } catch {
     dispatch({ type: REMOVE_FEED_FAILURE });
+    console.log("Caught error while removing feed");
   }
 };

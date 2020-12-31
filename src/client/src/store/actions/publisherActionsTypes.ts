@@ -31,6 +31,9 @@ interface getUsersPublishersFailure {
 
 interface removeFeedSuccess {
   type: typeof REMOVE_FEED_SUCCESS;
+  payload: {
+    publishers: Publisher[];
+  };
 }
 
 interface removeFeedFailure {

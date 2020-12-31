@@ -9,4 +9,6 @@ const router = express.Router();
 
 router.get("/getpublishers", publisherController.getPublishers);
 
+router.put("/removepublisher", publisherController.removePublisher);
+
 module.exports = router;

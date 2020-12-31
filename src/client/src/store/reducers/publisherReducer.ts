@@ -5,6 +5,8 @@ import {
   PublisherDispatchTypes,
   GET_USERS_PUBLISHERS_FAILURE,
   GET_USERS_PUBLISHERS_SUCCESS,
+  REMOVE_FEED_SUCCESS,
+  REMOVE_FEED_FAILURE,
 } from "../actions/publisherActionsTypes";
 import { Publisher } from "../../../../shared/Publisher";
 
@@ -41,6 +43,13 @@ const publisherReducer = (
         loadedUsersFeeds: true,
       };
     case GET_USERS_PUBLISHERS_FAILURE:
+      return state;
+    case REMOVE_FEED_SUCCESS:
+      return {
+        ...state,
+        publishers: action.payload,
+      };
+    case REMOVE_FEED_FAILURE:
       return state;
     default:
       return state;
