@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../sidebar.css";
 import { CgRemove } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,10 +12,21 @@ export const Source = (props: any) => {
   });
   const { user, authenticated } = userState;
 
+  const publisherState = useSelector((state: InitialState) => {
+    return state.publishers;
+  });
+
+  const { publishers } = publisherState;
+
+  const feedNameRef = useRef<any>(null);
+
   const handleClick = (e: any) => {
     if (user !== undefined && authenticated) {
       // 1. Remove feed from sidebar
       // 2. remove feed from users sources (in db)
+      console.log("------ ref ------");
+      console.log(feedNameRef.current.innerText);
+      //dispatch(removeFeed(publishers, name, user.user._id));
     } else {
       // User is not logged in, can't remove feeds
     }
@@ -32,7 +43,9 @@ export const Source = (props: any) => {
           />
         </div>
 
-        <span className="link-text">{props.feed.name}</span>
+        <span className="link-text" ref={feedNameRef}>
+          {props.feed.name}
+        </span>
         <CgRemove
           className="remove-button"
           size="1.5em"

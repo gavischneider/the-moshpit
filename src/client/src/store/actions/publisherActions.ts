@@ -68,7 +68,7 @@ export const removeFeed = (allFeeds: any, feed: any, userId: any) => async (
     })
       .then((res) => {
         allFeeds.filter((feed: any) => {
-          feed.name !== feed;
+          return feed.name !== feed;
         });
 
         console.log(`Feed was removed, ${res}`);
