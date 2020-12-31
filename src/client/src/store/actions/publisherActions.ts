@@ -9,6 +9,8 @@ import {
   PublisherDispatchTypes,
   GET_USERS_PUBLISHERS_SUCCESS,
   GET_USERS_PUBLISHERS_FAILURE,
+  REMOVE_FEED_SUCCESS,
+  REMOVE_FEED_FAILURE,
 } from "./publisherActionsTypes";
 
 export const getAllPublishers = () => async (
@@ -51,5 +53,30 @@ export const getUsersPublishers = (usersFeeds: any) => async (
     dispatch({
       type: GET_USERS_PUBLISHERS_FAILURE,
     });
+  }
+};
+
+export const removeFeed = (feed: any) => async (
+  dispatch: Dispatch<PublisherDispatchTypes>
+) => {
+  console.log("IN THE REMOVE_FEED FUNCTION");
+  try {
+    axios({
+      method: "GET",
+      url: "publisher/getpublishers",
+    })
+      .then((res) => {
+        console.log("Feed was removed");
+        dispatch({
+          type: REMOVE_FEED_SUCCESS,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: REMOVE_FEED_FAILURE,
+        });
+      });
+  } catch {
+    dispatch({ type: REMOVE_FEED_FAILURE });
   }
 };
