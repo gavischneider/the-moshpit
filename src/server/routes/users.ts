@@ -1,10 +1,12 @@
 export {};
 
 const express = require("express");
-const userControler = require("../controllers/userController");
+const userController = require("../controllers/userController");
 
 const router = express.Router();
 
-router.post("/add", userControler.addUser);
+router.post("/add", userController.addUser);
+
+router.put("/removepublisher", userController.removePublisher);
 
 module.exports = router;

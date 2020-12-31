@@ -26,7 +26,9 @@ export const Source = (props: any) => {
       // 2. remove feed from users sources (in db)
       console.log("------ ref ------");
       console.log(feedNameRef.current.innerText);
-      //dispatch(removeFeed(publishers, name, user.user._id));
+      dispatch(
+        removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
+      );
     } else {
       // User is not logged in, can't remove feeds
     }
@@ -47,7 +49,7 @@ export const Source = (props: any) => {
           {props.feed.name}
         </span>
         <CgRemove
-          className="remove-button"
+          className=" remove-button transform transition duration-300 hover:scale-125"
           size="1.5em"
           onClick={handleClick}
         />

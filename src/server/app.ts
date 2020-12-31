@@ -77,7 +77,7 @@ mongoose
   .then(() => console.log("Connected to database"))
   .catch((err: Error) => console.log(`There was an error: ${err}`));
 
-app.use("/user/", userRoutes);
+app.use("/users/", userRoutes);
 app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);
 app.use("/publisher/", publisherRoutes);

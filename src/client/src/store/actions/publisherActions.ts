@@ -63,7 +63,7 @@ export const removeFeed = (allFeeds: any, feed: any, userId: any) => async (
   try {
     axios({
       method: "PUT",
-      url: "publisher/removepublisher",
+      url: "users/removepublisher",
       params: { publisher: feed, userId },
     })
       .then((res) => {
