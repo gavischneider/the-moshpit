@@ -49,7 +49,7 @@ export const Source = (props: any) => {
           {props.feed.name}
         </span>
         <CgRemove
-          className=" remove-button transform transition duration-300 hover:scale-125"
+          className="remove-button transform transition duration-300 hover:scale-125"
           size="1.5em"
           onClick={handleClick}
         />

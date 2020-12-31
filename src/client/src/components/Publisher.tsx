@@ -29,7 +29,7 @@ export const Publisher = (props: any) => {
       <img
         src={image}
         alt="publisher"
-        className="w-6 h-6 rounded-full border border-black"
+        className="w-6 h-6 rounded-full border border-black shadow-lg"
       />
     </div>
   );
