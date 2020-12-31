@@ -56,7 +56,7 @@ export const getUsersPublishers = (usersFeeds: any) => async (
   }
 };
 
-export const removeFeed = (allFeeds: any, feed: any, userId: any) => async (
+export const removeFeed = (allFeeds: any, feedName: any, userId: any) => async (
   dispatch: Dispatch<PublisherDispatchTypes>
 ) => {
   console.log("IN THE REMOVE_FEED FUNCTION");
@@ -64,17 +64,24 @@ export const removeFeed = (allFeeds: any, feed: any, userId: any) => async (
     axios({
       method: "PUT",
       url: "users/removepublisher",
-      params: { publisher: feed, userId },
+      params: { publisher: feedName, userId },
     })
       .then((res) => {
-        allFeeds.filter((feed: any) => {
-          return feed.name !== feed;
+        let newAllFeeds = allFeeds.filter((feed: any) => {
+          console.log("feed.name | feedName");
+          console.log(feed.name);
+          console.log(feedName);
+          return feed.name.localeCompare(feedName) !== 0;
         });
+        console.log("+++++++++++++");
+        console.log("allFeeds: ");
+        console.log(newAllFeeds);
+        console.log("+++++++++++++");
 
         console.log(`Feed was removed, ${res}`);
         dispatch({
           type: REMOVE_FEED_SUCCESS,
-          payload: allFeeds,
+          payload: newAllFeeds,
         });
       })
       .catch((err) => {
