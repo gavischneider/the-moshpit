@@ -4,9 +4,17 @@ import { Post } from "./Post";
 import { Tag } from "./Tag";
 import { Upvote } from "./Upvote";
 import { getDate } from "../services/getDate";
+import { useSelector } from "react-redux";
+import { InitialState } from "../store/reducers/rootReducer";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
+
+  const publisherState = useSelector((state: InitialState) => {
+    return state.publishers;
+  });
+
+  const { publishers } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
 
