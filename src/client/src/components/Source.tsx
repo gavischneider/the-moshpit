@@ -1,5 +1,6 @@
 import React from "react";
 import "../sidebar.css";
+import { CgRemove } from "react-icons/cg";
 
 export const Source = (props: any) => {
   return (
@@ -14,6 +15,7 @@ export const Source = (props: any) => {
         </div>
 
         <span className="link-text">{props.feed.name}</span>
+        <CgRemove className="remove-button" size="1.5em" />
       </a>
     </li>
   );

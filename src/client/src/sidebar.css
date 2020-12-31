@@ -5,7 +5,7 @@
   --text-secondary: #ececec;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
-  --transition-speed: 600ms;
+  --transition-speed: 300ms;
 }
 
 /* body {
@@ -81,6 +81,11 @@ filter: grayscale(100%) opacity(0.7);
 .link-text {
   display: none;
   margin-left: 1rem;
+}
+
+.remove-button {
+  display: none;
+  margin-left: 2rem;
 }
 
 .nav-link svg {
@@ -175,6 +180,11 @@ filter: grayscale(100%) opacity(0.7);
 
   .navbar:hover .link-text {
     display: inline;
+  }
+
+  .navbar:hover .remove-button {
+    display: inline;
+    margin-left: 3rem;
   }
 
   .navbar:hover .logo svg {
