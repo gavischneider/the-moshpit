@@ -143,8 +143,21 @@ const postController = {
 
     postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
       if (result) {
-        result.upvotes.filter((upvoterId: string) => userId !== upvoterId);
-        result.save((err: Error) => {
+        console.log("userId: ");
+        console.log(userId);
+        console.log(typeof userId);
+        console.log("-----");
+        console.log(typeof result.upvotes[0]);
+
+        console.log("Result before filter: ");
+        console.log(result);
+        let newResult = result;
+        newResult.upvotes = result.upvotes.filter(
+          (upvoterId: string) => userId.localeCompare(upvoterId) !== 0
+        );
+        console.log("newResult AFTER filter: ");
+        console.log(newResult);
+        newResult.save((err: Error) => {
           if (err) {
             console.log(`Error saving downvoted post: ${err}`);
           }
