@@ -82,6 +82,7 @@ export const Newsfeed = (props: any) => {
               postId={post._id}
               created={post.created}
               publisher={post.publisher}
+              upvotes={post.upvotes}
             />
           );
         })}

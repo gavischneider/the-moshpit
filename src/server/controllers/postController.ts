@@ -26,6 +26,7 @@ const postController = {
         category: req.body.category,
         image: req.body.image,
         publisher: req.body.publisher,
+        upvotes: req.body.upvotes,
       });
       postModel.addPost(newPost, (err: Error, data: any) => {
         if (err) {
@@ -104,15 +105,30 @@ const postController = {
   },
 
   upvotePost(req: any, res: any) {
-    const postId: string = req.body.postId;
-    const userId: string = req.body.userId;
+    const postId: string = req.query.postId;
+    const userId: string = req.query.userId;
+
+    console.log("-=-=- req.query,postId -=-=-");
+    console.log(req.query.postId);
 
     postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
       if (result) {
-        result.upvotes.push(userId);
+        console.log("result.upvotes");
+        console.log(result.upvotes);
+        console.log(typeof result.upvotes);
+        if (result.upvotes !== undefined) {
+          result.upvotes.push(userId);
+        } else {
+          result.upvotes = [userId];
+        }
+
+        console.log("RESULT BEFORE SAVE");
+        console.log(result);
         result.save((err: Error) => {
           if (err) {
             console.log(`Error saving upvoted post: ${err}`);
+          } else {
+            console.log("Upvote stored successfully!");
           }
         });
       } else {
@@ -122,8 +138,8 @@ const postController = {
   },
 
   downvotePost(req: any, res: any) {
-    const postId = req.body.postId;
-    const userId = req.body.userId;
+    const postId = req.query.postId;
+    const userId = req.query.userId;
 
     postModel.findOne({ _id: postId }).exec((err: Error, result: any) => {
       if (result) {
@@ -141,3 +157,5 @@ const postController = {
 };
 
 module.exports = postController;
+
+// userId.localeCompare(upvoterId) !== 0

@@ -15,7 +15,7 @@ export const upvotePost = (postId: string, userId: string) => async (
   console.log("IN THE UPVOTE_POST FUNCTION");
   try {
     axios({
-      method: "GET",
+      method: "POST",
       url: "post/upvotepost",
       params: { postId, userId },
     })
@@ -40,7 +40,7 @@ export const downvotePost = (postId: string, userId: string) => async (
   console.log("IN THE DOWNVOTE_POST FUNCTION");
   try {
     axios({
-      method: "GET",
+      method: "POST",
       url: "post/downvotepost",
       params: { postId, userId },
     })

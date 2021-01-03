@@ -18,6 +18,11 @@ const postSchema = new mongoose.Schema({
   ],
   image: String,
   publisher: String,
+  upvotes: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const postModel = (module.exports = mongoose.model("post", postSchema));
@@ -68,6 +73,7 @@ module.exports.addPost = (newPost: Post, callback: Function) => {
     category: newPost.category,
     image: newPost.image,
     publisher: newPost.publisher,
+    upvotes: newPost.upvotes,
   });
   post.save(callback);
 };
