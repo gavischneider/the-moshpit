@@ -14,35 +14,45 @@ export const Upvote = (props: any) => {
   });
   const { user, authenticated } = userState;
 
-  const [upvoted, setUpvoted] = useState(false);
+  const [upvoted, setUpvoted] = useState(
+    props.upvotes && props.upvotes.includes(user?.user._id)
+  );
   const [upvoteCount, setUpvoteCount] = useState(props.upvoteCount);
   const iconRef = useRef<any>(null);
 
-  useEffect(() => {
-    // If user already upvoted post, make color red
-    //setUpvoteCount(props.upvotes.length);
-    if (userState && userState.user !== undefined) {
-      const userId = userState.user.user._id;
+  // useEffect(() => {
+  //   console.log("RERENDERRRRRRRRRRRRRRRRR");
+  //   // If user already upvoted post, make color red
+  //   //setUpvoteCount(props.upvotes.length);
+  //   if (userState && userState.user !== undefined) {
+  //     const userId = userState.user.user._id;
 
-      console.log("props.upvotes.indexOf(userId)");
-      props.upvotes && console.log(props.upvotes.indexOf(userId));
+  //     // console.log("props.upvotes.indexOf(userId)");
+  //     // props.upvotes && console.log(props.upvotes.indexOf(userId));
 
-      console.log("props.upvotes");
-      console.log(props.upvotes);
+  //     // console.log("props.upvotes");
+  //     // console.log(props.upvotes);
 
-      console.log("userId");
-      console.log(userId);
+  //     // console.log("userId");
+  //     // console.log(userId);
 
-      if (props.upvotes && props.upvotes.indexOf(userId) > -1) {
-        // The user already upvoted this post
-        setUpvoted(true);
-      }
-    }
-  }, [userState, upvoted]);
+  //     if (props.upvotes && props.upvotes.includes(userId)) {
+  //       // The user already upvoted this post
+  //       console.log("SETTING UPVOTE TO TRUE AGAIN");
+  //       setUpvoted(true);
+  //       iconRef.current.querySelector("svg path").setAttribute("fill", "red");
+  //     } else {
+  //       console.log(" ---NOT--- SETTING UPVOTE TO TRUE AGAIN");
+  //       setUpvoted(false);
+  //     }
+  //   }
+  // }, [userState, upvoted]);
 
   useEffect(() => {
     if (upvoted) {
       iconRef.current.querySelector("svg path").setAttribute("fill", "red");
+    } else {
+      iconRef.current.querySelector("svg path").setAttribute("fill", "none");
     }
   }, [upvoted]);
 
@@ -60,6 +70,8 @@ export const Upvote = (props: any) => {
         console.log("DOWNVOTE");
         console.log(e.currentTarget);
         e.currentTarget.querySelector("path").setAttribute("fill", "none");
+        console.log("e.currentTarget AFTER");
+        console.log(e.currentTarget);
         setUpvoted(false);
         setUpvoteCount(upvoteCount - 1);
         dispatch(downvotePost(props.postId, userId));
