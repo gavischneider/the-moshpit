@@ -25,7 +25,11 @@ export const Post = (props: any) => {
         </div>
         <br />
         <div className="flex justify-between absolute inset-x-0 bottom-0 bottom-2 m-2">
-          <Upvote postId={props.postId} upvotes={props.upvotes} />
+          <Upvote
+            postId={props.postId}
+            upvotes={props.upvotes}
+            upvoteCount={props.upvotes.length}
+          />
           <Publisher publisher={props.publisher} />
         </div>
       </div>

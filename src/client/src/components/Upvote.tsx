@@ -15,10 +15,12 @@ export const Upvote = (props: any) => {
   const { user, authenticated } = userState;
 
   const [upvoted, setUpvoted] = useState(false);
+  const [upvoteCount, setUpvoteCount] = useState(props.upvoteCount);
   const iconRef = useRef<any>(null);
 
   useEffect(() => {
     // If user already upvoted post, make color red
+    //setUpvoteCount(props.upvotes.length);
     if (userState && userState.user !== undefined) {
       const userId = userState.user.user._id;
 
@@ -52,12 +54,14 @@ export const Upvote = (props: any) => {
         console.log(e.currentTarget);
         e.currentTarget.querySelector("path").setAttribute("fill", "red");
         setUpvoted(true);
+        setUpvoteCount(upvoteCount + 1);
         dispatch(upvotePost(props.postId, userId));
       } else {
         console.log("DOWNVOTE");
         console.log(e.currentTarget);
         e.currentTarget.querySelector("path").setAttribute("fill", "none");
         setUpvoted(false);
+        setUpvoteCount(upvoteCount - 1);
         dispatch(downvotePost(props.postId, userId));
       }
     } else {
@@ -73,7 +77,7 @@ export const Upvote = (props: any) => {
         onClick={handleClick}
       />
       {/* change inner text to props.upvotes.length */}
-      <div className="pl-2 text-lg">{props.upvotes ? props.upvotes : 0}</div>
+      <div className="pl-2 text-lg">{upvoteCount}</div>
     </div>
   );
 };
