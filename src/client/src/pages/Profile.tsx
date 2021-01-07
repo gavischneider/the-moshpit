@@ -30,7 +30,7 @@ export const Profile = () => {
     <div>
       <Navbar user={userState} />
       <div className="flex justify-center">
-        <div className="bg-gray-300 p-5 border border-black w-3/5">
+        <div className="bg-gray-700 p-5 border border-black w-3/5">
           {user && (
             <div className="flex justify-evenly">
               <div className="border border-black">

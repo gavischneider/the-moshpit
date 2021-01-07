@@ -16,6 +16,23 @@ export const Sidebar = (props: any) => {
   console.log(" >>>>>>>>> PUBLISHERS:");
   console.log(publishers);
 
+  // Get all the names of the users subscribed publishers
+  let length = 0;
+  const publisherNames =
+    publishers &&
+    publishers.map((publisher) => {
+      length++;
+      return publisher.name;
+    });
+
+  // Get the publishers that the user is NOT subscribed to
+  let nonSubscribed = [];
+  for (let i = 0; i < feeds.length; i++) {
+    if (!publisherNames?.includes(feeds[i].name)) {
+      nonSubscribed.push(feeds[i]);
+    }
+  }
+
   return (
     <div>
       <nav className="navbar z-10 mt-11">
@@ -53,7 +70,11 @@ export const Sidebar = (props: any) => {
 Change feeds to the users feeds (if logged in) */}
           {publishers !== undefined &&
             publishers.map((feed: any) => {
-              return <Source key={feed.url} feed={feed} />;
+              return <Source key={feed.url} feed={feed} sub={true} />;
+            })}
+          {nonSubscribed !== undefined &&
+            nonSubscribed.map((feed: any) => {
+              return <Source key={feed.url} feed={feed} sub={false} />;
             })}
         </ul>
       </nav>
