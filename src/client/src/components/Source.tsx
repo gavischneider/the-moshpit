@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "../sidebar.css";
-import { CgRemove } from "react-icons/cg";
+import { CgRemove, CgAdd } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
 import { removeFeed } from "../store/actions/publisherActions";
@@ -20,7 +20,7 @@ export const Source = (props: any) => {
 
   const feedNameRef = useRef<any>(null);
 
-  const handleClick = (e: any) => {
+  const handleClickRemove = (e: any) => {
     if (user !== undefined && authenticated) {
       // 1. Remove feed from sidebar
       // 2. remove feed from users sources (in db)
@@ -29,6 +29,13 @@ export const Source = (props: any) => {
       dispatch(
         removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
       );
+    } else {
+      // User is not logged in, can't remove feeds
+    }
+  };
+
+  const handleClickAdd = (e: any) => {
+    if (user !== undefined && authenticated) {
     } else {
       // User is not logged in, can't remove feeds
     }
@@ -48,11 +55,19 @@ export const Source = (props: any) => {
         <span className="link-text" ref={feedNameRef}>
           {props.feed.name}
         </span>
-        <CgRemove
-          className="remove-button transform transition duration-300 hover:scale-125"
-          size="1.5em"
-          onClick={handleClick}
-        />
+        {props.sub ? (
+          <CgRemove
+            className="remove-button transform transition duration-300 hover:scale-125"
+            size="1.5em"
+            onClick={handleClickRemove}
+          />
+        ) : (
+          <CgAdd
+            className="add-button transform transition duration-300 hover:scale-125"
+            size="1.5em"
+            onClick={handleClickAdd}
+          />
+        )}
       </a>
     </li>
   );
