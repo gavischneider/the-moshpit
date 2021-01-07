@@ -114,6 +114,7 @@ export const addFeed = (allFeeds: any, feed: any, userId: any) => async (
 
         console.log("FEED IM ABOUT TO ADD!!!!!!!!!");
         console.log(feed);
+
         allFeeds.push(...feed);
 
         console.log(`Feed was added, ${res}`);

@@ -15,6 +15,12 @@ export const Profile = () => {
 
   const { user, authenticated } = userState;
 
+  const publisherState = useSelector((state: InitialState) => {
+    return state.publishers;
+  });
+
+  const { publishers, loadedUsersFeeds } = publisherState;
+
   // useEffect(() => {
   //   // Check if there's a user authenticated but we dont yet have it
   //   if (typeof userState.user === "undefined") {

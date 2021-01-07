@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
 import { Tag } from "./Tag";
@@ -9,6 +9,14 @@ import { InitialState } from "../store/reducers/rootReducer";
 
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
+
+  console.log("RERENDERED BITCH!!!!");
+
+  const userState = useSelector((state: InitialState) => {
+    return state.auth;
+  });
+
+  const { user } = userState;
 
   const publisherState = useSelector((state: InitialState) => {
     return state.publishers;
@@ -45,6 +53,9 @@ export const Newsfeed = (props: any) => {
     <div className="container mx-auto bg-gray-900" id="newsfeed">
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
         {posts.map((post, index) => {
+          if (publishers && publishers.length > 5) {
+            console.log("TEST");
+          }
           if (posts.length === index + 1) {
             const date = getDate(post.created);
             return (
