@@ -7,8 +7,11 @@ import {
   GET_USERS_PUBLISHERS_SUCCESS,
   REMOVE_FEED_SUCCESS,
   REMOVE_FEED_FAILURE,
+  ADD_FEED_SUCCESS,
+  ADD_FEED_FAILURE,
 } from "../actions/publisherActionsTypes";
 import { Publisher } from "../../../../shared/Publisher";
+import { act } from "react-dom/test-utils";
 
 interface PublisherResponse {
   publishers: Publisher[];
@@ -50,6 +53,13 @@ const publisherReducer = (
         publishers: action.payload,
       };
     case REMOVE_FEED_FAILURE:
+      return state;
+    case ADD_FEED_SUCCESS:
+      return {
+        ...state,
+        publishers: action.payload,
+      };
+    case ADD_FEED_FAILURE:
       return state;
     default:
       return state;

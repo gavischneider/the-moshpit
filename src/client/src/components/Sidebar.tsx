@@ -7,23 +7,25 @@ import { InitialState } from "../store/reducers/rootReducer";
 
 export const Sidebar = (props: any) => {
   const publisherState = useSelector((state: InitialState) => {
-    console.log("STATEEEEEE");
+    console.log(" PUBLISHERS STATEEEEEE");
     console.log(state.publishers);
     return state.publishers;
   });
 
   const { publishers } = publisherState;
-  console.log(" >>>>>>>>> PUBLISHERS:");
+  console.log(" >>>>>>>>> PUBLISHERS: <<<<<<<<<<<");
+
   console.log(publishers);
 
   // Get all the names of the users subscribed publishers
   let length = 0;
-  const publisherNames =
-    publishers &&
-    publishers.map((publisher) => {
+  const publisherNames = [];
+  if (publishers !== undefined) {
+    for (let i = 0; i < publishers.length; i++) {
+      publisherNames.push(publishers[i].name);
       length++;
-      return publisher.name;
-    });
+    }
+  }
 
   // Get the publishers that the user is NOT subscribed to
   let nonSubscribed = [];
@@ -68,10 +70,12 @@ export const Sidebar = (props: any) => {
 
           {/* --TODO--
 Change feeds to the users feeds (if logged in) */}
-          {publishers !== undefined &&
-            publishers.map((feed: any) => {
-              return <Source key={feed.url} feed={feed} sub={true} />;
-            })}
+          {publishers !== undefined
+            ? publishers.map((feed: any) => {
+                return <Source key={feed.url} feed={feed} sub={true} />;
+              })
+            : null}
+
           {nonSubscribed !== undefined &&
             nonSubscribed.map((feed: any) => {
               return <Source key={feed.url} feed={feed} sub={false} />;

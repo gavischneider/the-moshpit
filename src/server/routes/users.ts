@@ -9,4 +9,6 @@ router.post("/add", userController.addUser);
 
 router.put("/removepublisher", userController.removePublisher);
 
+router.put("/addpublisher", userController.addPublisher);
+
 module.exports = router;

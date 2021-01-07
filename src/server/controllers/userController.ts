@@ -55,6 +55,33 @@ const userController = {
       }
     );
   },
+
+  // Add a feed to the users source list
+  addPublisher(req: any, res: any) {
+    console.log("REQ.query");
+    console.log(req.query);
+    const publisher = JSON.parse(req.query.publisher);
+    const userId = req.query.userId;
+    console.log(
+      "In the addPublisher function, heres the publisher and userId: "
+    );
+    console.log(publisher);
+    console.log(userId);
+
+    userModel.update(
+      { _id: userId },
+      { $push: { sources: publisher } },
+      function (err: Error, status: any) {
+        if (err) {
+          console.log(`Error adding source in db: ${err}`);
+        } else {
+          console.log(`Source added to users list, ${status}`);
+          console.log(status);
+          res.send(status);
+        }
+      }
+    );
+  },
 };
 
 module.exports = userController;

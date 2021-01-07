@@ -11,6 +11,8 @@ import {
   GET_USERS_PUBLISHERS_FAILURE,
   REMOVE_FEED_SUCCESS,
   REMOVE_FEED_FAILURE,
+  ADD_FEED_SUCCESS,
+  ADD_FEED_FAILURE,
 } from "./publisherActionsTypes";
 
 export const getAllPublishers = () => async (
@@ -93,5 +95,31 @@ export const removeFeed = (allFeeds: any, feedName: any, userId: any) => async (
   } catch {
     dispatch({ type: REMOVE_FEED_FAILURE });
     console.log("Caught error while removing feed");
+  }
+};
+
+export const addFeed = (allFeeds: any, feed: any, userId: any) => async (
+  dispatch: Dispatch<PublisherDispatchTypes>
+) => {
+  console.log("IN THE ADD_FEED FUNCTION");
+  try {
+    axios({
+      method: "PUT",
+      url: "users/addpublisher",
+      params: { publisher: feed, userId },
+    })
+      .then((res) => {
+        console.log("ADD FEED RES------->");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(`Error adding feed, ${err}`);
+        dispatch({
+          type: ADD_FEED_FAILURE,
+        });
+      });
+  } catch {
+    dispatch({ type: ADD_FEED_FAILURE });
+    console.log("Caught error while adding feed");
   }
 };

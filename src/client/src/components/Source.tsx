@@ -3,7 +3,8 @@ import "../sidebar.css";
 import { CgRemove, CgAdd } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
-import { removeFeed } from "../store/actions/publisherActions";
+import { removeFeed, addFeed } from "../store/actions/publisherActions";
+import { feeds } from "../constants/feeds";
 
 export const Source = (props: any) => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const Source = (props: any) => {
       // 2. remove feed from users sources (in db)
       console.log("------ ref ------");
       console.log(feedNameRef.current.innerText);
+      console.log("HANDLE_CLICK_REMOVE");
       dispatch(
         removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
       );
@@ -36,6 +38,13 @@ export const Source = (props: any) => {
 
   const handleClickAdd = (e: any) => {
     if (user !== undefined && authenticated) {
+      console.log("------ ref ------");
+      console.log(feedNameRef.current.innerText);
+      console.log("HANDLE_CLICK_ADD");
+      let feed = feeds.filter((feed) => {
+        return feed.name.localeCompare(feedNameRef.current.innerText) === 0;
+      });
+      dispatch(addFeed(publishers, feed, user.user._id));
     } else {
       // User is not logged in, can't remove feeds
     }
