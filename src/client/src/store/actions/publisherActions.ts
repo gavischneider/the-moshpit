@@ -111,6 +111,16 @@ export const addFeed = (allFeeds: any, feed: any, userId: any) => async (
       .then((res) => {
         console.log("ADD FEED RES------->");
         console.log(res);
+
+        console.log("FEED IM ABOUT TO ADD!!!!!!!!!");
+        console.log(feed);
+        allFeeds.push(...feed);
+
+        console.log(`Feed was added, ${res}`);
+        dispatch({
+          type: ADD_FEED_SUCCESS,
+          payload: allFeeds,
+        });
       })
       .catch((err) => {
         console.log(`Error adding feed, ${err}`);

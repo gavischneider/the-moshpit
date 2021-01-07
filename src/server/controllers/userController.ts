@@ -41,7 +41,7 @@ const userController = {
     console.log(publisher);
     console.log(userId);
 
-    userModel.update(
+    userModel.updateOne(
       { _id: userId },
       { $pull: { sources: { name: publisher } } },
       function (err: Error, status: any) {
@@ -68,7 +68,7 @@ const userController = {
     console.log(publisher);
     console.log(userId);
 
-    userModel.update(
+    userModel.updateOne(
       { _id: userId },
       { $push: { sources: publisher } },
       function (err: Error, status: any) {
