@@ -54,6 +54,11 @@ const postController = {
       sources = feeds;
     }
 
+    console.log("-----------------------------------------------");
+    console.log("@@ Sources: @@");
+    console.log(sources);
+    console.log("-----------------------------------------------");
+
     let sourceNames = [];
     for (let i = 0; i < sources.length; i++) {
       sourceNames[i] = sources[i].name;

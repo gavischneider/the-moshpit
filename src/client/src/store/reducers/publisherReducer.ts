@@ -20,11 +20,13 @@ interface PublisherResponse {
 export interface PublisherState {
   publishers: Publisher[] | undefined;
   loadedUsersFeeds: boolean;
+  feedCount: number;
 }
 
 const defaultState: PublisherState = {
   publishers: undefined,
   loadedUsersFeeds: false,
+  feedCount: 0,
 };
 
 const publisherReducer = (
@@ -40,24 +42,30 @@ const publisherReducer = (
     case GET_PUBLISHERS_FAILURE:
       return state;
     case GET_USERS_PUBLISHERS_SUCCESS:
+      let fc = state.publishers ? state.publishers.length : 0;
       return {
         ...state,
         publishers: action.payload,
         loadedUsersFeeds: true,
+        feedCount: fc,
       };
     case GET_USERS_PUBLISHERS_FAILURE:
       return state;
     case REMOVE_FEED_SUCCESS:
+      let fc2 = state.feedCount + 1;
       return {
         ...state,
         publishers: action.payload,
+        feedCount: fc2,
       };
     case REMOVE_FEED_FAILURE:
       return state;
     case ADD_FEED_SUCCESS:
+      let fc3 = state.feedCount - 1;
       return {
         ...state,
         publishers: action.payload,
+        feedCount: fc3,
       };
     case ADD_FEED_FAILURE:
       return state;
