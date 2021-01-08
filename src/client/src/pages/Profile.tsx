@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
+import axios from "axios";
+import { Post as PostT } from "../../../shared/Post";
+import { Post } from "../components/Post";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -21,6 +24,8 @@ export const Profile = () => {
 
   const { publishers, loadedUsersFeeds } = publisherState;
 
+  const [likedPosts, setLikedPosts] = useState(Array<PostT>());
+
   // useEffect(() => {
   //   // Check if there's a user authenticated but we dont yet have it
   //   if (typeof userState.user === "undefined") {
@@ -29,6 +34,24 @@ export const Profile = () => {
   //     dispatch(setUser());
   //   }
   // });
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "post/getlikedposts",
+    }).then((res) => {
+      setLikedPosts((prevPosts: any) => {
+        console.log(res.data);
+        const arr: PostT[] = [...prevPosts, ...res.data];
+        const map: any = {};
+        for (const post of arr) {
+          map[post.id] = post;
+        }
+        const newArray: PostT[] = Object.values(map);
+        return newArray;
+      });
+    });
+  }, []);
 
   if (!authenticated) return <Redirect to="/login" />;
 
@@ -54,24 +77,22 @@ export const Profile = () => {
               </div>
             </div>
           )}
-          <div className="flex justify-center">
-            <h2>Your News Sources</h2>
-            <ul>
-              {user &&
-                user.user.sources.map((source: any) => {
-                  return (
-                    <div>
-                      <li key={source.url}>{source.name}</li>
-                      <img
-                        src={source.image}
-                        alt={"source"}
-                        className="svg-inline--fa fa-w-20 fa-5x"
-                      />
-                    </div>
-                  );
-                })}
-            </ul>
-          </div>
+          <div>Your Upvoted Posts</div>
+          {likedPosts.map((post) => {
+            return (
+              <Post
+                key={post.id}
+                title={post.title}
+                url={post.url}
+                image={post.image}
+                category={post.category}
+                postId={post._id}
+                created={post.created}
+                publisher={post.publisher}
+                upvotes={post.upvotes}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

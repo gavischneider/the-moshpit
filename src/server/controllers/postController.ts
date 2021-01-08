@@ -8,6 +8,7 @@ import { feeds } from "../constants/feeds";
 
 import { Publisher } from "../../shared/Publisher";
 import { Tag } from "../../shared/Tag";
+import { Mongoose } from "mongoose";
 
 const postModel = require("../models/post");
 const tagController = require("./tagController");
@@ -43,10 +44,6 @@ const postController = {
 
   // Need to update with the query
   getPosts(req: any, res: any) {
-    // console.log("-----------------------------------------------");
-    // console.log("@@ Sources: @@");
-    // console.log("-----------------------------------------------");
-    // console.log(req.query.query);
     let sources;
     if (req.user) {
       sources = req.user.sources;
@@ -81,6 +78,28 @@ const postController = {
       if (err) {
         res.status(500).json({ message: err.message });
       } else {
+        console.log(posts);
+        res.send(posts);
+      }
+    });
+  },
+
+  getLikedPosts(req: any, res: any) {
+    let userId = req.user._id.toString();
+    console.log("USER ID");
+    console.log(userId);
+    console.log(typeof userId);
+
+    const query = postModel
+      .find({
+        upvotes: { $all: [userId] },
+      })
+      .sort({ created: "desc" });
+    query.exec((err: Error, posts: Post[]) => {
+      if (err) {
+        res.status(500).json({ message: err.message });
+      } else {
+        console.log("LIKED POSTS");
         console.log(posts);
         res.send(posts);
       }
