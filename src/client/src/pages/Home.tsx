@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
@@ -29,6 +29,8 @@ export const Home: React.FC = () => {
 
   const { publishers, loadedUsersFeeds } = publisherState;
 
+  //const [pubs, setPubs] = useState(publishers);
+
   useEffect(() => {
     // Check if there's a user but we dont yet have it
     if (userState && user === undefined) {
@@ -51,7 +53,7 @@ export const Home: React.FC = () => {
     <div className="App bg-gray-900 min-h-screen">
       <Navbar />
       <Sidebar user={user} />
-      <Newsfeed user={user} publishers={publishers} />
+      <Newsfeed user={user} />
     </div>
   );
 };

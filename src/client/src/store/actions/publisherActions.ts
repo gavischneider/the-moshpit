@@ -80,10 +80,12 @@ export const removeFeed = (allFeeds: any, feedName: any, userId: any) => async (
         console.log(newAllFeeds);
         console.log("+++++++++++++");
 
+        allFeeds = newAllFeeds;
+
         console.log(`Feed was removed, ${res}`);
         dispatch({
           type: REMOVE_FEED_SUCCESS,
-          payload: newAllFeeds,
+          payload: allFeeds,
         });
       })
       .catch((err) => {
@@ -115,12 +117,17 @@ export const addFeed = (allFeeds: any, feed: any, userId: any) => async (
         console.log("FEED IM ABOUT TO ADD!!!!!!!!!");
         console.log(feed);
 
-        allFeeds.push(...feed);
+        //let feeds = allFeeds.concat(feed);
+        //allFeeds = feeds;
 
         console.log(`Feed was added, ${res}`);
         dispatch({
           type: ADD_FEED_SUCCESS,
-          payload: allFeeds,
+          payload: {
+            name: feed.name,
+            url: feed.url,
+            image: feed.image,
+          },
         });
       })
       .catch((err) => {

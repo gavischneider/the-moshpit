@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
 import { removeFeed, addFeed } from "../store/actions/publisherActions";
 import { feeds } from "../constants/feeds";
+import { Publisher } from "../../../shared/Publisher";
 
 export const Source = (props: any) => {
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ export const Source = (props: any) => {
       let feed = feeds.filter((feed) => {
         return feed.name.localeCompare(feedNameRef.current.innerText) === 0;
       });
-      dispatch(addFeed(publishers, feed, user.user._id));
+
+      dispatch(addFeed(publishers, feed[0], user.user._id));
     } else {
       // User is not logged in, can't remove feeds
     }

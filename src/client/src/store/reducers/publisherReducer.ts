@@ -51,20 +51,17 @@ const publisherReducer = (
     case GET_USERS_PUBLISHERS_FAILURE:
       return state;
     case REMOVE_FEED_SUCCESS:
-      let fc2 = state.feedCount + 1;
       return {
         ...state,
         publishers: action.payload,
-        feedCount: fc2,
       };
     case REMOVE_FEED_FAILURE:
       return state;
     case ADD_FEED_SUCCESS:
-      let fc3 = state.feedCount - 1;
+      let pubs = state.publishers || [];
       return {
         ...state,
-        publishers: action.payload,
-        feedCount: fc3,
+        publishers: [...pubs, action.payload],
       };
     case ADD_FEED_FAILURE:
       return state;

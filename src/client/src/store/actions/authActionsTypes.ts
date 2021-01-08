@@ -24,23 +24,23 @@ interface UserSuccess {
   };
 }
 
-interface removeFeedFromUserState {
-  type: typeof REMOVE_FEED_FROM_USER_STATE;
-  payload: {
-    publishers: Publisher[];
-  };
-}
+// interface removeFeedFromUserState {
+//   type: typeof REMOVE_FEED_FROM_USER_STATE;
+//   payload: {
+//     user: User;
+//     status: number;
+//     authenticated: boolean;
+//   };
+// }
 
-interface addFeedToUserState {
-  type: typeof ADD_FEED_TO_USER_STATE;
-  payload: {
-    publishers: Publisher[];
-  };
-}
+// interface addFeedToUserState {
+//   type: typeof ADD_FEED_TO_USER_STATE;
+//   payload: {
+//     user: User;
+//   };
+// }
 
-export type AuthDispatchTypes =
-  | UserLoading
-  | UserFail
-  | UserSuccess
-  | removeFeedFromUserState
-  | addFeedToUserState;
+export type AuthDispatchTypes = UserLoading | UserFail | UserSuccess;
+
+//   | removeFeedFromUserState
+//   | addFeedToUserState;

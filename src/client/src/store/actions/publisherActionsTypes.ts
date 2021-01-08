@@ -44,9 +44,7 @@ interface removeFeedFailure {
 
 interface addFeedSuccess {
   type: typeof ADD_FEED_SUCCESS;
-  payload: {
-    publishers: Publisher[];
-  };
+  payload: Publisher;
 }
 
 interface addFeedFailure {

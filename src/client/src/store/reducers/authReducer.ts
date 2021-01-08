@@ -1,4 +1,5 @@
 import { Reducer } from "react";
+import { Publisher } from "../../../../shared/Publisher";
 import { User } from "../../../../shared/User";
 import {
   AuthDispatchTypes,
@@ -53,28 +54,20 @@ const authReducer: Reducer<AuthState, AuthDispatchTypes> = (
         authenticated: true,
         user: action.payload,
       };
-    case ADD_FEED_TO_USER_STATE:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          user: {
-            ...state.user?.user,
-            sources: action.payload,
-          },
-        },
-      };
-    case REMOVE_FEED_FROM_USER_STATE:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          user: {
-            ...state.user?.user,
-            sources: action.payload,
-          },
-        },
-      };
+    // case ADD_FEED_TO_USER_STATE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     authenticated: true,
+    //     user: action.payload,
+    //   };
+    // case REMOVE_FEED_FROM_USER_STATE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     authenticated: true,
+    //     user: action.payload,
+    //   };
     default:
       return state;
   }

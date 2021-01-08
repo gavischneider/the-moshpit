@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { Publisher } from "../../../../shared/Publisher";
+import { User } from "../../../../shared/User";
 import {
   AuthDispatchTypes,
   USER_LOADING,
@@ -30,32 +32,46 @@ export const setUser = () => async (dispatch: Dispatch<AuthDispatchTypes>) => {
   }
 };
 
-export const addFeedToUser = (feeds: any, newFeed: any) => async (
-  dispatch: Dispatch<AuthDispatchTypes>
-) => {
-  try {
-    let newFeeds = feeds.push(newFeed);
-    dispatch({
-      type: ADD_FEED_TO_USER_STATE,
-      payload: newFeeds,
-    });
-  } catch {
-    console.log("Error adding feed to user state");
-  }
-};
+// export const addFeedToUser = (
+//   user: User,
+//   feeds: Publisher[],
+//   newFeed: Publisher
+// ) => async (dispatch: Dispatch<AuthDispatchTypes>) => {
+//   try {
+//     let newFeeds: Publisher[] = feeds;
+//     newFeeds.push(newFeed);
 
-export const removeFeedFromUser = (feeds: any, newFeed: any) => async (
-  dispatch: Dispatch<AuthDispatchTypes>
-) => {
-  try {
-    let newFeeds = feeds.filter((feed: any) => {
-      return feed.name.localeCompare(newFeed) !== 0;
-    });
-    dispatch({
-      type: REMOVE_FEED_FROM_USER_STATE,
-      payload: newFeeds,
-    });
-  } catch {
-    console.log("Error removing feed from user state");
-  }
-};
+//     let newUser: User = {
+//       ...user,
+//       sources: newFeeds,
+//     };
+//     dispatch({
+//       type: ADD_FEED_TO_USER_STATE,
+//       payload: newUser,
+//     });
+//   } catch {
+//     console.log("Error adding feed to user state");
+//   }
+// };
+
+// export const removeFeedFromUser = (
+//   user: User,
+//   feeds: any,
+//   newFeed: any
+// ) => async (dispatch: Dispatch<AuthDispatchTypes>) => {
+//   try {
+//     let newFeeds = feeds.filter((feed: any) => {
+//       return feed.name.localeCompare(newFeed) !== 0;
+//     });
+//     let newUser = {
+//       ...user,
+//       sources: newFeeds,
+//     };
+//     dispatch({
+//       type: REMOVE_FEED_FROM_USER_STATE,
+//       payload: newUser,
+//     });
+//   } catch {
+//     console.log("Error removing feed from user state");
+//   }
+// };

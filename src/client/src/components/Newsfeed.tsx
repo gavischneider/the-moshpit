@@ -22,6 +22,10 @@ export const Newsfeed = (props: any) => {
     return state.publishers.publishers;
   });
 
+  const pubbs = publisherState ? [...publisherState] : [];
+
+  const [pubs, setPubs] = useState(pubbs);
+
   //const { publishers, feedCount } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -52,6 +56,10 @@ export const Newsfeed = (props: any) => {
   return (
     <div className="container mx-auto bg-gray-900" id="newsfeed">
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
+        {props.pubs &&
+          props.pubs.map((pub: any) => {
+            console.log(pub.name);
+          })}
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
             const date = getDate(post.created);

@@ -74,6 +74,7 @@ const postController = {
     const query = postModel.find().limit(limit).skip(startIndex);
     const query2 = postModel
       .find({ publisher: { $in: sourceNames } })
+      .sort({ created: "desc" })
       .limit(limit)
       .skip(startIndex);
     query2.exec((err: Error, posts: Post[]) => {
