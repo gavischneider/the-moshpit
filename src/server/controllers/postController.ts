@@ -90,11 +90,17 @@ const postController = {
     console.log(userId);
     console.log(typeof userId);
 
+    const page = parseInt(req.query.page);
+    const limit = 10;
+    const startIndex = (page - 1) * limit;
+
     const query = postModel
       .find({
         upvotes: { $all: [userId] },
       })
-      .sort({ created: "desc" });
+      .sort({ created: "desc" })
+      .limit(10)
+      .skip(startIndex);
     query.exec((err: Error, posts: Post[]) => {
       if (err) {
         res.status(500).json({ message: err.message });

@@ -26,6 +26,13 @@ export const Navbar = (props: any) => {
                 <>
                   <div>
                     <li>
+                      <Link to="/upvoted" className="mr-4">
+                        Upvoted
+                      </Link>
+                    </li>
+                  </div>
+                  <div>
+                    <li>
                       <Link to="/profile" className="mr-4">
                         Profile
                       </Link>

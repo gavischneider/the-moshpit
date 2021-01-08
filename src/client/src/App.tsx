@@ -5,6 +5,7 @@ import { Profile } from "./pages/Profile";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "./store/reducers/rootReducer";
+import { Upvoted } from "./pages/Upvoted";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
+        <Route path="/upvoted" component={Upvoted} />
       </Switch>
     </Router>
   );
