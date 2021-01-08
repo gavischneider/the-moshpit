@@ -5,6 +5,8 @@ import {
   USER_SUCCESS,
   USER_FAIL,
   USER_LOADING,
+  REMOVE_FEED_FROM_USER_STATE,
+  ADD_FEED_TO_USER_STATE,
 } from "../actions/authActionsTypes";
 
 interface UserRes {
@@ -50,6 +52,28 @@ const authReducer: Reducer<AuthState, AuthDispatchTypes> = (
         loading: false,
         authenticated: true,
         user: action.payload,
+      };
+    case ADD_FEED_TO_USER_STATE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          user: {
+            ...state.user?.user,
+            sources: action.payload,
+          },
+        },
+      };
+    case REMOVE_FEED_FROM_USER_STATE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          user: {
+            ...state.user?.user,
+            sources: action.payload,
+          },
+        },
       };
     default:
       return state;

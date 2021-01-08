@@ -1,8 +1,11 @@
+import { Publisher } from "../../../../shared/Publisher";
 import { User } from "../../../../shared/User";
 
 export const USER_LOADING = "USER_LOADING";
 export const USER_FAIL = "USER_FAIL";
 export const USER_SUCCESS = "USER_SUCCESS";
+export const REMOVE_FEED_FROM_USER_STATE = "REMOVE_FEED_FROM_USER_STATE";
+export const ADD_FEED_TO_USER_STATE = "ADD_FEED_TO_USER_STATE";
 
 interface UserLoading {
   type: typeof USER_LOADING;
@@ -21,4 +24,23 @@ interface UserSuccess {
   };
 }
 
-export type AuthDispatchTypes = UserLoading | UserFail | UserSuccess;
+interface removeFeedFromUserState {
+  type: typeof REMOVE_FEED_FROM_USER_STATE;
+  payload: {
+    publishers: Publisher[];
+  };
+}
+
+interface addFeedToUserState {
+  type: typeof ADD_FEED_TO_USER_STATE;
+  payload: {
+    publishers: Publisher[];
+  };
+}
+
+export type AuthDispatchTypes =
+  | UserLoading
+  | UserFail
+  | UserSuccess
+  | removeFeedFromUserState
+  | addFeedToUserState;

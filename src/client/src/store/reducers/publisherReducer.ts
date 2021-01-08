@@ -11,7 +11,6 @@ import {
   ADD_FEED_FAILURE,
 } from "../actions/publisherActionsTypes";
 import { Publisher } from "../../../../shared/Publisher";
-import { act } from "react-dom/test-utils";
 
 interface PublisherResponse {
   publishers: Publisher[];
