@@ -56,12 +56,12 @@ export const Profile = () => {
   if (!authenticated) return <Redirect to="/login" />;
 
   return (
-    <div>
+    <div className="bg-gray-900">
       <Navbar user={userState} />
-      <div className="flex justify-center">
-        <div className="bg-gray-700 p-5 border border-black w-3/5">
+      <div className="flex justify-center min-h-screen shadow-xl">
+        <div className="bg-gray-700 p-5 border border-black sm:w-screen md:w-4/5 lg:w-3/5 xl:w-2/5 ">
           {user && (
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly ">
               <div className="border border-black">
                 <img
                   src={user.user.photo}
@@ -77,22 +77,6 @@ export const Profile = () => {
               </div>
             </div>
           )}
-          <div>Your Upvoted Posts</div>
-          {likedPosts.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                title={post.title}
-                url={post.url}
-                image={post.image}
-                category={post.category}
-                postId={post._id}
-                created={post.created}
-                publisher={post.publisher}
-                upvotes={post.upvotes}
-              />
-            );
-          })}
         </div>
       </div>
     </div>

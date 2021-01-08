@@ -5,7 +5,7 @@ import { Post } from "./Post";
 import { Tag } from "./Tag";
 import { Upvote } from "./Upvote";
 
-export const UpvotedNewsfeed = () => {
+export const UpvotedNewsfeed = (props: any) => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const { loading, error, posts, hasMore } = useLikedPostFetch(pageNumber);
