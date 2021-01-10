@@ -28,14 +28,15 @@ const authController = {
   },
 
   // googleRedirect(req: any, res: any) {
-  //   //res.send(req.user);
+  //   res.send(req.user);
   //   if (!req.user) {
-  //     // If user is not logged in
+  //     //If user is not logged in
   //     res.redirect("/auth/login");
   //   } else {
   //     res.redirect("http://localhost:3000/profile");
   //   }
   // },
+
   getUser(req: any, res: any) {
     if (req.user) {
       res.json(req.user);

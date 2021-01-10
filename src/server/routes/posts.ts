@@ -5,8 +5,6 @@ const postController = require("../controllers/postController");
 
 const router = express.Router();
 
-router.post("/add", postController.addPost);
-
 router.get("/getposts", postController.getPosts);
 
 router.get("/getlikedposts", postController.getLikedPosts);

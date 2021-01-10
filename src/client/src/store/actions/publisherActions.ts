@@ -70,15 +70,8 @@ export const removeFeed = (allFeeds: any, feedName: any, userId: any) => async (
     })
       .then((res) => {
         let newAllFeeds = allFeeds.filter((feed: any) => {
-          console.log("feed.name | feedName");
-          console.log(feed.name);
-          console.log(feedName);
           return feed.name.localeCompare(feedName) !== 0;
         });
-        console.log("+++++++++++++");
-        console.log("allFeeds: ");
-        console.log(newAllFeeds);
-        console.log("+++++++++++++");
 
         allFeeds = newAllFeeds;
 

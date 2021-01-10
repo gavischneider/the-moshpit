@@ -46,7 +46,6 @@ const publisherReducer = (
         ...state,
         publishers: action.payload,
         loadedUsersFeeds: true,
-        feedCount: fc,
       };
     case GET_USERS_PUBLISHERS_FAILURE:
       return state;

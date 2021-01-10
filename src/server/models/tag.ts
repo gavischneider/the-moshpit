@@ -16,16 +16,16 @@ const tagSchema = new mongoose.Schema({
 const tagModel = (module.exports = mongoose.model("tag", tagSchema));
 
 // Add new tag
-module.exports.addTag = (
-  newTagTitle: string,
-  postId: ObjectId,
-  callback: Function
-) => {
-  let ids: ObjectId[] = [];
-  ids.push(postId);
-  const tag = new tagModel({
-    title: newTagTitle,
-    postIds: ids,
-  });
-  tag.save(callback);
-};
+// module.exports.addTag = (
+//   newTagTitle: string,
+//   postId: ObjectId,
+//   callback: Function
+// ) => {
+//   let ids: ObjectId[] = [];
+//   ids.push(postId);
+//   const tag = new tagModel({
+//     title: newTagTitle,
+//     postIds: ids,
+//   });
+//   tag.save(callback);
+// };

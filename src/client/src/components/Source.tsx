@@ -26,9 +26,10 @@ export const Source = (props: any) => {
     if (user !== undefined && authenticated) {
       // 1. Remove feed from sidebar
       // 2. remove feed from users sources (in db)
-      console.log("------ ref ------");
-      console.log(feedNameRef.current.innerText);
-      console.log("HANDLE_CLICK_REMOVE");
+
+      //console.log("------ ref ------");
+      //console.log(feedNameRef.current.innerText);
+      //console.log("HANDLE_CLICK_REMOVE");
       dispatch(
         removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
       );
@@ -39,9 +40,9 @@ export const Source = (props: any) => {
 
   const handleClickAdd = (e: any) => {
     if (user !== undefined && authenticated) {
-      console.log("------ ref ------");
-      console.log(feedNameRef.current.innerText);
-      console.log("HANDLE_CLICK_ADD");
+      //console.log("------ ref ------");
+      //console.log(feedNameRef.current.innerText);
+      //console.log("HANDLE_CLICK_ADD");
       let feed = feeds.filter((feed) => {
         return feed.name.localeCompare(feedNameRef.current.innerText) === 0;
       });

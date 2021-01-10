@@ -10,7 +10,7 @@ import { InitialState } from "../store/reducers/rootReducer";
 export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
 
-  console.log("RERENDERED BITCH!!!!");
+  //console.log("RERENDERED BITCH!!!!");
 
   const userState = useSelector((state: InitialState) => {
     return state.auth;
@@ -19,20 +19,16 @@ export const Newsfeed = (props: any) => {
   const { user } = userState;
 
   const publisherState = useSelector((state: InitialState) => {
-    return state.publishers.publishers;
+    return state.publishers;
   });
 
-  const pubbs = publisherState ? [...publisherState] : [];
-
-  const [pubs, setPubs] = useState(pubbs);
-
-  //const { publishers, feedCount } = publisherState;
+  const { publishers } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
 
-  // if (props.user) {
-  //   setQuery([...props.user.sources]);
-  // }
+  useEffect(() => {
+    console.log("Rerendered");
+  }, [publisherState, user?.user.sources, userState, publishers]);
 
   const { loading, error, posts, hasMore } = usePostFetch(pageNumber);
 
@@ -56,10 +52,6 @@ export const Newsfeed = (props: any) => {
   return (
     <div className="container mx-auto bg-gray-900" id="newsfeed">
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
-        {props.pubs &&
-          props.pubs.map((pub: any) => {
-            console.log(pub.name);
-          })}
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
             const date = getDate(post.created);

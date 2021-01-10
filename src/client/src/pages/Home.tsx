@@ -16,8 +16,6 @@ export const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const userState = useSelector((state: InitialState) => {
-    console.log("STATEEEEEE");
-    console.log(state.auth);
     return state.auth;
   });
 
@@ -37,8 +35,8 @@ export const Home: React.FC = () => {
       //&& userState.authenticated
       dispatch(setUser());
     }
-    if (publishers === undefined) {
-      // Load publishers into state
+    if (publishers === undefined && user === undefined) {
+      // Load all default publishers into state
       dispatch(getAllPublishers());
     }
     if (authenticated && !loadedUsersFeeds) {
@@ -47,7 +45,7 @@ export const Home: React.FC = () => {
       console.log("IN THE DISPATCH GET USERS PUBLISHERS");
       console.log(user?.user.sources);
     }
-  }, [loadedUsersFeeds, publishers]);
+  }, [loadedUsersFeeds, publishers, user]);
 
   return (
     <div className="App bg-gray-900 min-h-screen">

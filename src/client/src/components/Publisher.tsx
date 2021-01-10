@@ -11,6 +11,8 @@ export const Publisher = (props: any) => {
   });
 
   const publishers = feeds;
+  //const publishers = publisherState.publishers;
+
   useEffect(() => {
     publishers?.map((publisher) => {
       if (publisher.name.localeCompare(props.publisher) === 0) {

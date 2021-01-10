@@ -5,8 +5,6 @@ import { InitialState } from "../store/reducers/rootReducer";
 
 export const Navbar = (props: any) => {
   const userState = useSelector((state: InitialState) => {
-    console.log("STATEEEEEE");
-    console.log(state.auth);
     return state.auth;
   });
 

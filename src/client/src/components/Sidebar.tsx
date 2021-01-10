@@ -7,15 +7,10 @@ import { InitialState } from "../store/reducers/rootReducer";
 
 export const Sidebar = (props: any) => {
   const publisherState = useSelector((state: InitialState) => {
-    console.log(" PUBLISHERS STATEEEEEE");
-    console.log(state.publishers);
     return state.publishers;
   });
 
   const { publishers } = publisherState;
-  console.log(" >>>>>>>>> PUBLISHERS: <<<<<<<<<<<");
-
-  console.log(publishers);
 
   // Get all the names of the users subscribed publishers
   let length = 0;
