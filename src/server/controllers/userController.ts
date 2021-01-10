@@ -49,7 +49,13 @@ const userController = {
           console.log(`Error removing source in db: ${err}`);
         } else {
           console.log(`Source removed from users list, ${status}`);
+          console.log("STATUS");
           console.log(status);
+          req.logIn(req.user, (err: Error) => {
+            if (err) {
+              console.log(`Error re-logging in user, ${err}`);
+            }
+          });
           res.send(status);
         }
       }
@@ -77,6 +83,13 @@ const userController = {
         } else {
           console.log(`Source added to users list, ${status}`);
           console.log(status);
+          console.log("STATUS");
+          console.log(status);
+          req.logIn(req.user, (err: Error) => {
+            if (err) {
+              console.log(`Error re-logging in user, ${err}`);
+            }
+          });
           res.send(status);
         }
       }

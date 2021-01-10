@@ -3,9 +3,14 @@ import "../sidebar.css";
 import { CgRemove, CgAdd } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
-import { removeFeed, addFeed } from "../store/actions/publisherActions";
+import {
+  removeFeed,
+  addFeed,
+  getUsersPublishers,
+} from "../store/actions/publisherActions";
 import { feeds } from "../constants/feeds";
 import { Publisher } from "../../../shared/Publisher";
+import { setUser } from "../store/actions/authActions";
 
 export const Source = (props: any) => {
   const dispatch = useDispatch();
@@ -33,6 +38,9 @@ export const Source = (props: any) => {
       dispatch(
         removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
       );
+
+      // Refresh the user
+      dispatch(setUser());
     } else {
       // User is not logged in, can't remove feeds
     }
@@ -48,6 +56,23 @@ export const Source = (props: any) => {
       });
 
       dispatch(addFeed(publishers, feed[0], user.user._id));
+
+      // Refresh the user
+      dispatch(setUser());
+
+      // Add the new feed to existing ones, and update the state
+      // const newPub = {
+      //   name: feed[0].name,
+      //   url: feed[0].url,
+      //   image: feed[0].image,
+      // };
+
+      // const newPublishers = {
+      //   ...publishers,
+      //   newPub,
+      // };
+      // console.log("----> NEW PUBLISHERS <----")
+      // console.log(newPublishers)
     } else {
       // User is not logged in, can't remove feeds
     }

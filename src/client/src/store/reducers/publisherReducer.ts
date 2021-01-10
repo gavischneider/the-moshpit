@@ -37,11 +37,11 @@ const publisherReducer = (
       return {
         ...state,
         publishers: action.payload,
+        loadedUsersFeeds: false,
       };
     case GET_PUBLISHERS_FAILURE:
       return state;
     case GET_USERS_PUBLISHERS_SUCCESS:
-      let fc = state.publishers ? state.publishers.length : 0;
       return {
         ...state,
         publishers: action.payload,

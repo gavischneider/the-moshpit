@@ -38,8 +38,7 @@ export const Home: React.FC = () => {
     if (publishers === undefined && user === undefined) {
       // Load all default publishers into state
       dispatch(getAllPublishers());
-    }
-    if (authenticated && !loadedUsersFeeds) {
+    } else if (authenticated && !loadedUsersFeeds) {
       // User logged in, load their feeds
       dispatch(getUsersPublishers(user?.user.sources));
       console.log("IN THE DISPATCH GET USERS PUBLISHERS");
