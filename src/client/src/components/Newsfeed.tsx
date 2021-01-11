@@ -19,25 +19,10 @@ export const Newsfeed = (props: any) => {
   console.log(
     "--------------------------------NEWSFEED RERENDERED! ---------------------"
   );
-  console.log(publisherContext);
-
-  // Need to get the users query to know which feeds to get (ONLY if user is logged in)
-
-  //console.log("RERENDERED BITCH!!!!");
-  console.log("PROPS.USER");
-  console.log(props.user);
 
   const { user } = useSelector((state: InitialState) => {
     return state.auth;
   });
-
-  //const { user } = userState;
-
-  // const { publishers } = useSelector((state: InitialState) => {
-  //   return state.publishers;
-  // });
-
-  //const { publishers } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
   console.log(
@@ -55,27 +40,6 @@ export const Newsfeed = (props: any) => {
     setPageNumber((prevPageNumber) => 1);
     setPubs(publisherContext);
   }
-
-  // Get all the names of the users subscribed publishers
-  // let length = 0;
-  // const publisherNames: string[] = [];
-  // if (publisherContext !== undefined) {
-  //   for (let i = 0; i < publisherContext.length; i++) {
-  //     publisherNames.push(publisherContext[i].name);
-  //     length++;
-  //   }
-  // }
-
-  // posts = posts.filter((post) => {
-  //   return (
-  //     publisherNames.includes(post.publisher) ||
-  //     post.description.localeCompare("observer") === 0
-  //   );
-  // });
-
-  // useEffect(() => {
-  //   setPageNumber(1);
-  // }, [publisherContext]);
 
   const observer: any = useRef();
   const lastPostElementRef = useCallback(
@@ -100,7 +64,7 @@ export const Newsfeed = (props: any) => {
 
   return (
     <div className="container mx-auto bg-gray-900" id="newsfeed">
-      <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
+      <div className="object-center grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
             // Setting the des to 'observer' will make sure it does not get filtered out

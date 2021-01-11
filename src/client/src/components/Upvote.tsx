@@ -20,34 +20,6 @@ export const Upvote = (props: any) => {
   const [upvoteCount, setUpvoteCount] = useState(props.upvoteCount);
   const iconRef = useRef<any>(null);
 
-  // useEffect(() => {
-  //   console.log("RERENDERRRRRRRRRRRRRRRRR");
-  //   // If user already upvoted post, make color red
-  //   //setUpvoteCount(props.upvotes.length);
-  //   if (userState && userState.user !== undefined) {
-  //     const userId = userState.user.user._id;
-
-  //     // console.log("props.upvotes.indexOf(userId)");
-  //     // props.upvotes && console.log(props.upvotes.indexOf(userId));
-
-  //     // console.log("props.upvotes");
-  //     // console.log(props.upvotes);
-
-  //     // console.log("userId");
-  //     // console.log(userId);
-
-  //     if (props.upvotes && props.upvotes.includes(userId)) {
-  //       // The user already upvoted this post
-  //       console.log("SETTING UPVOTE TO TRUE AGAIN");
-  //       setUpvoted(true);
-  //       iconRef.current.querySelector("svg path").setAttribute("fill", "red");
-  //     } else {
-  //       console.log(" ---NOT--- SETTING UPVOTE TO TRUE AGAIN");
-  //       setUpvoted(false);
-  //     }
-  //   }
-  // }, [userState, upvoted]);
-
   useEffect(() => {
     if (upvoted) {
       iconRef.current.querySelector("svg path").setAttribute("fill", "red");
