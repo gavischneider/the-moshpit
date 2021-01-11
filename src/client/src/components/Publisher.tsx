@@ -16,8 +16,8 @@ export const Publisher = (props: any) => {
   useEffect(() => {
     publishers?.map((publisher) => {
       if (publisher.name.localeCompare(props.publisher) === 0) {
-        console.log(`We found a match: ${publisher.name} = ${props.publisher}`);
-        console.log(`Publisher Image: ${publisher.image}`);
+        //console.log(`We found a match: ${publisher.name} = ${props.publisher}`);
+        //console.log(`Publisher Image: ${publisher.image}`);
         setImage(publisher.image);
       }
     });
@@ -25,7 +25,7 @@ export const Publisher = (props: any) => {
 
   //user.user.sources
 
-  console.log(`ImagePath: ${image}`);
+  //console.log(`ImagePath: ${image}`);
   return (
     <div className="flex items-center">
       <img

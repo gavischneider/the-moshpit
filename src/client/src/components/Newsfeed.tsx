@@ -1,4 +1,10 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
 import usePostFetch from "../hooks/usePostFetch";
 import { Post } from "./Post";
 import { Tag } from "./Tag";
@@ -6,8 +12,15 @@ import { Upvote } from "./Upvote";
 import { getDate } from "../services/getDate";
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
+import { PublisherContext } from "../pages/Home";
 
 export const Newsfeed = (props: any) => {
+  const publisherContext = useContext(PublisherContext);
+  console.log(
+    "--------------------------------NEWSFEED RERENDERED! ---------------------"
+  );
+  console.log(publisherContext);
+
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
 
   //console.log("RERENDERED BITCH!!!!");
@@ -20,19 +33,49 @@ export const Newsfeed = (props: any) => {
 
   //const { user } = userState;
 
-  const { publishers } = useSelector((state: InitialState) => {
-    return state.publishers;
-  });
+  // const { publishers } = useSelector((state: InitialState) => {
+  //   return state.publishers;
+  // });
 
   //const { publishers } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
+  console.log(
+    `-------Page Number: ${pageNumber} ---------------------------------++`
+  );
 
-  useEffect(() => {
-    console.log("--------------------------------NEWSFEED RERENDERED!");
-  }, [publishers, user]);
+  const { loading, error, posts, hasMore } = usePostFetch(
+    pageNumber,
+    publisherContext
+  );
 
-  const { loading, error, posts, hasMore } = usePostFetch(pageNumber);
+  const [pubs, setPubs] = useState(publisherContext);
+
+  if (pubs.length !== publisherContext.length) {
+    setPageNumber((prevPageNumber) => 1);
+    setPubs(publisherContext);
+  }
+
+  // Get all the names of the users subscribed publishers
+  // let length = 0;
+  // const publisherNames: string[] = [];
+  // if (publisherContext !== undefined) {
+  //   for (let i = 0; i < publisherContext.length; i++) {
+  //     publisherNames.push(publisherContext[i].name);
+  //     length++;
+  //   }
+  // }
+
+  // posts = posts.filter((post) => {
+  //   return (
+  //     publisherNames.includes(post.publisher) ||
+  //     post.description.localeCompare("observer") === 0
+  //   );
+  // });
+
+  // useEffect(() => {
+  //   setPageNumber(1);
+  // }, [publisherContext]);
 
   const observer: any = useRef();
   const lastPostElementRef = useCallback(
@@ -40,8 +83,12 @@ export const Newsfeed = (props: any) => {
       if (loading) return;
       if (observer && observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
+        console.log("<<<>>>>>>ENTRIES<<<>>>");
+        console.log(entries);
         if (entries[0].isIntersecting && hasMore) {
-          console.log("Visible ");
+          console.log(
+            "|||||||||||||||||||||||||||||| Observer is Visible ||||||||||||||||||||||||||||||||||"
+          );
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }
       });
@@ -56,10 +103,12 @@ export const Newsfeed = (props: any) => {
       <div className="object-center grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto pb-6 pt-6">
         {posts.map((post, index) => {
           if (posts.length === index + 1) {
+            // Setting the des to 'observer' will make sure it does not get filtered out
+            post.description = "observer";
             const date = getDate(post.created);
             return (
               <div
-                key={post.id}
+                key={`${post.id}00000`}
                 ref={lastPostElementRef}
                 className="rounded shadow-lg transform transition border border-transparent hover:border-white hover:border-opacity-50 bg-gray-700 mx-auto"
               >
@@ -93,7 +142,6 @@ export const Newsfeed = (props: any) => {
               created={post.created}
               publisher={post.publisher}
               upvotes={post.upvotes}
-              test={publishers?.length}
             />
           );
         })}

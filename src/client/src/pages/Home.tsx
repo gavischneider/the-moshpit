@@ -10,7 +10,10 @@ import {
   getAllPublishers,
   getUsersPublishers,
 } from "../store/actions/publisherActions";
+import { Publisher } from "../../../shared/Publisher";
 //import { InitialState } from "../store/reducers/rootReducer";
+
+export const PublisherContext = React.createContext(Array<Publisher>());
 
 export const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -49,9 +52,13 @@ export const Home: React.FC = () => {
 
   return (
     <div className="App bg-gray-900 min-h-screen">
-      <Navbar user={authenticated} />
-      <Sidebar user={user} />
-      <Newsfeed user={user} />
+      <PublisherContext.Provider
+        value={publishers ? publishers : Array<Publisher>()}
+      >
+        <Navbar user={authenticated} />
+        <Sidebar user={user} />
+        <Newsfeed user={user} />
+      </PublisherContext.Provider>
     </div>
   );
 };

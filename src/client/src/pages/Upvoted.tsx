@@ -24,7 +24,7 @@ export const Upvoted = () => {
 
   return (
     <div className="App bg-gray-900 min-h-screen">
-      <Navbar />
+      <Navbar user={authenticated} />
       <Sidebar user={user} />
       <UpvotedNewsfeed user={user} />
     </div>

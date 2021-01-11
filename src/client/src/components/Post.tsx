@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Tag } from "./Tag";
 import { Upvote } from "./Upvote";
 import { getDate } from "../services/getDate";
 import { Publisher } from "./Publisher";
+import { PublisherContext } from "../pages/Home";
 
 export const Post = (props: any) => {
   const date = getDate(props.created);

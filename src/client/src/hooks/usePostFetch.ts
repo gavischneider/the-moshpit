@@ -3,25 +3,51 @@ import axios from "axios";
 import { Post } from "../../../shared/Post";
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
+import { Publisher } from "../../../shared/Publisher";
 
 // Change the string to type post
-export default function usePostFetch(pageNumber: number) {
+export default function usePostFetch(
+  pageNumber: number,
+  publisherContext: any
+) {
+  console.log(`BACK IN USE_POST_FETCH, PAGE NUM: ${pageNumber}`);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState(Array<Post>());
   const [hasMore, setHasMore] = useState(false);
 
-  const { publishers } = useSelector((state: InitialState) => {
-    return state.publishers;
-  });
+  // const { publishers } = useSelector((state: InitialState) => {
+  //   return state.publishers;
+  // });
 
-  const { user } = useSelector((state: InitialState) => {
-    return state.auth;
-  });
+  // const { user } = useSelector((state: InitialState) => {
+  //   return state.auth;
+  // });
+
+  // Get all the names of the users subscribed publishers
+  // let length = 0;
+  // const publisherNames: string[] = [];
+  // if (pubContext !== undefined) {
+  //   for (let i = 0; i < pubContext.length; i++) {
+  //     publisherNames.push(pubContext[i].name);
+  //     length++;
+  //   }
+  // }
+
+  // let newPosts = posts.filter((post) => {
+  //   return publisherNames.includes(post.publisher);
+  // });
+  // setPosts(newPosts);
 
   useEffect(() => {
     setPosts([]);
-  }, []);
+    console.log("POSTS IS NOW EMPTY AGAIN");
+  }, [publisherContext]);
+
+  // useEffect(() => {
+  //   pageNumber = 1;
+  // }, [publisherContext]);
 
   useEffect(() => {
     setLoading(true);
@@ -52,6 +78,6 @@ export default function usePostFetch(pageNumber: number) {
       .catch((error) => {
         setError(true);
       });
-  }, [pageNumber]);
+  }, [pageNumber, publisherContext]);
   return { loading, error, posts, hasMore };
 }

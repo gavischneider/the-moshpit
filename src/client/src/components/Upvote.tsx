@@ -60,18 +60,18 @@ export const Upvote = (props: any) => {
     if (user !== undefined) {
       const userId = user.user._id;
       if (!upvoted) {
-        console.log("UPVOTE");
-        console.log(e.currentTarget);
+        //console.log("UPVOTE");
+        //console.log(e.currentTarget);
         e.currentTarget.querySelector("path").setAttribute("fill", "red");
         setUpvoted(true);
         setUpvoteCount(upvoteCount + 1);
         dispatch(upvotePost(props.postId, userId));
       } else {
-        console.log("DOWNVOTE");
-        console.log(e.currentTarget);
+        //console.log("DOWNVOTE");
+        //console.log(e.currentTarget);
         e.currentTarget.querySelector("path").setAttribute("fill", "none");
-        console.log("e.currentTarget AFTER");
-        console.log(e.currentTarget);
+        //console.log("e.currentTarget AFTER");
+        //console.log(e.currentTarget);
         setUpvoted(false);
         setUpvoteCount(upvoteCount - 1);
         dispatch(downvotePost(props.postId, userId));
