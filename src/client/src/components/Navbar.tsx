@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { InitialState } from "../store/reducers/rootReducer";
 
-export const Navbar = (props: any) => {
-  const userState = useSelector((state: InitialState) => {
-    return state.auth;
-  });
+export const Navbar = React.memo((props: any) => {
+  //const { authenticated } = useSelector((state: InitialState) => {
+  //return state.auth;
+  //});
+  console.log("Navar Props.user :::::::::");
+  console.log(props.user);
 
   return (
     <nav className="z-20 flex items-center justify-between flex-wrap bg-gray-900 border-solid border-b-2 border-gray-700 pl-6 pr-6 pt-3 pb-3 shadow-xl inset-x-0 top-0 object-top sticky">
@@ -20,7 +22,7 @@ export const Navbar = (props: any) => {
             </li>
 
             <div className="absolute right-0 flex pr-6">
-              {userState.authenticated ? (
+              {props.user ? (
                 <>
                   <div>
                     <li>
@@ -60,4 +62,4 @@ export const Navbar = (props: any) => {
       </div>
     </nav>
   );
-};
+});

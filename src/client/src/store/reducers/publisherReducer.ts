@@ -37,7 +37,6 @@ const publisherReducer = (
       return {
         ...state,
         publishers: action.payload,
-        loadedUsersFeeds: false,
       };
     case GET_PUBLISHERS_FAILURE:
       return state;
@@ -48,20 +47,25 @@ const publisherReducer = (
         loadedUsersFeeds: true,
       };
     case GET_USERS_PUBLISHERS_FAILURE:
-      return state;
-    case REMOVE_FEED_SUCCESS:
       return {
+        ...state,
+        loadedUsersFeeds: false,
+      };
+    case REMOVE_FEED_SUCCESS:
+      const newState = {
         ...state,
         publishers: action.payload,
       };
+      return newState;
     case REMOVE_FEED_FAILURE:
       return state;
     case ADD_FEED_SUCCESS:
       let pubs = state.publishers || [];
-      return {
+      const newState2 = {
         ...state,
         publishers: [...pubs, action.payload],
       };
+      return newState2;
     case ADD_FEED_FAILURE:
       return state;
     default:

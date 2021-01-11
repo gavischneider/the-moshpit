@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Post } from "../../../shared/Post";
+import { useSelector } from "react-redux";
+import { InitialState } from "../store/reducers/rootReducer";
 
 // Change the string to type post
 export default function usePostFetch(pageNumber: number) {
@@ -8,6 +10,14 @@ export default function usePostFetch(pageNumber: number) {
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState(Array<Post>());
   const [hasMore, setHasMore] = useState(false);
+
+  const { publishers } = useSelector((state: InitialState) => {
+    return state.publishers;
+  });
+
+  const { user } = useSelector((state: InitialState) => {
+    return state.auth;
+  });
 
   useEffect(() => {
     setPosts([]);

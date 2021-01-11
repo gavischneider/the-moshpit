@@ -29,18 +29,12 @@ export const Source = (props: any) => {
 
   const handleClickRemove = (e: any) => {
     if (user !== undefined && authenticated) {
-      // 1. Remove feed from sidebar
-      // 2. remove feed from users sources (in db)
-
-      //console.log("------ ref ------");
-      //console.log(feedNameRef.current.innerText);
-      //console.log("HANDLE_CLICK_REMOVE");
       dispatch(
         removeFeed(publishers, feedNameRef.current.innerText, user.user._id)
       );
 
       // Refresh the user
-      dispatch(setUser());
+      //dispatch(setUser());
     } else {
       // User is not logged in, can't remove feeds
     }
@@ -48,9 +42,6 @@ export const Source = (props: any) => {
 
   const handleClickAdd = (e: any) => {
     if (user !== undefined && authenticated) {
-      //console.log("------ ref ------");
-      //console.log(feedNameRef.current.innerText);
-      //console.log("HANDLE_CLICK_ADD");
       let feed = feeds.filter((feed) => {
         return feed.name.localeCompare(feedNameRef.current.innerText) === 0;
       });
@@ -58,21 +49,7 @@ export const Source = (props: any) => {
       dispatch(addFeed(publishers, feed[0], user.user._id));
 
       // Refresh the user
-      dispatch(setUser());
-
-      // Add the new feed to existing ones, and update the state
-      // const newPub = {
-      //   name: feed[0].name,
-      //   url: feed[0].url,
-      //   image: feed[0].image,
-      // };
-
-      // const newPublishers = {
-      //   ...publishers,
-      //   newPub,
-      // };
-      // console.log("----> NEW PUBLISHERS <----")
-      // console.log(newPublishers)
+      //dispatch(setUser());
     } else {
       // User is not logged in, can't remove feeds
     }

@@ -35,10 +35,11 @@ export const Home: React.FC = () => {
       //&& userState.authenticated
       dispatch(setUser());
     }
-    if (publishers === undefined && user === undefined) {
-      // Load all default publishers into state
-      dispatch(getAllPublishers());
-    } else if (authenticated && !loadedUsersFeeds) {
+    //if (publishers === undefined && user === undefined && !loadedUsersFeeds) {
+    // Load all default publishers into state
+    //dispatch(getAllPublishers());
+    //} else
+    if (authenticated && !loadedUsersFeeds) {
       // User logged in, load their feeds
       dispatch(getUsersPublishers(user?.user.sources));
       console.log("IN THE DISPATCH GET USERS PUBLISHERS");
@@ -48,7 +49,7 @@ export const Home: React.FC = () => {
 
   return (
     <div className="App bg-gray-900 min-h-screen">
-      <Navbar />
+      <Navbar user={authenticated} />
       <Sidebar user={user} />
       <Newsfeed user={user} />
     </div>

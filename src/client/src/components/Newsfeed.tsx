@@ -11,24 +11,26 @@ export const Newsfeed = (props: any) => {
   // Need to get the users query to know which feeds to get (ONLY if user is logged in)
 
   //console.log("RERENDERED BITCH!!!!");
+  console.log("PROPS.USER");
+  console.log(props.user);
 
-  const userState = useSelector((state: InitialState) => {
+  const { user } = useSelector((state: InitialState) => {
     return state.auth;
   });
 
-  const { user } = userState;
+  //const { user } = userState;
 
-  const publisherState = useSelector((state: InitialState) => {
+  const { publishers } = useSelector((state: InitialState) => {
     return state.publishers;
   });
 
-  const { publishers } = publisherState;
+  //const { publishers } = publisherState;
 
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    console.log("Rerendered");
-  }, [publisherState, user?.user.sources, userState, publishers]);
+    console.log("--------------------------------NEWSFEED RERENDERED!");
+  }, [publishers, user]);
 
   const { loading, error, posts, hasMore } = usePostFetch(pageNumber);
 
@@ -91,6 +93,7 @@ export const Newsfeed = (props: any) => {
               created={post.created}
               publisher={post.publisher}
               upvotes={post.upvotes}
+              test={publishers?.length}
             />
           );
         })}
