@@ -63,8 +63,6 @@ export const Sidebar = (props: any) => {
             </a>
           </li>
 
-          {/* --TODO--
-Change feeds to the users feeds (if logged in) */}
           {publishers !== undefined
             ? publishers.map((feed: any) => {
                 return <Source key={feed.url} feed={feed} sub={true} />;

@@ -21,7 +21,7 @@ export const Post = (props: any) => {
         <h3 className="text-white mb-2 opacity-75">{date}</h3>
         <div className="px-6 py-4 mb-1">
           {props.category.map((tag: string, index: number) => {
-            // Limits the post to five tags
+            // Limits the post to five tags to conserve space
             if (index < 5) {
               return <Tag key={tag} name={tag} />;
             }

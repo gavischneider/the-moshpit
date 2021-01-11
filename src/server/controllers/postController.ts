@@ -27,6 +27,8 @@ const postController = {
     for (let i = 0; i < sources.length; i++) {
       sourceNames[i] = sources[i].name;
     } // JSON.parse
+    console.log("--->>Source Names<<---");
+    console.log(sourceNames);
 
     const page = parseInt(req.query.page);
     const limit = 10;

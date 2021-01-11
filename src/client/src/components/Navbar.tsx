@@ -1,13 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
-import { InitialState } from "../store/reducers/rootReducer";
-import { Sign, User, Logout } from "grommet-icons";
+import { Link } from "react-router-dom";
+import { Sign, User, Logout, Login } from "grommet-icons";
 
 export const Navbar = React.memo((props: any) => {
-  //const { authenticated } = useSelector((state: InitialState) => {
-  //return state.auth;
-  //});
   console.log("Navar Props.user :::::::::");
   console.log(props.user);
 
@@ -28,14 +23,14 @@ export const Navbar = React.memo((props: any) => {
                   <div>
                     <li>
                       <Link to="/upvoted" className="mr-6">
-                        <Sign color="red" />
+                        <Sign color="gray" />
                       </Link>
                     </li>
                   </div>
                   <div>
                     <li>
                       <Link to="/profile" className="mr-6">
-                        <User color="red" />
+                        <User color="gray" />
                       </Link>
                     </li>
                   </div>
@@ -45,7 +40,7 @@ export const Navbar = React.memo((props: any) => {
                         href="http://localhost:5000/auth/logout"
                         className="mr-2"
                       >
-                        <Logout color="red" />
+                        <Logout color="gray" />
                       </a>
                     </li>
                   </div>
@@ -53,7 +48,7 @@ export const Navbar = React.memo((props: any) => {
               ) : (
                 <li>
                   <Link to="/login" className="mr-2">
-                    Login
+                    <Login color="gray" />
                   </Link>
                 </li>
               )}

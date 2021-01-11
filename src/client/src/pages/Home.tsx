@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
@@ -11,7 +11,6 @@ import {
   getUsersPublishers,
 } from "../store/actions/publisherActions";
 import { Publisher } from "../../../shared/Publisher";
-//import { InitialState } from "../store/reducers/rootReducer";
 
 export const PublisherContext = React.createContext(Array<Publisher>());
 
@@ -29,8 +28,6 @@ export const Home: React.FC = () => {
   });
 
   const { publishers, loadedUsersFeeds } = publisherState;
-
-  //const [pubs, setPubs] = useState(publishers);
 
   useEffect(() => {
     // Check if there's a user but we dont yet have it
