@@ -73,7 +73,8 @@ export const Profile = () => {
                 <h2>{user.user.username}</h2>
                 <h2>{user.user.email}</h2>
 
-                <h2>{user.user.joined}</h2>
+                <h2>{`You joined on: ${user.user.joined}`}</h2>
+                <h2>{`You're currently subscribed to ${user.user.sources.length} feeds`}</h2>
               </div>
             </div>
           )}

@@ -12,9 +12,22 @@ export const Sidebar = (props: any) => {
 
   const { publishers } = publisherState;
 
+  function compare(a: any, b: any) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  }
+
+  feeds.sort(compare);
+
   // Get all the names of the users subscribed publishers
   let length = 0;
   const publisherNames = [];
+  publishers?.sort(compare);
   if (publishers !== undefined) {
     for (let i = 0; i < publishers.length; i++) {
       publisherNames.push(publishers[i].name);
