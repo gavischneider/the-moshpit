@@ -93,6 +93,11 @@ filter: grayscale(100%) opacity(0.7);
   margin-left: 2rem;
 }
 
+.block {
+  display: none;
+  margin-left: 2rem;
+}
+
 .nav-link svg {
   width: 1.5rem;
   min-width: 1.5rem;
@@ -146,6 +151,11 @@ filter: grayscale(100%) opacity(0.7);
   transform: rotate(-180deg);
 }
 
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
+
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
@@ -194,6 +204,12 @@ filter: grayscale(100%) opacity(0.7);
   }
 
   .navbar:hover .add-button {
+    display: inline;
+    /* margin-right: 2rem; */
+    justify-content: end;
+  }
+
+  .navbar:hover .block {
     display: inline;
     /* margin-right: 2rem; */
     justify-content: end;

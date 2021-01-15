@@ -28,6 +28,7 @@ export const Source = (props: any) => {
       );
     } else {
       // User is not logged in, can't remove feeds
+      console.log("Cant remove feed");
     }
   };
 
@@ -38,13 +39,17 @@ export const Source = (props: any) => {
       });
       dispatch(addFeed(publishers, feed[0], user.user._id));
     } else {
-      // User is not logged in, can't remove feeds
+      // User is not logged in, can't add feeds
+      console.log("Cant add feed");
     }
   };
 
   return (
     <li className="nav-item">
-      <a href="#" className="nav-link">
+      <a
+        href="#"
+        className={"nav-link " + (authenticated ? "" : "inactiveLink")}
+      >
         <div className="">
           <img
             src={props.feed.image}
@@ -52,10 +57,10 @@ export const Source = (props: any) => {
             className="svg-inline--fa fa-w-20 fa-5x"
           />
         </div>
-
         <span className="link-text" ref={feedNameRef}>
           {props.feed.name}
         </span>
+
         {props.sub ? (
           <CgRemove
             className="remove-button transform transition duration-300 hover:scale-125"
