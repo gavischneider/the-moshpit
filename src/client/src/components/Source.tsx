@@ -54,7 +54,7 @@ export const Source = (props: any) => {
           <img
             src={props.feed.image}
             alt={"source"}
-            className="svg-inline--fa fa-w-20 fa-5x"
+            className="svg-inline--fa fa-w-20 fa-5x rounded"
           />
         </div>
         <span className="link-text" ref={feedNameRef}>

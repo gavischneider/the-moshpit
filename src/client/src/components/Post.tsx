@@ -16,18 +16,19 @@ export const Post = (props: any) => {
             src={props.image}
             className="rounded border border-black"
           />
+
+          <h1 className="text-white my-2">{props.title}</h1>
+          <h3 className="text-white mb-2 opacity-75">{date}</h3>
+          <div className="px-6 py-4 mb-1">
+            {props.category.map((tag: string, index: number) => {
+              // Limits the post to five tags to conserve space
+              if (index < 5) {
+                return <Tag key={tag} name={tag} />;
+              }
+            })}
+          </div>
+          <br />
         </a>
-        <h1 className="text-white my-2">{props.title}</h1>
-        <h3 className="text-white mb-2 opacity-75">{date}</h3>
-        <div className="px-6 py-4 mb-1">
-          {props.category.map((tag: string, index: number) => {
-            // Limits the post to five tags to conserve space
-            if (index < 5) {
-              return <Tag key={tag} name={tag} />;
-            }
-          })}
-        </div>
-        <br />
         <div className="flex justify-between absolute inset-x-0 bottom-0 bottom-2 m-2">
           <Upvote
             postId={props.postId}

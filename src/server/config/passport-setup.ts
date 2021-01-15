@@ -42,7 +42,7 @@ passport.use(
           done(null, currentUser);
         } else {
           // Create new user
-          // Initially give the user the deafault feeds
+          // Initially give the user the default feeds
           new userModel({
             provider: "google",
             googleId: profile.id,
@@ -52,6 +52,7 @@ passport.use(
             email: profile.emails[0].value,
             photo: profile.photos[0].value,
             sources: feeds,
+            joined: new Date(),
           })
             .save()
             .then((newUser: any) => {
