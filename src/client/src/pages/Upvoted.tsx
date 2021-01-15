@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Publisher } from "../../../shared/Publisher";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
 import { UpvotedNewsfeed } from "../components/UpvotedNewsfeed";
 import { setUser } from "../store/actions/authActions";
+import { getUsersPublishers } from "../store/actions/publisherActions";
 import { InitialState } from "../store/reducers/rootReducer";
 
 export const Upvoted = () => {
@@ -25,7 +27,6 @@ export const Upvoted = () => {
   return (
     <div className="App bg-gray-900 min-h-screen">
       <Navbar user={authenticated} />
-      <Sidebar user={user} />
       <UpvotedNewsfeed user={user} />
     </div>
   );

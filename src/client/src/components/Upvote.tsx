@@ -61,7 +61,7 @@ export const Upvote = (props: any) => {
         onClick={handleClick}
       />
       {/* change inner text to props.upvotes.length */}
-      <div className="pl-2 text-lg">{upvoteCount}</div>
+      <div className="pl-2 text-lg">{upvoteCount ? upvoteCount : 0}</div>
     </div>
   );
 };
