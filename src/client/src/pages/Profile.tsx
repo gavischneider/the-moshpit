@@ -3,61 +3,31 @@ import { Navbar } from "../components/Navbar";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
-import axios from "axios";
 import { Post as PostT } from "../../../shared/Post";
 import { Post } from "../components/Post";
+import { setUser } from "../store/actions/authActions";
 
 export const Profile = () => {
   const dispatch = useDispatch();
 
   const userState = useSelector((state: InitialState) => {
-    console.log("STATEEEEEE");
-    console.log(state.auth);
     return state.auth;
   });
 
   const { user, authenticated } = userState;
 
-  const publisherState = useSelector((state: InitialState) => {
-    return state.publishers;
-  });
-
-  const { publishers, loadedUsersFeeds } = publisherState;
-
-  const [likedPosts, setLikedPosts] = useState(Array<PostT>());
-
-  // useEffect(() => {
-  //   // Check if there's a user authenticated but we dont yet have it
-  //   if (typeof userState.user === "undefined") {
-  //     // && userState.authenticated
-  //     console.log("IM IN THE IF");
-  //     dispatch(setUser());
-  //   }
-  // });
-
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: "post/getlikedposts",
-    }).then((res) => {
-      setLikedPosts((prevPosts: any) => {
-        console.log(res.data);
-        const arr: PostT[] = [...prevPosts, ...res.data];
-        const map: any = {};
-        for (const post of arr) {
-          map[post.id] = post;
-        }
-        const newArray: PostT[] = Object.values(map);
-        return newArray;
-      });
-    });
-  }, []);
+    // Check if there's a user but we dont yet have it
+    if (userState && user === undefined) {
+      dispatch(setUser());
+    }
+  }, [user, authenticated]);
 
-  if (!authenticated) return <Redirect to="/login" />;
+  //if (!authenticated) return <Redirect to="/login" />;
 
   return (
     <div className="bg-gray-900">
-      <Navbar user={userState} />
+      <Navbar user={authenticated} />
       <div className="flex justify-center min-h-screen shadow-xl">
         <div className="bg-gray-700 p-5 border border-black sm:w-screen md:w-4/5 lg:w-3/5 xl:w-2/5 ">
           {user && (
@@ -78,6 +48,13 @@ export const Profile = () => {
               </div>
             </div>
           )}
+          <div className="flex justify-center pt-10">
+            {!user && (
+              <p className="text-2xl text-white">
+                Please login to view your profile
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
