@@ -4,6 +4,7 @@ import "../sidebar.css";
 import { feeds } from "../constants/feeds";
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
+import { Publisher } from "../../../shared/Publisher";
 
 export const Sidebar = (props: any) => {
   const publisherState = useSelector((state: InitialState) => {
@@ -12,7 +13,7 @@ export const Sidebar = (props: any) => {
 
   const { publishers } = publisherState;
 
-  function compare(a: any, b: any) {
+  function compare(a: Publisher, b: Publisher) {
     if (a.name < b.name) {
       return -1;
     }

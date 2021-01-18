@@ -29,13 +29,6 @@ const userRoutes = require("./routes/users");
 const tagRoutes = require("./routes/tags");
 const publisherRoutes = require("./routes/publishers");
 
-const postModel = require("./models/post");
-//const userModel = require("./models/user");
-
-//const authController = require("./controllers/authController");
-//const postController = require("./controllers/postController");
-//const userController = require("./controllers/userController");
-
 const app: Application = express();
 app.use(express.json());
 app.use(
