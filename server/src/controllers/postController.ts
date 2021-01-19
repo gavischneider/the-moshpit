@@ -1,13 +1,13 @@
 import express from "express";
-import { Post } from "../../shared/Post";
+import { Post } from "../../../shared/Post";
 var feed = require("rss-to-json");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
 import { feeds } from "../constants/feeds";
 
-import { Publisher } from "../../shared/Publisher";
-import { Tag } from "../../shared/Tag";
+import { Publisher } from "../../../shared/Publisher";
+import { Tag } from "../../../shared/Tag";
 import { Mongoose } from "mongoose";
 
 const postModel = require("../models/post");

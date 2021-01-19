@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 import { ObjectId } from "mongodb";
-import { User } from "../../shared/User";
+import { User } from "../../../shared/User";
 
 const userSchema = new mongoose.Schema({
   provider: String,

@@ -1,4 +1,4 @@
-import { Publisher } from "../../shared/Publisher";
+import { Publisher } from "../../../shared/Publisher";
 
 const mongoose = require("mongoose");
 

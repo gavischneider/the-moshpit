@@ -1,14 +1,8 @@
 export {};
 
-import express, {
-  Application,
-  Request,
-  Response,
-  NextFunction,
-  Router,
-} from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 
-import { Publisher } from "../shared/Publisher";
+import { Publisher } from "../../shared/Publisher";
 
 const feeds: Array<Publisher> = require("./constants/feeds").feeds;
 

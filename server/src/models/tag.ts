@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Tag } from "../../shared/Tag";
+import { Tag } from "../../../shared/Tag";
 
 const mongoose = require("mongoose");
 

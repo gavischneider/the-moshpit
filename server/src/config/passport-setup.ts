@@ -5,7 +5,7 @@ const userModel = require("../models/user");
 const userController = require("../controllers/userController");
 import { feeds } from "../constants/feeds";
 
-import { User } from "../../shared/User";
+import { User } from "../../../shared/User";
 require("dotenv").config();
 
 passport.serializeUser((user: any, done: any) => {

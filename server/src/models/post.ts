@@ -2,7 +2,7 @@ var feed = require("rss-to-json");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
-import { Post } from "../../shared/Post";
+import { Post } from "../../../shared/Post";
 
 const postSchema = new mongoose.Schema({
   title: String,
