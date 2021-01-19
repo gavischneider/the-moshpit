@@ -1,6 +1,7 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
 const GoogleStrategy = require("passport-google-oauth20");
+const FacebookStrategy = require("passport-facebook").Strategy;
 const userModel = require("../models/user");
 const userController = require("../controllers/userController");
 import { feeds } from "../constants/feeds";
@@ -61,6 +62,56 @@ passport.use(
             });
         }
       });
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: "/auth/facebook/redirect",
+      profileFields: [
+        "id",
+        "displayName",
+        "picture.type(large)",
+        "email",
+        "name",
+      ],
+    },
+    (accessToken: any, refreshToken: any, profile: any, done: any) => {
+      console.log("Passport callback function");
+      console.log(profile);
+
+      // Check if user exists in DB
+      userModel
+        .findOne({ facebookId: profile.id })
+        .then((currentUser: User) => {
+          if (currentUser) {
+            console.log(`User is: ${currentUser}`);
+            done(null, currentUser);
+          } else {
+            // Create new user
+            // Initially give the user the default feeds
+            new userModel({
+              provider: "facebook",
+              facebookId: profile.id,
+              firstname: profile.name.givenName,
+              lastname: profile.name.familyName,
+              username: profile.displayName,
+              email: profile.emails[0].value,
+              photo: profile.photos[0].value,
+              sources: feeds,
+              joined: new Date(),
+            })
+              .save()
+              .then((newUser: any) => {
+                console.log("created new user: ", newUser);
+                done(null, newUser);
+              });
+          }
+        });
     }
   )
 );

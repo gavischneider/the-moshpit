@@ -5,6 +5,7 @@ import { User } from "../../../shared/User";
 const userSchema = new mongoose.Schema({
   provider: String,
   googleId: String,
+  facebookId: String,
   firstname: String,
   lastname: String,
   username: String,
@@ -32,6 +33,7 @@ module.exports.addUser = (newUser: any, callback: Function) => {
   const user = new userModel({
     provider: newUser.provider,
     googleId: newUser.googleId,
+    facebookId: newUser.facebookId,
     firstname: newUser.firstname,
     lastname: newUser.lastname,
     username: newUser.username,
