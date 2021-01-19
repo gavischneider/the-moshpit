@@ -1,7 +1,8 @@
 export interface User {
   _id: any;
   provider: string;
-  googleId: string;
+  googleId?: string;
+  facebookId?: string;
   username: string;
   firstname: string;
   lastname: string;
