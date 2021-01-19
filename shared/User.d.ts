@@ -3,6 +3,7 @@ export interface User {
   provider: string;
   googleId?: string;
   facebookId?: string;
+  spotifyId?: string;
   username: string;
   firstname: string;
   lastname: string;

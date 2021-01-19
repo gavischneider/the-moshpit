@@ -2,6 +2,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const GoogleStrategy = require("passport-google-oauth20");
 const FacebookStrategy = require("passport-facebook").Strategy;
+const SpotifyStrategy = require("passport-spotify").Strategy;
 const userModel = require("../models/user");
 const userController = require("../controllers/userController");
 import { feeds } from "../constants/feeds";
@@ -24,6 +25,7 @@ passport.deserializeUser((id: any, done: any) => {
     });
 });
 
+// Google
 passport.use(
   new GoogleStrategy(
     {
@@ -66,6 +68,7 @@ passport.use(
   )
 );
 
+// Facebook
 passport.use(
   new FacebookStrategy(
     {
@@ -112,6 +115,48 @@ passport.use(
               });
           }
         });
+    }
+  )
+);
+
+// Spotify
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      callbackURL: "/auth/spotify/redirect",
+    },
+    (accessToken: any, refreshToken: any, profile: any, done: any) => {
+      console.log("Passport callback function");
+      console.log(profile);
+
+      // Check if user exists in DB
+      userModel.findOne({ spotifyId: profile.id }).then((currentUser: User) => {
+        if (currentUser) {
+          console.log(`User is: ${currentUser}`);
+          done(null, currentUser);
+        } else {
+          // Create new user
+          // Initially give the user the default feeds
+          new userModel({
+            provider: "spotify",
+            spotifyId: profile.id,
+            firstname: profile.name.givenName,
+            lastname: profile.name.familyName,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            photo: profile.photos[0].value,
+            sources: feeds,
+            joined: new Date(),
+          })
+            .save()
+            .then((newUser: any) => {
+              console.log("created new user: ", newUser);
+              done(null, newUser);
+            });
+        }
+      });
     }
   )
 );

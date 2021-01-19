@@ -53,4 +53,20 @@ router.get(
   })
 );
 
+// Spotify
+router.get(
+  "/spotify",
+  passport.authenticate("spotify", {
+    scope: ["user-read-email", "user-read-private"],
+  })
+);
+
+router.get(
+  "/spotify/redirect",
+  passport.authenticate("spotify", {
+    successRedirect: "http://localhost:3000",
+    failureRedirect: "/auth/login/failed",
+  })
+);
+
 module.exports = router;

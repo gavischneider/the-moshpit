@@ -30,6 +30,9 @@ export const Login = () => {
                 ></div>
               </a>
             </li>
+            <li>
+              <a href="http://localhost:5000/auth/spotify">Spotify</a>
+            </li>
           </ul>
         </div>
       </div>
