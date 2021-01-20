@@ -129,6 +129,7 @@ passport.use(
     },
     (accessToken: any, refreshToken: any, profile: any, done: any) => {
       console.log("Passport callback function");
+      console.log("-----> This is what Spotify returns: ");
       console.log(profile);
 
       // Check if user exists in DB
@@ -142,11 +143,11 @@ passport.use(
           new userModel({
             provider: "spotify",
             spotifyId: profile.id,
-            firstname: profile.name.givenName,
-            lastname: profile.name.familyName,
+            firstname: profile.displayName.split(" ").slice(0, -1).join(" "),
+            lastname: profile.displayName.split(" ").slice(-1).join(" "),
             username: profile.displayName,
             email: profile.emails[0].value,
-            photo: profile.photos[0].value,
+            photo: profile.photos.length === 0 ? "" : profile.photos[0].value,
             sources: feeds,
             joined: new Date(),
           })
