@@ -69,4 +69,15 @@ router.get(
   })
 );
 
+// Twitter
+router.get("/twitter", passport.authenticate("twitter"));
+
+router.get(
+  "/twitter/redirect",
+  passport.authenticate("twitter", {
+    successRedirect: "http://localhost:3000",
+    failureRedirect: "/auth/login/failed",
+  })
+);
+
 module.exports = router;

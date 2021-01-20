@@ -28,7 +28,14 @@ export const Login = () => {
                 <i className="icon fa fa-facebook"></i>Login With Facebook
               </a>
             </li>
-
+            <li>
+              <a
+                className="button button--social-login button--twitter"
+                href="http://localhost:5000/auth/twitter"
+              >
+                <i className="icon fa fa-twitter"></i>Login With Twitter
+              </a>
+            </li>
             <li>
               <a
                 className="button button--social-login button--spotify"

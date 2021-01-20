@@ -4,6 +4,7 @@ export interface User {
   googleId?: string;
   facebookId?: string;
   spotifyId?: string;
+  twitterId?: string;
   username: string;
   firstname: string;
   lastname: string;
