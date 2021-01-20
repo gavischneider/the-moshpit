@@ -13,25 +13,29 @@ export const Login = () => {
           </h1>
           <ul className="flex flex-col">
             <li>
-              <a href="http://localhost:5000/auth/google">
-                <img src={imgSource} className="" />
+              <a
+                className="button button--social-login button--google"
+                href="http://localhost:5000/auth/google"
+              >
+                <i className="icon fa fa-google"></i>Login With Google
               </a>
             </li>
             <li>
-              <a href="http://localhost:5000/auth/facebook">
-                <div
-                  className="fb-login-button"
-                  data-width=""
-                  data-size="large"
-                  data-button-type="login_with"
-                  data-layout="default"
-                  data-auto-logout-link="false"
-                  data-use-continue-as="false"
-                ></div>
+              <a
+                className="button button--social-login button--facebook"
+                href="http://localhost:5000/auth/facebook"
+              >
+                <i className="icon fa fa-facebook"></i>Login With Facebook
               </a>
             </li>
+
             <li>
-              <a href="http://localhost:5000/auth/spotify">Spotify</a>
+              <a
+                className="button button--social-login button--spotify"
+                href="http://localhost:5000/auth/spotify"
+              >
+                <i className="icon fa fa-spotify"></i>Login With Spotify
+              </a>
             </li>
           </ul>
         </div>
