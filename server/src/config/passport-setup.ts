@@ -189,7 +189,7 @@ passport.use(
             firstname: profile.name.split(" ").slice(0, -1).join(" "),
             lastname: profile.name.split(" ").slice(-1).join(" "),
             username: profile.screen_name,
-            email: profile.emails[0].value,
+            email: profile.emails[0].value, /////------
             photo: profile.profile_image_url,
             sources: feeds,
             joined: new Date(),

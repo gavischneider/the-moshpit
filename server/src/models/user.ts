@@ -19,16 +19,6 @@ const userSchema = new mongoose.Schema({
 
 const userModel = (module.exports = mongoose.model("user", userSchema));
 
-// module.exports.getUser = (callback: Function) => {
-//   userModel.find((err: Error, data: any) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       callback(null, data);
-//     }
-//   });
-// };
-
 module.exports.addUser = (newUser: any, callback: Function) => {
   let [tMonth, tDay, tYear] = new Date().toLocaleDateString("en-US").split("/");
   const todaysDate = `${tMonth}/${tDay}/${tYear}`;
