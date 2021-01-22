@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import RootState from "./store/reducers/rootReducer";
 import { Upvoted } from "./pages/Upvoted";
 import "./App.css";
-import axios from "axios";
-import { Publisher } from "../../shared/Publisher";
 
 function App() {
   return (

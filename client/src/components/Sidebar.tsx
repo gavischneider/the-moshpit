@@ -48,9 +48,9 @@ export const Sidebar = (props: any) => {
 
   return (
     <div>
-      <nav className="navbar z-10 mt-11">
+      <nav className="navbar z-10 mt-11 pb-7">
         <ul className="navbar-nav shadow-xl border-r border-black">
-          <li className="logo">
+          <li className="logo top-0 sticky z-20">
             <a href="#" className="nav-link">
               <span className="link-text logo-text">Sources</span>
               <svg

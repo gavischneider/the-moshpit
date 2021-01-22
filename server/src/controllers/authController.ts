@@ -9,6 +9,8 @@ const authController = {
   },
 
   loginSuccess(req: any, res: any) {
+    console.log("IM IN THE LOGIN SUCCESS FUNCTION< HERES THE USER: ");
+    console.log(req.user);
     if (req.user) {
       res.json({
         success: true,

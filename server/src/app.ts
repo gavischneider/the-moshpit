@@ -17,6 +17,7 @@ const cors = require("cors");
 const redis = require("redis");
 const connectRedis = require("connect-redis");
 const session = require("express-session");
+const loadAllFeeds = require("./services/loadAllFeeds");
 //const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth");
@@ -50,7 +51,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // if true only transmit cookie over https
+      secure: false, // if true only transmit cookie over https
       httpOnly: false, // if true prevent client side JS from reading the cookie
       maxAge: 1000 * 60 * 60, // session max age in miliseconds
     },
@@ -101,6 +102,13 @@ app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);
 app.use("/publisher/", publisherRoutes);
 
+var allF = "jkl";
+// Load all feeds when app starts
+(async function () {
+  app.set("allFeeds", await loadAllFeeds());
+  allF = await loadAllFeeds();
+})();
+
 const authCheck = (req: any, res: Response, next: NextFunction) => {
   if (!req.user) {
     res.status(401).json({
@@ -117,9 +125,17 @@ app.get("/session", (req: any, res: any) => {
   res.send(req.session);
 });
 
+app.get("/user", (req: any, res: any) => {
+  console.log("|----------> USER <----------|");
+  res.send(req.user);
+  //console.log(req);
+  //res.send("");
+});
+
 app.get("/", authCheck, (req: any, res: Response) => {
   console.log("|----------> SESSION <----------|");
   console.log(req.session);
+  req.pubs = allF;
 
   //res.send("Houme route");
   res.status(200).json({

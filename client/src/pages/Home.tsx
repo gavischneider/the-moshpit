@@ -16,6 +16,20 @@ import axios from "axios";
 export const PublisherContext = React.createContext(Array<Publisher>());
 
 export const Home: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const userState = useSelector((state: InitialState) => {
+    return state.auth;
+  });
+
+  const { user, authenticated } = userState;
+
+  const publisherState = useSelector((state: InitialState) => {
+    return state.publishers;
+  });
+
+  const { publishers, loadedUsersFeeds } = publisherState;
+
   const [allFeeds, setAllFeeds] = useState(Array<Publisher>());
 
   // This will retrieve ALL the feeds (not the users) and store them
@@ -31,20 +45,6 @@ export const Home: React.FC = () => {
       })
       .catch((err) => console.log(`Error getting all feeds, ${err}`));
   }, []);
-
-  const dispatch = useDispatch();
-
-  const userState = useSelector((state: InitialState) => {
-    return state.auth;
-  });
-
-  const { user, authenticated } = userState;
-
-  const publisherState = useSelector((state: InitialState) => {
-    return state.publishers;
-  });
-
-  const { publishers, loadedUsersFeeds } = publisherState;
 
   useEffect(() => {
     // Check if there's a user but we dont yet have it

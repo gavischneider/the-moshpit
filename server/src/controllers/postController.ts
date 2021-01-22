@@ -4,6 +4,7 @@ var feed = require("rss-to-json");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const mongoose = require("mongoose");
+const app = require("../app");
 import { feeds } from "../constants/feeds";
 
 import { Publisher } from "../../../shared/Publisher";
@@ -15,7 +16,12 @@ const tagController = require("./tagController");
 
 const postController = {
   // Need to update with the query
-  getPosts(req: any, res: any) {
+  async getPosts(req: any, res: any) {
+    //globalAny.global = global;
+    //const allFeeds = af;
+    //console.log("AAAAAAAAAALLLLLLL FEEEEEEEEEEEEEEEEEEDS");
+    //console.log(allFeeds);
+
     let sources;
     if (req.user) {
       sources = req.user.sources;
