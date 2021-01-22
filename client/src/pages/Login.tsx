@@ -8,7 +8,7 @@ export const Login = () => {
       <Navbar />
       <div id="content" className="flex justify-center pt-8">
         <div>
-          <h1 className="text-3xl mb-3 text-white flex justify-center">
+          <h1 className="text-3xl mb-5 text-white flex justify-center">
             Sign In
           </h1>
           <ul className="flex flex-col">

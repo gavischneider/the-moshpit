@@ -38,7 +38,7 @@
 }
 
 .button {
-  width: auto;
+  width: 16em;
   display: inline-block;
   padding: 0 18px 0 6px;
   border: 0 none;
@@ -51,7 +51,7 @@
 }
 
 .button--social-login {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
   margin-right: 12px;
   color: white;
   height: 50px;
