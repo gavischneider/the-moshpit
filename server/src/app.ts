@@ -46,11 +46,11 @@ redisClient.on("connect", (err: Error) => {
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),
-    secret: "secret$%^134",
+    secret: process.env.REDIS_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // if true only transmit cookie over https
+      secure: true, // if true only transmit cookie over https
       httpOnly: false, // if true prevent client side JS from reading the cookie
       maxAge: 1000 * 60 * 60, // session max age in miliseconds
     },
