@@ -163,44 +163,44 @@ passport.use(
 );
 
 // Twitter
-passport.use(
-  new TwitterStrategy(
-    {
-      consumerKey: process.env.TWITTER_API_KEY,
-      consumerSecret: process.env.TWITTER_API_SECRET_KEY,
-      callbackURL: "/auth/twitter/redirect",
-    },
-    (accessToken: any, refreshToken: any, profile: any, done: any) => {
-      console.log("Passport callback function");
-      console.log("-----> TWITTER <-----");
-      console.log(profile);
+// passport.use(
+//   new TwitterStrategy(
+//     {
+//       consumerKey: process.env.TWITTER_API_KEY,
+//       consumerSecret: process.env.TWITTER_API_SECRET_KEY,
+//       callbackURL: "/auth/twitter/redirect",
+//     },
+//     (accessToken: any, refreshToken: any, profile: any, done: any) => {
+//       console.log("Passport callback function");
+//       console.log("-----> TWITTER <-----");
+//       console.log(profile);
 
-      // Check if user exists in DB
-      userModel.findOne({ twitterId: profile.id }).then((currentUser: User) => {
-        if (currentUser) {
-          console.log(`User is: ${currentUser}`);
-          done(null, currentUser);
-        } else {
-          // Create new user
-          // Initially give the user the default feeds
-          new userModel({
-            provider: "twitter",
-            spotifyId: profile.id,
-            firstname: profile.name.split(" ").slice(0, -1).join(" "),
-            lastname: profile.name.split(" ").slice(-1).join(" "),
-            username: profile.screen_name,
-            email: profile.emails[0].value, /////------
-            photo: profile.profile_image_url,
-            sources: feeds,
-            joined: new Date(),
-          })
-            .save()
-            .then((newUser: any) => {
-              console.log("created new user: ", newUser);
-              done(null, newUser);
-            });
-        }
-      });
-    }
-  )
-);
+//       // Check if user exists in DB
+//       userModel.findOne({ twitterId: profile.id }).then((currentUser: User) => {
+//         if (currentUser) {
+//           console.log(`User is: ${currentUser}`);
+//           done(null, currentUser);
+//         } else {
+//           // Create new user
+//           // Initially give the user the default feeds
+//           new userModel({
+//             provider: "twitter",
+//             spotifyId: profile.id,
+//             firstname: profile.name.split(" ").slice(0, -1).join(" "),
+//             lastname: profile.name.split(" ").slice(-1).join(" "),
+//             username: profile.screen_name,
+//             email: profile.emails[0].value, /////------
+//             photo: profile.profile_image_url,
+//             sources: feeds,
+//             joined: new Date(),
+//           })
+//             .save()
+//             .then((newUser: any) => {
+//               console.log("created new user: ", newUser);
+//               done(null, newUser);
+//             });
+//         }
+//       });
+//     }
+//   )
+// );

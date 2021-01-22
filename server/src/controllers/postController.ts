@@ -27,8 +27,8 @@ const postController = {
     for (let i = 0; i < sources.length; i++) {
       sourceNames[i] = sources[i].name;
     } // JSON.parse
-    console.log("--->>Source Names<<---");
-    console.log(sourceNames);
+    //console.log("--->>Source Names<<---");
+    //console.log(sourceNames);
 
     const page = parseInt(req.query.page);
     const limit = 10;
@@ -45,7 +45,7 @@ const postController = {
       if (err) {
         res.status(500).json({ message: err.message });
       } else {
-        console.log(posts);
+        //console.log(posts);
         res.send(posts);
       }
     });
@@ -72,8 +72,8 @@ const postController = {
       if (err) {
         res.status(500).json({ message: err.message });
       } else {
-        console.log("LIKED POSTS");
-        console.log(posts);
+        //console.log("LIKED POSTS");
+        //console.log(posts);
         res.send(posts);
       }
     });
