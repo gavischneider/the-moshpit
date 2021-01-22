@@ -46,10 +46,7 @@ export const Source = (props: any) => {
 
   return (
     <li className="nav-item">
-      <a
-        href="#"
-        className={"nav-link " + (authenticated ? "" : "inactiveLink")}
-      >
+      <a className={"nav-link " + (authenticated ? "" : "inactiveLink")}>
         <div className="">
           <img
             src={props.feed.image}
