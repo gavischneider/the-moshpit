@@ -1,12 +1,14 @@
 import React from "react";
 import { Source } from "./Source";
 import "../sidebar.css";
-import { feeds } from "../constants/feeds";
+//import { feeds } from "../constants/feeds";
 import { useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
 import { Publisher } from "../../../shared/Publisher";
 
 export const Sidebar = (props: any) => {
+  const feeds = props.allFeeds;
+
   const publisherState = useSelector((state: InitialState) => {
     return state.publishers;
   });

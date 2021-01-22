@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
@@ -11,10 +11,27 @@ import {
   getUsersPublishers,
 } from "../store/actions/publisherActions";
 import { Publisher } from "../../../shared/Publisher";
+import axios from "axios";
 
 export const PublisherContext = React.createContext(Array<Publisher>());
 
 export const Home: React.FC = () => {
+  const [allFeeds, setAllFeeds] = useState(Array<Publisher>());
+
+  // This will retrieve ALL the feeds (not the users) and store them
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "publisher/getpublishers",
+    })
+      .then((feeds: any) => {
+        console.log("FEEDS - APP JUST LOADED");
+        console.log(feeds);
+        setAllFeeds(feeds.data);
+      })
+      .catch((err) => console.log(`Error getting all feeds, ${err}`));
+  }, []);
+
   const dispatch = useDispatch();
 
   const userState = useSelector((state: InitialState) => {
@@ -53,7 +70,7 @@ export const Home: React.FC = () => {
         value={publishers ? publishers : Array<Publisher>()}
       >
         <Navbar user={authenticated} />
-        <Sidebar user={user} />
+        <Sidebar user={user} allFeeds={allFeeds} />
         <Newsfeed user={user} />
       </PublisherContext.Provider>
     </div>

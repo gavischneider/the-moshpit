@@ -11,22 +11,6 @@ import axios from "axios";
 import { Publisher } from "../../shared/Publisher";
 
 function App() {
-  const [allFeeds, setAllFeeds] = useState(Array<Publisher>());
-
-  // This will retrieve ALL the feeds (not the users) and store them
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "publisher/getpublishers",
-    })
-      .then((feeds: any) => {
-        console.log("FEEDS - APP JUST LOADED");
-        console.log(feeds);
-        setAllFeeds(feeds.data);
-      })
-      .catch((err) => console.log(`Error getting all feeds, ${err}`));
-  }, []);
-
   return (
     <Router>
       <Switch>
