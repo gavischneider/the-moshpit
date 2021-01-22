@@ -71,7 +71,7 @@ export const Home: React.FC = () => {
       >
         <Navbar user={authenticated} />
         <Sidebar user={user} allFeeds={allFeeds} />
-        <Newsfeed user={user} />
+        <Newsfeed user={user} allFeeds={allFeeds} />
       </PublisherContext.Provider>
     </div>
   );

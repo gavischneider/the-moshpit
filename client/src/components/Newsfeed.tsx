@@ -88,7 +88,7 @@ export const Newsfeed = (props: any) => {
                     })}
                   </div>
                   <br />
-                  <div className="absolute absolute inset-x-0 bottom-0 bottom-2 m-2">
+                  <div className="absolute inset-x-0 bottom-0 bottom-2 m-2">
                     <Upvote postId={post.id} upvotes={post.upvotes} />
                   </div>
                 </div>
@@ -106,6 +106,7 @@ export const Newsfeed = (props: any) => {
               created={post.created}
               publisher={post.publisher}
               upvotes={post.upvotes}
+              allFeeds={props.allFeeds}
             />
           );
         })}

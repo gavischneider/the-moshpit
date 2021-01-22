@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { feeds } from "../constants/feeds";
+//import { feeds } from "../constants/feeds";
 import { InitialState } from "../store/reducers/rootReducer";
 
 // Change feeds to the feeds loaded into state
@@ -10,11 +10,11 @@ export const Publisher = (props: any) => {
     return state.publishers;
   });
 
-  const publishers = feeds;
+  const publishers = props.allFeeds;
   //const publishers = publisherState.publishers;
 
   useEffect(() => {
-    publishers?.map((publisher) => {
+    publishers?.map((publisher: any) => {
       if (publisher.name.localeCompare(props.publisher) === 0) {
         //console.log(`We found a match: ${publisher.name} = ${props.publisher}`);
         //console.log(`Publisher Image: ${publisher.image}`);

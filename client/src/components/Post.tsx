@@ -35,7 +35,7 @@ export const Post = (props: any) => {
             upvotes={props.upvotes}
             upvoteCount={props.upvotes.length}
           />
-          <Publisher publisher={props.publisher} />
+          <Publisher publisher={props.publisher} allFeeds={props.allFeeds} />
         </div>
       </div>
     </div>
