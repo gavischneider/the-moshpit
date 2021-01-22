@@ -42,7 +42,10 @@ export const Profile = () => {
               <div className="border border-black">
                 <h2>{user.user.username}</h2>
                 <h2>{user.user.email}</h2>
-
+                <h2>{`Login Method: ${
+                  user.user.provider[0].toUpperCase() +
+                  user.user.provider.slice(1)
+                }`}</h2>
                 <h2>{`You joined on: ${user.user.joined}`}</h2>
                 <h2>{`You're currently subscribed to ${user.user.sources.length} feeds`}</h2>
               </div>

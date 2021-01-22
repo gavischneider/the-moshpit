@@ -133,9 +133,8 @@ app.get("/user", (req: any, res: any) => {
 });
 
 app.get("/", authCheck, (req: any, res: Response) => {
-  console.log("|----------> SESSION <----------|");
-  console.log(req.session);
-  req.pubs = allF;
+  //console.log("|----------> SESSION <----------|");
+  //console.log(req.session);
 
   //res.send("Houme route");
   res.status(200).json({
