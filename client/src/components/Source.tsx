@@ -4,9 +4,11 @@ import { CgRemove, CgAdd } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
 import { removeFeed, addFeed } from "../store/actions/publisherActions";
-import { feeds } from "../constants/feeds";
+//import { feeds } from "../constants/feeds";
 
 export const Source = (props: any) => {
+  const feeds = props.allFeeds;
+
   const dispatch = useDispatch();
   const userState = useSelector((state: InitialState) => {
     return state.auth;
@@ -34,7 +36,7 @@ export const Source = (props: any) => {
 
   const handleClickAdd = (e: any) => {
     if (user !== undefined && authenticated) {
-      let feed = feeds.filter((feed) => {
+      let feed = feeds.filter((feed: any) => {
         return feed.name.localeCompare(feedNameRef.current.innerText) === 0;
       });
       dispatch(addFeed(publishers, feed[0], user.user._id));

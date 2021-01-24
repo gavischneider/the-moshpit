@@ -1,8 +1,8 @@
 export {};
 const publisherModel = require("../models/publisher");
 
-const loadAllFeeds = () => {
-  publisherModel.find((err: Error, data: any) => {
+const loadAllFeeds = (callback: Function) => {
+  publisherModel.find({}, (err: Error, data: any) => {
     if (err) {
       console.log(`Error getting publishers: ${err}`);
     } else {
@@ -10,7 +10,7 @@ const loadAllFeeds = () => {
         "FEED DATA <------------------------------------------------"
       );
       console.log(data);
-      return data;
+      callback(null, data);
     }
   });
 };

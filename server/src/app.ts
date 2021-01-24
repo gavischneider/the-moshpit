@@ -102,11 +102,17 @@ app.use("/post/", postRoutes);
 app.use("/auth/", authRoutes);
 app.use("/publisher/", publisherRoutes);
 
-var allF = "jkl";
+var allF = "";
 // Load all feeds when app starts
-(async function () {
-  app.set("allFeeds", await loadAllFeeds());
-  allF = await loadAllFeeds();
+(function () {
+  loadAllFeeds((err: Error, data: any) => {
+    if (err) {
+      console.log(`Problem loading feeds: ${err}`);
+    } else {
+      console.log(data);
+      allF = data;
+    }
+  });
 })();
 
 const authCheck = (req: any, res: Response, next: NextFunction) => {
@@ -119,6 +125,10 @@ const authCheck = (req: any, res: Response, next: NextFunction) => {
     next();
   }
 };
+
+app.get("/feeds", (req: any, res: any) => {
+  res.send(allF);
+});
 
 app.get("/session", (req: any, res: any) => {
   console.log("|----------> SESSION <----------|");

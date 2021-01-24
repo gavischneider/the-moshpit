@@ -81,13 +81,27 @@ export const Sidebar = (props: any) => {
 
           {publishers !== undefined
             ? publishers.map((feed: any) => {
-                return <Source key={feed.url} feed={feed} sub={true} />;
+                return (
+                  <Source
+                    key={feed.url}
+                    feed={feed}
+                    allFeeds={feeds}
+                    sub={true}
+                  />
+                );
               })
             : null}
 
           {nonSubscribed !== undefined &&
             nonSubscribed.map((feed: any) => {
-              return <Source key={feed.url} feed={feed} sub={false} />;
+              return (
+                <Source
+                  key={feed.url}
+                  feed={feed}
+                  allFeeds={feeds}
+                  sub={false}
+                />
+              );
             })}
         </ul>
       </nav>
