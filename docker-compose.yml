@@ -4,15 +4,34 @@ services:
     build: ./client
     networks:
       - mosh-net
+    environment:
+      - CLIENTPORT=3000
+    ports:
+      - ${CLIENTPORT}:${CLIENTPORT}
+
   backend:
     build: ./server
     networks:
       - mosh-net
+    environment:
+      - SERVERPORT=5000
+    ports:
+      - ${SERVERPORT}:${SERVERPORT}
+
   revproxy:
     build: ./proxy
     networks:
       - mosh-net
+    environment:
+      - PROXYPORT=80
     ports:
-      - "80:80"
+      - ${PROXYPORT}:${PROXYPORT}
+
+    depends_on:
+      - frontend
+      - backend
 networks:
   mosh-net:
+    driver: bridge
+# Todo:
+# Add env variables
