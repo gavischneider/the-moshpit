@@ -21,13 +21,11 @@ export const Home: React.FC = () => {
   const userState = useSelector((state: InitialState) => {
     return state.auth;
   });
-
   const { user, authenticated } = userState;
 
   const publisherState = useSelector((state: InitialState) => {
     return state.publishers;
   });
-
   const { publishers, loadedUsersFeeds } = publisherState;
 
   const [allFeeds, setAllFeeds] = useState(Array<Publisher>());
@@ -52,10 +50,7 @@ export const Home: React.FC = () => {
       //&& userState.authenticated
       dispatch(setUser());
     }
-    //if (publishers === undefined && user === undefined && !loadedUsersFeeds) {
-    // Load all default publishers into state
-    //dispatch(getAllPublishers());
-    //} else
+
     if (authenticated && !loadedUsersFeeds) {
       // User logged in, load their feeds
       dispatch(getUsersPublishers(user?.user.sources));

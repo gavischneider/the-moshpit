@@ -16,18 +16,12 @@ import { PublisherContext } from "../pages/Home";
 
 export const Newsfeed = (props: any) => {
   const publisherContext = useContext(PublisherContext);
-  console.log(
-    "--------------------------------NEWSFEED RERENDERED! ---------------------"
-  );
 
-  const { user } = useSelector((state: InitialState) => {
-    return state.auth;
-  });
+  // const { user } = useSelector((state: InitialState) => {
+  //   return state.auth;
+  // });
 
   const [pageNumber, setPageNumber] = useState(1);
-  console.log(
-    `-------Page Number: ${pageNumber} ---------------------------------++`
-  );
 
   const { loading, error, posts, hasMore } = usePostFetch(
     pageNumber,
@@ -37,7 +31,7 @@ export const Newsfeed = (props: any) => {
   const [pubs, setPubs] = useState(publisherContext);
 
   if (pubs.length !== publisherContext.length) {
-    setPageNumber((prevPageNumber) => 1);
+    setPageNumber(1);
     setPubs(publisherContext);
   }
 
@@ -47,12 +41,7 @@ export const Newsfeed = (props: any) => {
       if (loading) return;
       if (observer && observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        console.log("<<<>>>>>>ENTRIES<<<>>>");
-        console.log(entries);
         if (entries[0].isIntersecting && hasMore) {
-          console.log(
-            "|||||||||||||||||||||||||||||| Observer is Visible ||||||||||||||||||||||||||||||||||"
-          );
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }
       });

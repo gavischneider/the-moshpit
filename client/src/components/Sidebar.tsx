@@ -12,7 +12,6 @@ export const Sidebar = (props: any) => {
   const publisherState = useSelector((state: InitialState) => {
     return state.publishers;
   });
-
   const { publishers } = publisherState;
 
   function compare(a: Publisher, b: Publisher) {

@@ -32,14 +32,13 @@ const postController = {
       const startIndex = (page - 1) * limit;
       //const endIndex = page * limit;
 
-      const query = postModel.find().limit(limit).skip(startIndex);
-      const query2 = postModel
+      const query = postModel
         .find({ publisher: { $in: sourceNames } })
         .sort({ created: "desc" })
         .limit(limit)
         .skip(startIndex);
 
-      query2.exec((err: Error, posts: Post[]) => {
+      query.exec((err: Error, posts: Post[]) => {
         if (err) {
           res.status(500).json({ message: err.message });
         } else {
@@ -67,14 +66,13 @@ const postController = {
           const startIndex = (page - 1) * limit;
           //const endIndex = page * limit;
 
-          const query = postModel.find().limit(limit).skip(startIndex);
-          const query2 = postModel
+          const query = postModel
             .find({ publisher: { $in: sourceNames } })
             .sort({ created: "desc" })
             .limit(limit)
             .skip(startIndex);
 
-          query2.exec((err: Error, posts: Post[]) => {
+          query.exec((err: Error, posts: Post[]) => {
             if (err) {
               res.status(500).json({ message: err.message });
             } else {
