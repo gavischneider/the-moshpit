@@ -1,7 +1,17 @@
 {
-  "extends": ["plugin:prettier/recommended"],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
+  ],
 
-  "plugins": ["prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
+
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
 
   "rules": {
     "prettier/prettier": "error"
