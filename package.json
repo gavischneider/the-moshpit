@@ -1,0 +1,19 @@
+{
+  "name": "the-moshpit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavischneider/the-moshpit.git"
+  },
+  "author": "Gavi Schneider",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gavischneider/the-moshpit/issues"
+  },
+  "homepage": "https://github.com/gavischneider/the-moshpit#readme"
+}

@@ -22,7 +22,7 @@ const loadAllFeeds = require("./services/loadAllFeeds");
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/users");1
 const tagRoutes = require("./routes/tags");
 const publisherRoutes = require("./routes/publishers");
 
@@ -30,20 +30,21 @@ const app: Application = express();
 app.use(express.json());
 
 const RedisStore = connectRedis(session);
+const redisPort = process.env.REDIS_PORT || 10064;
 //Configure redis client
 const redisClient = redis.createClient({
   host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT || 10064,
+  port: redisPort,
   password: process.env.REDIS_PASSWORD,
 });
 redisClient.on("error", (err: Error) => {
   console.log("Could not establish a connection with redis. " + err);
 });
 redisClient.on("connect", (err: Error) => {
-  console.log("Connected to redis successfully");
+  console.log(`Connected to redis successfully on port ${redisPort}`);
 });
 
-//Configure session middleware
+// Configure session middleware
 app.use(
   session({
     store: new RedisStore({ client: redisClient }),

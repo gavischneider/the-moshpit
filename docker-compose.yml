@@ -26,7 +26,6 @@ services:
       - PROXYPORT=80
     ports:
       - ${PROXYPORT}:${PROXYPORT}
-
     depends_on:
       - frontend
       - backend
