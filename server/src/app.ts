@@ -22,7 +22,7 @@ const loadAllFeeds = require("./services/loadAllFeeds");
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
-const userRoutes = require("./routes/users");1
+const userRoutes = require("./routes/users");
 const tagRoutes = require("./routes/tags");
 const publisherRoutes = require("./routes/publishers");
 
