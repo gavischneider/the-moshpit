@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "./store/reducers/rootReducer";
 import { Upvoted } from "./pages/Upvoted";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
