@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "../sidebar.css";
+import "../sidebar.scss";
 import { CgRemove, CgAdd } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../store/reducers/rootReducer";
