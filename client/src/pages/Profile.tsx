@@ -47,6 +47,9 @@ export const Profile = () => {
                   user.user.provider.slice(1)
                 }`}</h2>
                 <h2>{`You joined on: ${user.user.joined}`}</h2>
+
+                {/* Need to better sync the users subscription numbers - publisher state gets updated 
+                but user state does not - until the page is refreshed */}
                 <h2>{`You're currently subscribed to ${user.user.sources.length} feeds`}</h2>
               </div>
             </div>
